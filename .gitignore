@@ -1,11 +1,10 @@
 bin/
 obj/
-*.csproj, 
-*.csproj.user, 
+*.csproj
+*.user
 .vs/
 *.suo
 *.sln
-*.csproj
 *~
 *.psd, 
 *.fw.png
