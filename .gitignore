@@ -1,9 +1,12 @@
 bin/
 obj/
+*.csproj, 
+*.user, 
 .vs/
-*.fw.png
 *.suo
 *.sln
 *.csproj
 *~
+*.psd, 
+*.fw.png
 *.TMP
