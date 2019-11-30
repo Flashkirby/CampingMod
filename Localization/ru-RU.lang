@@ -1,38 +1,38 @@
 ﻿
 # Chests
 
-Common.GearHammock=Gear Hammock
+Common.GearHammock=Гамак
 
 # Spawn Tent texts
 
 Common.CampTent=Палатка
 Common.CampTentMakeshift=Походная палатка
-Common.SleepingBag=Sleeping Bag
-Common.CraftTent=Craft Tent
-Common.LargeTent=Base Camp
+Common.SleepingBag=Спальный мешок
+Common.CraftTent=Палатка-мастерская
+Common.LargeTent=Большая палатка
 
 Common.TemporarySpawn=Служит временной точкой спавна
-Common.TentCrafting=Used for basic crafting
-Common.LargeTentCrafting=Used for basic crafting, cooking, and alchemy
-Common.OutpostCrafting=Used for advanced crafting, smelting, cooking, and alchemy
+Common.TentCrafting=Можно использовать для базового крафта
+Common.LargeTentCrafting=Можно использовать для базового крафта, готовки и алхимии
+Common.OutpostCrafting=Можно использовать для продвинутого крафта, плавки, готовки и алхимии
 
-CampTent.SpawnSet=Temporary spawn point set!
-CampTent.SpawnRemove=Temporary spawn point removed!
-CampTent.SpawnBlocked=The area is obstructed.
-CampTent.SpawnRemoveBed=Spawn point reset to bed!
-CampTent.SpawnMissing=Temporary spawn point missing, returned to original spawn point.
+CampTent.SpawnSet=Временный спавн назначен!
+CampTent.SpawnRemove=Временный спавн удалён!
+CampTent.SpawnBlocked=Мало места.
+CampTent.SpawnRemoveBed=Спавн назначен на кровать!
+CampTent.SpawnMissing=Временный спавн не найден, возвращение на первый спавн.
 
 # Outpost
 
-Common.Outpost=Outpost
-Common.OutpostBank=Provides access to a Piggy Bank and Safe
-Common.OutpostEffect=Increases recovery when standing inside
-BuffDescription.OutpostStage1=Life regen is increased when standing in the outpost
-BuffDescription.OutpostStage2=Life regen is increased, reduces some debuff durations when unharmed for %TIME seconds
-BuffDescription.OutpostStage3=Life regen is increased, drastically reduces duration to some debuffs
+Common.Outpost=Лагерь
+Common.OutpostBank=Доступ к Свинье-копилке и Сейфу
+Common.OutpostEffect=Увеличивает восстановление, если стоять внутри
+BuffDescription.OutpostStage1=Жизнь восстанавливается быстрее
+BuffDescription.OutpostStage2=Жизнь восстанавливается быстрее, снижает время плохих эффектов, если не получать урона %TIME секунд
+BuffDescription.OutpostStage3=Жизнь восстанавливается быстрее, сильно снижает время плохих эффектов
 
 # Information
 
-CampTent.SpawnAtTent=Spawn at temporary spawn point
-CampTent.SpawnAtHome=Spawn at original spawn point
-WeaponOutConvertor.ConvertTent=Camping Mod: Converted WeaponOut tent to Camping tent.
+CampTent.SpawnAtTent=Спавн на временной точке
+CampTent.SpawnAtHome=Спавн на первоначальной точке
+WeaponOutConvertor.ConvertTent=Camping: Палатка из WeaponOut перемещена в Camping.
