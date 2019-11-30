@@ -19,6 +19,7 @@ namespace Camping.Tiles.Tents
             AddMapEntry(new Color(90, 190, 20), CreateMapEntryName());
 
             TileID.Sets.HasOutlines[Type] = true;
+            Camping.Sets.TemporarySpawn.Add(Type);
 
             //extra info
             Main.tileFrameImportant[Type] = true;
