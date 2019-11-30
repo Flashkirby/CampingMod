@@ -11,6 +11,8 @@
 <img src="http://i.imgur.com/kdcROYP.png"/>
 </p>
 
+This mod is set up for localisation, so we are accepting translations!
+
 ## Summary
 
 Adds craftable tents that provide an additional spawn point to choose from upon death!
@@ -20,7 +22,7 @@ Adds craftable tents that provide an additional spawn point to choose from upon 
 * Various tiers of tents with bonus utilities
 * Gear hammocks, chests that hang on the ceiling
 
-Craft your first tent with [i/si:225]×2 and [i/si:9]×8 at a workbench, or a gear hammock with [i/si:150]×50.
+Craft your first tent with Silk×2 and Wood×8 at a workbench, or a gear hammock with Cobweb×50.
 
 As this was ported over from WeaponOut, any tents picked up or crafted from WeaponOut are converted to this mod's equivalent.
 
