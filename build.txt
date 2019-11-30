@@ -2,4 +2,4 @@ displayName = Camping
 author = Flashkirby99
 version = 1.0
 
-buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, *.suo, *.sln, .git, *.md, .git\*, *.psd, *.fw.png *.TMP
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, *.suo, *.sln, .git, .gitignore, *.env, *.md, .git\*, *.psd, *.fw.png *.TMP
