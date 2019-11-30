@@ -11,8 +11,9 @@ namespace Camping
 {
     internal static class SpawnInterfaceHelper
     {
-        public static Texture2D spawnButtons;
         public const int spawnButtonSize = 44;
+
+        public static Texture2D spawnButtons;
 
         public static void Load(Mod mod)
         {
@@ -24,8 +25,7 @@ namespace Camping
 
         public static void Unload()
         {
-            spawnButtons = null;
-
+            spawnButtons = default;
         }
 
         public static void DrawInterface(SpriteBatch spriteBatch)
