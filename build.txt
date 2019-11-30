@@ -1,5 +1,5 @@
 displayName = Camping
 author = Flashkirby99
-version = 0.1
+version = 1.0
 
 buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, *.suo, *.sln, .git, *.md, .git\*, *.psd, *.fw.png *.TMP

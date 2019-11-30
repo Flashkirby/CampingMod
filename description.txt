@@ -1,11 +1,14 @@
 ﻿[g:5] [c/FFFF00:Summary] [g:4] 
-Adds various craftable tents. When in use you will respawn at a tent intead of a bed, but it does not override your bed's spawn point when you enter the world.
+Adds craftable tents that provide an additional spawn point to choose from upon death!
 
-[i/s1:184] Set up temporary spawn points by crafting tents!
-[i/s1:184] Spawn at a tent instead of a bed whilst active
-[i/s1:184] Various tiers of tents
+[i/s1:184] Set up temporary spawn points by crafting tents
+[i/s1:184] Choose to spawn between your tent or your bed
+[i/s1:184] Various tiers of tents with bonus utilities
+[i/s1:184] Gear hammocks, chests that hang on the ceiling
 
-As this was ported over from WeaponOut, any tents picked up or crafted from WeaponOut are converted to this mod's version.
+Craft your first tent with [i/si:225]×2 and [i/si:9]×8 at a workbench, or a gear hammock with [i/si:150]×50.
+
+As this was ported over from WeaponOut, any tents picked up or crafted from WeaponOut are converted to this mod's equivalent.
 
 [i/s1:58] [c/FFFF00:Credits] [i/s1:58]
 Flashkirby99 - I am making this mod.
