@@ -1,0 +1,13 @@
+﻿[g:5] [c/FFFF00:Summary] [g:4] 
+Adds various craftable tents. When in use you will respawn at a tent intead of a bed, but it does not override your bed's spawn point when you enter the world.
+
+[i/s1:184] Set up temporary spawn points by crafting tents!
+[i/s1:184] Spawn at a tent instead of a bed whilst active
+[i/s1:184] Various tiers of tents
+
+As this was ported over from WeaponOut, any tents picked up or crafted from WeaponOut are converted to this mod's version.
+
+[i/s1:58] [c/FFFF00:Credits] [i/s1:58]
+Flashkirby99 - I am making this mod.
+Milliath - Переведено на русский.
+Gouvod - 汉语翻译
