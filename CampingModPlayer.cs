@@ -18,20 +18,27 @@ namespace Camping
 {
     class CampingModPlayer : ModPlayer
     {
+        public static bool SpawnAtTent = true;
+
         /// <summary> Spawn vector held by the tent </summary>
         public Point tentSpawn;
+
         /// <summary> Stores the player's original spawn point during respawn, whilst tent overrides it. </summary>
-        public Vector2? localPermaSpawnCache;
+        private Vector2? localPermaSpawnCache;
 
         public override void OnEnterWorld(Player player)
         {
             tentSpawn = default(Point);
             localPermaSpawnCache = null;
+            SpawnAtTent = true;
         }
 
         public override void OnRespawn(Player player)
         {
-            tentSpawnOverride();
+            if(player == Main.LocalPlayer && SpawnAtTent)
+            {
+                tentSpawnOverride();
+            }
         }
 
         public override bool PreItemCheck()
@@ -65,7 +72,7 @@ namespace Camping
                 if (!Camping.Sets.TemporarySpawn.Contains(tileType))
                 {
                     Camping.PrintInfo("CampTent.SpawnMissing");
-                    tentSpawn = default(Point);
+                    tentSpawn = default;
                     return;
                 }
 

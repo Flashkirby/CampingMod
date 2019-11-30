@@ -53,6 +53,10 @@ namespace Camping.Tiles.Tents
 
                 Camping.PrintInfo("CampTent.SpawnSet");
                 modPlayer.tentSpawn = new Point(spawnX, spawnY);
+                if (modPlayer.player == Main.LocalPlayer)
+                {
+                    CampingModPlayer.SpawnAtTent = true;
+                }
             }
             else
             {
@@ -64,7 +68,7 @@ namespace Camping.Tiles.Tents
                 {
                     Camping.PrintInfo("CampTent.SpawnRemoveBed");
                 }
-                modPlayer.tentSpawn = new Point();
+                modPlayer.tentSpawn = default;
             }
         }
 

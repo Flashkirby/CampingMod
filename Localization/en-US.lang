@@ -33,6 +33,8 @@ BuffDescription.OutpostStage3=Life regen is increased, drastically reduces durat
 
 # Information
 
+CampTent.SpawnAtTent=Spawn at temporary spawn point
+CampTent.SpawnAtHome=Spawn at original spawn point
 WeaponOutConvertor.ConvertTent=Camping Mod: Converted WeaponOut tent to Camping tent.
 
 
