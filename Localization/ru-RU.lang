@@ -1,0 +1,36 @@
+﻿
+# Chests
+
+Common.GearHammock=Gear Hammock
+
+# Spawn Tent texts
+
+Common.CampTent=Палатка
+Common.CampTentMakeshift=Походная палатка
+Common.SleepingBag=Sleeping Bag
+Common.CraftTent=Craft Tent
+Common.LargeTent=Base Camp
+
+Common.TemporarySpawn=Служит временной точкой спавна
+Common.TentCrafting=Used for basic crafting
+Common.LargeTentCrafting=Used for basic crafting, cooking, and alchemy
+Common.OutpostCrafting=Used for advanced crafting, smelting, cooking, and alchemy
+
+CampTent.SpawnSet=Temporary spawn point set!
+CampTent.SpawnRemove=Temporary spawn point removed!
+CampTent.SpawnBlocked=The area is obstructed.
+CampTent.SpawnRemoveBed=Spawn point reset to bed!
+CampTent.SpawnMissing=Temporary spawn point missing, returned to original spawn point.
+
+# Outpost
+
+Common.Outpost=Outpost
+Common.OutpostBank=Provides access to a Piggy Bank and Safe
+Common.OutpostEffect=Increases recovery when standing inside
+BuffDescription.OutpostStage1=Life regen is increased when standing in the outpost
+BuffDescription.OutpostStage2=Life regen is increased, reduces some debuff durations when unharmed for %TIME seconds
+BuffDescription.OutpostStage3=Life regen is increased, drastically reduces duration to some debuffs
+
+# Information
+
+WeaponOutConvertor.ConvertTent=Camping Mod: Converted WeaponOut tent to Camping tent.
