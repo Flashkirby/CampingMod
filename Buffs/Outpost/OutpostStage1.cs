@@ -5,6 +5,9 @@ using Terraria.ModLoader;
 
 namespace Camping.Buffs.Outpost
 {
+    /// <summary>
+    /// Outpost Stage when near an outpost, but not by the actual tile
+    /// </summary>
     public class OutpostStage1 : ModBuff
     {
         public override void SetDefaults()

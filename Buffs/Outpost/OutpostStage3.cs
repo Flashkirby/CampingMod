@@ -5,6 +5,9 @@ using Terraria.ModLoader;
 
 namespace Camping.Buffs.Outpost
 {
+    /// <summary>
+    /// Triggers after 30 seconds of unharmed regeneration
+    /// </summary>
     public class OutpostStage3 : ModBuff
     {
         public override void SetDefaults()
@@ -25,11 +28,13 @@ namespace Camping.Buffs.Outpost
             player.lifeRegenCount += 2;
             player.buffImmune[BuffID.Bleeding] = true;
 
+            // Campfire removes chilled
             if (player.HasBuff(BuffID.Campfire))
             {
                 player.buffImmune[BuffID.Chilled] = true;
             }
 
+            // These buffs can be inflicted for a long time, are typically a pain to remove without magic mirror-ring
             for (int i = 0; i < player.buffTime.Length; i++)
             {
                 if (player.buffType[i] == BuffID.Weak ||

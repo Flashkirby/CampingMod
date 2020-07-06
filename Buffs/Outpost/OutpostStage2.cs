@@ -5,6 +5,9 @@ using Terraria.ModLoader;
 
 namespace Camping.Buffs.Outpost
 {
+    /// <summary>
+    /// Outpost Stage when standing in the outpost
+    /// </summary>
     public class OutpostStage2 : ModBuff
     {
         public override void SetDefaults()
@@ -19,6 +22,7 @@ namespace Camping.Buffs.Outpost
             player.accDepthMeter = 1; // Show Depth
             player.accCompass = 1; // Show Location
 
+            // Timer that counts up as long as the player is unharmed and can naturally regenerate life
             if (player.lifeRegenTime >= 15 * 60)
             {
                 player.lifeRegenCount += 1;
@@ -34,7 +38,7 @@ namespace Camping.Buffs.Outpost
         public override void ModifyBuffTip(ref string tip, ref int rare)
         {
             int remaining = Math.Max(0, 30 - (int)(Main.LocalPlayer.lifeRegenTime / 60));
-            tip = tip.Replace("%TIME", "" + remaining);
+            tip = tip.Replace("%TIME", "" + remaining); // See BuffDescription.OutpostStage2
         }
     }
 }

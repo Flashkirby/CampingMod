@@ -13,4 +13,4 @@ As this was ported over from WeaponOut, any tents picked up or crafted from Weap
 [i/s1:58] [c/FFFF00:Credits] [i/s1:58]
 Flashkirby99 - I am making this mod.
 Milliath - Переведено на русский.
-Gouvod - 汉语翻译
+Gouvod - 汉语翻译 (outdated)
