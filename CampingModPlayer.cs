@@ -12,9 +12,9 @@ using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
 
 using Terraria.ModLoader.IO;
-using Camping.Tiles.Tents;
+using CampingMod.Tiles.Tents;
 
-namespace Camping
+namespace CampingMod
 {
     class CampingModPlayer : ModPlayer
     {
@@ -69,16 +69,16 @@ namespace Camping
             {
                 int tileType = (int)Main.tile[(int)tentSpawn.X, (int)tentSpawn.Y - 1].TileType;
 
-                if (!Camping.Sets.TemporarySpawn.Contains(tileType))
+                if (!CampingMod.Sets.TemporarySpawn.Contains(tileType))
                 {
-                    Camping.PrintInfo("CampTent.SpawnMissing");
+                    CampingMod.PrintInfo("CampTent.SpawnMissing");
                     tentSpawn = default;
                     return;
                 }
 
                 if (TileUtils.IsTemporarySpawnObstructed(tentSpawn.X, tentSpawn.Y))
                 {
-                    Camping.PrintInfo("CampTent.SpawnBlocked");
+                    CampingMod.PrintInfo("CampTent.SpawnBlocked");
                     return;
                 }
 

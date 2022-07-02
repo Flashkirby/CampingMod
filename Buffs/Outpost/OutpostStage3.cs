@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Camping.Buffs.Outpost
+namespace CampingMod.Buffs.Outpost
 {
     /// <summary>
     /// Triggers after 30 seconds of unharmed regeneration

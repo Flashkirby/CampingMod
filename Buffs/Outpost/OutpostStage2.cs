@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Camping.Buffs.Outpost
+namespace CampingMod.Buffs.Outpost
 {
     /// <summary>
     /// Outpost Stage when standing in the outpost

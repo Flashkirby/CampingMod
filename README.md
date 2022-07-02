@@ -1,11 +1,11 @@
-﻿# Camping
+﻿# CampingMod
 
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/Flashkirby/CampingMod/master/icon.png"/>
 </p>
 <p align="center">
-<img src="http://javid.ddns.net/tModLoader/widget/widgetimage/Camping.png"/>
+<img src="http://javid.ddns.net/tModLoader/widget/widgetimage/CampingMod.png"/>
 </p>
 <p align="center">
 <img src="http://i.imgur.com/kdcROYP.png"/>

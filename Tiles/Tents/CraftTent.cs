@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.Localization;
 
-namespace Camping.Tiles.Tents
+namespace CampingMod.Tiles.Tents
 {
     public class CraftTent : CampTent
     {
@@ -19,7 +19,7 @@ namespace Camping.Tiles.Tents
 
             AddMapEntry(new Color(90, 190, 20), CreateMapEntryName());
 
-            Camping.Sets.TemporarySpawn.Add(Type);
+            CampingMod.Sets.TemporarySpawn.Add(Type);
             dropItem = ModContent.ItemType<Items.Tents.CraftTent>();
 
             DustType = -1;
@@ -28,7 +28,7 @@ namespace Camping.Tiles.Tents
 
         public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
         {
-            Item.NewItem(tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEWIDTH, dropItem);
+            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEWIDTH, dropItem);
         }
 
         public override void MouseOver(int tX, int tY)

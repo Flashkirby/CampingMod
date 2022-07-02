@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
-namespace Camping.ModCompatible
+namespace CampingMod.ModCompatible
 {
     public class WeaponOutConvertor : GlobalItem
     {
@@ -11,8 +11,7 @@ namespace Camping.ModCompatible
 
         public override bool IsLoadingEnabled(Mod mod)/* tModPorter Suggestion: If you return false for the purposes of manual loading, use the [Autoload(false)] attribute on your class instead */
         {
-            weaponOut = ModLoader.GetMod("WeaponOut");
-            return weaponOut != null;
+            return ModLoader.HasMod("WeaponOut");
         }
 
         public override bool OnPickup(Item item, Player player)
@@ -21,7 +20,7 @@ namespace Camping.ModCompatible
             return true;
         }
 
-        public override void OnCraft(Item item, Recipe recipe)
+        public override void OnCreate(Item item, ItemCreationContext context)
         {
             ConvertTent(item);
         }
@@ -34,7 +33,7 @@ namespace Camping.ModCompatible
                 item.type = ItemType<Items.Tents.CampTent>();
                 item.SetDefaults(item.type);
                 item.stack = stack;
-                Camping.Print("WeaponOutConvertor.ConvertTent");
+                CampingMod.Print("WeaponOutConvertor.ConvertTent");
             }
             else if (item.type == weaponOut.Find<ModItem>("CampTentMakeshift").Type)
             {
@@ -42,7 +41,7 @@ namespace Camping.ModCompatible
                 item.type = ItemType<Items.Tents.CampTentMakeshift>();
                 item.SetDefaults(item.type);
                 item.stack = stack;
-                Camping.Print("WeaponOutConvertor.ConvertTent");
+                CampingMod.Print("WeaponOutConvertor.ConvertTent");
             }
         }
 

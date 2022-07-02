@@ -1,6 +1,6 @@
 displayName = Camping
-author = Flashkirby99
-version = 1.0.2
+author = Flashkirby99, kittenchilly
+version = 2.0
 homepage=https://github.com/Flashkirby/CampingMod/blob/master/README.md
 
 buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, *.suo, *.sln, .git, .gitignore, *.env, *.md, .git\*, *.psd, *.fw.png *.TMP

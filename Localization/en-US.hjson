@@ -37,51 +37,51 @@ Mods: {
 		}
 
 		ItemName: {
-			GearHammock: "{$Mods.Camping.Common.GearHammock}"
-			CampTent: "{$Mods.Camping.Common.CampTent}"
-			CampTentMakeshift: "{$Mods.Camping.Common.CampTentMakeshift}"
-			SleepingBag: "{$Mods.Camping.Common.SleepingBag}"
-			CraftTent: "{$Mods.Camping.Common.CraftTent}"
-			LargeTent: "{$Mods.Camping.Common.LargeTent}"
-			Outpost: "{$Mods.Camping.Common.Outpost}"
+			GearHammock: "{$Mods.CampingMod.Common.GearHammock}"
+			CampTent: "{$Mods.CampingMod.Common.CampTent}"
+			CampTentMakeshift: "{$Mods.CampingMod.Common.CampTentMakeshift}"
+			SleepingBag: "{$Mods.CampingMod.Common.SleepingBag}"
+			CraftTent: "{$Mods.CampingMod.Common.CraftTent}"
+			LargeTent: "{$Mods.CampingMod.Common.LargeTent}"
+			Outpost: "{$Mods.CampingMod.Common.Outpost}"
 		}
 
 		MapObject: {
-			GearHammock: "{$Mods.Camping.Common.GearHammock}"
-			CampTent: "{$Mods.Camping.Common.CampTent}"
-			SleepingBag: "{$Mods.Camping.Common.SleepingBag}"
-			CraftTent: "{$Mods.Camping.Common.CraftTent}"
-			LargeTent: "{$Mods.Camping.Common.SleepingBag}"
-			Outpost: "{$Mods.Camping.Common.Outpost}"
+			GearHammock: "{$Mods.CampingMod.Common.GearHammock}"
+			CampTent: "{$Mods.CampingMod.Common.CampTent}"
+			SleepingBag: "{$Mods.CampingMod.Common.SleepingBag}"
+			CraftTent: "{$Mods.CampingMod.Common.CraftTent}"
+			LargeTent: "{$Mods.CampingMod.Common.SleepingBag}"
+			Outpost: "{$Mods.CampingMod.Common.Outpost}"
 		}
 
 		ItemTooltip: {
-			CampTent: "{$Mods.Camping.Common.TemporarySpawn}"
-			CampTentMakeshift: "{$Mods.Camping.Common.TemporarySpawn}"
-			SleepingBag: "{$Mods.Camping.Common.TemporarySpawn}"
+			CampTent: "{$Mods.CampingMod.Common.TemporarySpawn}"
+			CampTentMakeshift: "{$Mods.CampingMod.Common.TemporarySpawn}"
+			SleepingBag: "{$Mods.CampingMod.Common.TemporarySpawn}"
 			CraftTent:
 				'''
-				{$Mods.Camping.Common.TemporarySpawn}
-				{$Mods.Camping.Common.TentCrafting}
+				{$Mods.CampingMod.Common.TemporarySpawn}
+				{$Mods.CampingMod.Common.TentCrafting}
 				'''
 			LargeTent:
 				'''
-				{$Mods.Camping.Common.TemporarySpawn}
-				{$Mods.Camping.Common.LargeTentCrafting}
+				{$Mods.CampingMod.Common.TemporarySpawn}
+				{$Mods.CampingMod.Common.LargeTentCrafting}
 				'''
 			Outpost:
 				'''
-				{$Mods.Camping.Common.TemporarySpawn}
-				{$Mods.Camping.Common.OutpostCrafting}
-				{$Mods.Camping.Common.OutpostBank}
-				{$Mods.Camping.Common.OutpostEffect}
+				{$Mods.CampingMod.Common.TemporarySpawn}
+				{$Mods.CampingMod.Common.OutpostCrafting}
+				{$Mods.CampingMod.Common.OutpostBank}
+				{$Mods.CampingMod.Common.OutpostEffect}
 				'''
 		}
 
 		BuffName: {
-			OutpostStage1: "{$Mods.Camping.Common.Outpost}"
-			OutpostStage2: "{$Mods.Camping.Common.Outpost}"
-			OutpostStage3: "{$Mods.Camping.Common.Outpost}"
+			OutpostStage1: "{$Mods.CampingMod.Common.Outpost}"
+			OutpostStage2: "{$Mods.CampingMod.Common.Outpost}"
+			OutpostStage3: "{$Mods.CampingMod.Common.Outpost}"
 		}
 	}
 }

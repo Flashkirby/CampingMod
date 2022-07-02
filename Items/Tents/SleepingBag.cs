@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Camping.Items.Tents
+namespace CampingMod.Items.Tents
 {
     public class SleepingBag : ModItem
     {
@@ -26,11 +26,10 @@ namespace Camping.Items.Tents
         }
         public override void AddRecipes()
         {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.Silk, 4);
-            recipe.anyWood = true;
-            recipe.AddTile(TileID.Loom);
-            recipe.Register();
+            CreateRecipe()
+                .AddIngredient(ItemID.Silk, 5)
+                .AddTile(TileID.Loom)
+                .Register();
         }
     }
 }

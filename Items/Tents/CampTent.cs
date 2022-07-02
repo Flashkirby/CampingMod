@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Camping.Items.Tents
+namespace CampingMod.Items.Tents
 {
     public class CampTent : ModItem
     {
@@ -13,9 +13,9 @@ namespace Camping.Items.Tents
             Item.maxStack = 99;
             Item.consumable = true;
             Item.value = Item.sellPrice(0, 0, 1, 0);
-            Item.rare = 0;
+            Item.rare = ItemRarityID.White;
 
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 15;
             Item.useTime = 10;
             Item.createTile = ModContent.TileType<Tiles.Tents.CampTent>();
@@ -26,12 +26,11 @@ namespace Camping.Items.Tents
         }
         public override void AddRecipes()
         {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.Silk, 2);
-            recipe.AddIngredient(ItemID.Wood, 8);
-            recipe.anyWood = true;
-            recipe.AddTile(TileID.WorkBenches);
-            recipe.Register();
+            CreateRecipe()
+                .AddIngredient(ItemID.Silk, 2)
+                .AddRecipeGroup(RecipeGroupID.Wood, 8)
+                .AddTile(TileID.WorkBenches)
+                .Register();
         }
     }
 }

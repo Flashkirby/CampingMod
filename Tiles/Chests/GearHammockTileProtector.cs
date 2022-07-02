@@ -9,7 +9,7 @@ using Terraria.Enums;
 using Terraria.Localization;
 using static Terraria.ModLoader.ModContent;
 
-namespace Camping.Tiles.Chests
+namespace CampingMod.Tiles.Chests
 {
     /// <summary>
     /// Chests protect tiles under them when they contain items.

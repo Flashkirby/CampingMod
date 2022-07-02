@@ -11,7 +11,7 @@ using Terraria.GameInput;
 using Terraria.GameContent.Achievements;
 using static Terraria.ModLoader.ModContent;
 
-namespace Camping.Tiles.Tents
+namespace CampingMod.Tiles.Tents
 {
     public class Outpost : ModTile
     {
@@ -24,7 +24,9 @@ namespace Camping.Tiles.Tents
             AddMapEntry(new Color(116, 117, 186), CreateMapEntryName());
 
             TileID.Sets.HasOutlines[Type] = true;
-            Camping.Sets.TemporarySpawn.Add(Type);
+            TileID.Sets.CanBeSleptIn[Type] = true;
+            TileID.Sets.DisableSmartCursor[Type] = true;
+            CampingMod.Sets.TemporarySpawn.Add(Type);
 
             dropItem = ItemType<Items.Tents.Outpost>();
 
@@ -33,14 +35,12 @@ namespace Camping.Tiles.Tents
             Main.tileFrameImportant[Type] = true;
             Main.tileLavaDeath[Type] = true;
             DustType = -1;
-            disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
             AdjTiles = new int[] {
                     TileID.Beds, TileID.Chairs, TileID.Tables, TileID.Tables2,
                     TileID.WorkBenches, TileID.Bottles, TileID.CookingPots,
                     TileID.Anvils, TileID.Furnaces, TileID.HeavyWorkBench,
                     TileID.PiggyBank, TileID.Safes
                 };
-            bed/* tModPorter Note: Removed. Use TileID.Sets.CanBeSleptIn instead */ = true;
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 
             CampTent.SetTentBaseTileObjectData(_FRAMEWIDTH, _FRAMEHEIGHT);
@@ -56,7 +56,7 @@ namespace Camping.Tiles.Tents
 
         public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
         {
-            Item.NewItem(tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEWIDTH, dropItem);
+            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEWIDTH, dropItem);
         }
 
         /// <summary>
@@ -157,9 +157,9 @@ namespace Camping.Tiles.Tents
                     r = 0.9f - torchPulse;
                     g = 0.9f - torchPulse;
                     b = 0.7f + torchPulse;
-                    if (Main.rand.Next(20) == 0)
+                    if (Main.rand.NextBool(20))
                     {
-                        Gore star = Gore.NewGoreDirect(new Vector2(tX * 16 - 2, tY * 16 - 8), default(Vector2), Main.rand.Next(16, 18));
+                        Gore star = Gore.NewGoreDirect(new EntitySource_TileUpdate(tX, tY), new Vector2(tX * 16 - 2, tY * 16 - 8), default(Vector2), Main.rand.Next(16, 18));
                         star.scale *= 0.5f + (float)(Main.rand.NextDouble() * 0.25f);
                         star.velocity.Y = (star.velocity.Y + 2f) * 2;
                         star.velocity /= 2f;
@@ -174,9 +174,9 @@ namespace Camping.Tiles.Tents
                     r = 0.83f;
                     g = 0.6f;
                     b = 0.5f;
-                    if (Main.rand.Next(4) == 0)
+                    if (Main.rand.NextBool(4))
                     {
-                        Dust ember = Dust.NewDustDirect(new Vector2(tX * 16 + 2 + 6 * mirroredSign, tY * 16 + 18), 8, 2, 6);
+                        Dust ember = Dust.NewDustDirect(new Vector2(tX * 16 + 2 + 6 * mirroredSign, tY * 16 + 18), 8, 2, DustID.Torch);
                         ember.noGravity = true;
                         ember.velocity.X *= 0.5f;
                         ember.velocity.Y -= 0.5f;

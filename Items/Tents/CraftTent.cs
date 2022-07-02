@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Camping.Items.Tents
+namespace CampingMod.Items.Tents
 {
     public class CraftTent : CampTent
     {
@@ -15,20 +15,18 @@ namespace Camping.Items.Tents
         public override void AddRecipes()
         {
             // Raw craft option
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.Silk, 2);
-            recipe.AddIngredient(ItemID.Wood, 18);
-            recipe.anyWood = true;
-            recipe.AddTile(TileID.WorkBenches);
-            recipe.Register();
+            CreateRecipe()
+                .AddIngredient(ItemID.Silk, 2)
+                .AddRecipeGroup(RecipeGroupID.Wood, 18)
+                .AddTile(TileID.WorkBenches)
+                .Register();
 
             // Alternate upgrade option
-            recipe = CreateRecipe();
-            recipe.AddIngredient(ModContent.ItemType<CampTent>());
-            recipe.AddIngredient(ItemID.Wood, 10);
-            recipe.anyWood = true;
-            recipe.AddTile(TileID.WorkBenches);
-            recipe.Register();
+            CreateRecipe()
+                .AddIngredient(ModContent.ItemType<CampTent>())
+                .AddRecipeGroup(RecipeGroupID.Wood, 10)
+                .AddTile(TileID.WorkBenches)
+                .Register();
         }
     }
 }

@@ -63,31 +63,31 @@ WeaponOutConvertor.ConvertTent=Camping Mod: Converted WeaponOut tent to Camping 
 ### MapObject
 ### Prefix
 
-ItemName.GearHammock={$Mods.Camping.Common.GearHammock}
-	MapObject.GearHammock={$Mods.Camping.Common.GearHammock}
+ItemName.GearHammock={$Mods.CampingMod.Common.GearHammock}
+	MapObject.GearHammock={$Mods.CampingMod.Common.GearHammock}
 
-ItemName.CampTent={$Mods.Camping.Common.CampTent}
-	ItemTooltip.CampTent={$Mods.Camping.Common.TemporarySpawn}
-	MapObject.CampTent={$Mods.Camping.Common.CampTent}
+ItemName.CampTent={$Mods.CampingMod.Common.CampTent}
+	ItemTooltip.CampTent={$Mods.CampingMod.Common.TemporarySpawn}
+	MapObject.CampTent={$Mods.CampingMod.Common.CampTent}
 
-ItemName.CampTentMakeshift={$Mods.Camping.Common.CampTentMakeshift}
-	ItemTooltip.CampTentMakeshift={$Mods.Camping.Common.TemporarySpawn}
+ItemName.CampTentMakeshift={$Mods.CampingMod.Common.CampTentMakeshift}
+	ItemTooltip.CampTentMakeshift={$Mods.CampingMod.Common.TemporarySpawn}
 	
-ItemName.SleepingBag={$Mods.Camping.Common.SleepingBag}
-	ItemTooltip.SleepingBag={$Mods.Camping.Common.TemporarySpawn}
-	MapObject.SleepingBag={$Mods.Camping.Common.SleepingBag}
+ItemName.SleepingBag={$Mods.CampingMod.Common.SleepingBag}
+	ItemTooltip.SleepingBag={$Mods.CampingMod.Common.TemporarySpawn}
+	MapObject.SleepingBag={$Mods.CampingMod.Common.SleepingBag}
 
-ItemName.CraftTent={$Mods.Camping.Common.CraftTent}
-	ItemTooltip.CraftTent={$Mods.Camping.Common.TemporarySpawn}\n{$Mods.Camping.Common.TentCrafting}
-	MapObject.CraftTent={$Mods.Camping.Common.CraftTent}
+ItemName.CraftTent={$Mods.CampingMod.Common.CraftTent}
+	ItemTooltip.CraftTent={$Mods.CampingMod.Common.TemporarySpawn}\n{$Mods.CampingMod.Common.TentCrafting}
+	MapObject.CraftTent={$Mods.CampingMod.Common.CraftTent}
 	
-ItemName.LargeTent={$Mods.Camping.Common.LargeTent}
-	ItemTooltip.LargeTent={$Mods.Camping.Common.TemporarySpawn}\n{$Mods.Camping.Common.LargeTentCrafting}
-	MapObject.LargeTent={$Mods.Camping.Common.SleepingBag}
+ItemName.LargeTent={$Mods.CampingMod.Common.LargeTent}
+	ItemTooltip.LargeTent={$Mods.CampingMod.Common.TemporarySpawn}\n{$Mods.CampingMod.Common.LargeTentCrafting}
+	MapObject.LargeTent={$Mods.CampingMod.Common.SleepingBag}
 	
-ItemName.Outpost={$Mods.Camping.Common.Outpost}
-	ItemTooltip.Outpost={$Mods.Camping.Common.TemporarySpawn}\n{$Mods.Camping.Common.OutpostCrafting}\n{$Mods.Camping.Common.OutpostBank}\n{$Mods.Camping.Common.OutpostEffect}
-	MapObject.Outpost={$Mods.Camping.Common.Outpost}
-	BuffName.OutpostStage1={$Mods.Camping.Common.Outpost}
-	BuffName.OutpostStage2={$Mods.Camping.Common.Outpost}
-	BuffName.OutpostStage3={$Mods.Camping.Common.Outpost}
+ItemName.Outpost={$Mods.CampingMod.Common.Outpost}
+	ItemTooltip.Outpost={$Mods.CampingMod.Common.TemporarySpawn}\n{$Mods.CampingMod.Common.OutpostCrafting}\n{$Mods.CampingMod.Common.OutpostBank}\n{$Mods.CampingMod.Common.OutpostEffect}
+	MapObject.Outpost={$Mods.CampingMod.Common.Outpost}
+	BuffName.OutpostStage1={$Mods.CampingMod.Common.Outpost}
+	BuffName.OutpostStage2={$Mods.CampingMod.Common.Outpost}
+	BuffName.OutpostStage3={$Mods.CampingMod.Common.Outpost}

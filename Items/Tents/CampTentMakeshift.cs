@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Camping.Items.Tents
+namespace CampingMod.Items.Tents
 {
     public class CampTentMakeshift : CampTent
     {
@@ -17,12 +17,11 @@ namespace Camping.Items.Tents
         }
         public override void AddRecipes()
         {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.Cobweb, 30);
-            recipe.AddIngredient(ItemID.Wood, 8);
-            recipe.anyWood = true;
-            recipe.AddTile(TileID.WorkBenches);
-            recipe.Register();
+            CreateRecipe()
+                .AddIngredient(ItemID.Cobweb, 30)
+                .AddRecipeGroup(RecipeGroupID.Wood, 8)
+                .AddTile(TileID.WorkBenches)
+                .Register();
         }
     }
 }

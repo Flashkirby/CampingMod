@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.Localization;
 
-namespace Camping.Tiles.Tents
+namespace CampingMod.Tiles.Tents
 {
     public class SleepingBag : ModTile
     {
@@ -21,7 +21,9 @@ namespace Camping.Tiles.Tents
             AddMapEntry(new Color(96, 91, 121), CreateMapEntryName());
 
             TileID.Sets.HasOutlines[Type] = true;
-            Camping.Sets.TemporarySpawn.Add(Type);
+            TileID.Sets.CanBeSleptIn[Type] = true;
+            TileID.Sets.DisableSmartCursor[Type] = true;
+            CampingMod.Sets.TemporarySpawn.Add(Type);
 
             dropItem = ModContent.ItemType<Items.Tents.SleepingBag>();
 
@@ -29,9 +31,7 @@ namespace Camping.Tiles.Tents
             Main.tileFrameImportant[Type] = true;
             Main.tileLavaDeath[Type] = true;
             DustType = -1;
-            disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
             AdjTiles = new int[] { TileID.Beds };
-            bed/* tModPorter Note: Removed. Use TileID.Sets.CanBeSleptIn instead */ = true;
 
             CampTent.SetTentBaseTileObjectData(_FRAMEWIDTH, _FRAMEHEIGHT);
             //placement centre and offset on ground
@@ -46,7 +46,7 @@ namespace Camping.Tiles.Tents
 
         public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
         {
-            Item.NewItem(tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEWIDTH, dropItem);
+            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEWIDTH, dropItem);
         }
 
         /// <summary>

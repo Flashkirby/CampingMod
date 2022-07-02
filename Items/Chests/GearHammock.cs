@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Camping.Items.Chests
+namespace CampingMod.Items.Chests
 {
     public class GearHammock : ModItem
     {
@@ -13,9 +13,9 @@ namespace Camping.Items.Chests
             Item.maxStack = 99;
             Item.consumable = true;
             Item.value = 50;
-            Item.rare = 0;
+            Item.rare = ItemRarityID.White;
 
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 15;
             Item.useTime = 10;
             Item.createTile = ModContent.TileType<Tiles.Chests.GearHammock>();
@@ -25,10 +25,10 @@ namespace Camping.Items.Chests
         }
         public override void AddRecipes()
         {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.Cobweb, 50);
-            recipe.AddTile(TileID.WorkBenches);
-            recipe.Register();
+            CreateRecipe()
+                .AddIngredient(ItemID.Cobweb, 50)
+                .AddTile(TileID.WorkBenches)
+                .Register();
         }
     }
 }

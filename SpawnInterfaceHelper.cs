@@ -7,8 +7,9 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using ReLogic.Content;
 
-namespace Camping
+namespace CampingMod
 {
     internal static class SpawnInterfaceHelper
     {
@@ -20,7 +21,7 @@ namespace Camping
         {
             if (!Main.dedServ)
             {
-                spawnButtons = mod.GetTexture("UI/SpawnButtons");
+                spawnButtons = mod.Assets.Request<Texture2D>("UI/SpawnButtons", AssetRequestMode.ImmediateLoad).Value;
             }
         }
 
@@ -69,7 +70,7 @@ namespace Camping
 
                 if (hover == 1)
                 {
-                    Main.hoverItemName = Language.GetTextValue(Camping.LANG_KEY + "CampTent.SpawnAtHome");
+                    Main.hoverItemName = Language.GetTextValue(CampingMod.LANG_KEY + "CampTent.SpawnAtHome");
                     homeButton.color = Color.White;
                     if (leftClicked)
                     {
@@ -79,7 +80,7 @@ namespace Camping
                 }
                 else if (hover == 2)
                 {
-                    Main.hoverItemName = Language.GetTextValue(Camping.LANG_KEY + "CampTent.SpawnAtTent");
+                    Main.hoverItemName = Language.GetTextValue(CampingMod.LANG_KEY + "CampTent.SpawnAtTent");
                     tentButton.color = Color.White;
                     if (leftClicked)
                     {

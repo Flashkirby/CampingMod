@@ -8,7 +8,7 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 
-namespace Camping.Tiles.Tents
+namespace CampingMod.Tiles.Tents
 {
     internal static class TileUtils
     {
@@ -48,11 +48,11 @@ namespace Camping.Tiles.Tents
             {
                 if (IsTemporarySpawnObstructed(spawnX, spawnY))
                 {
-                    Camping.PrintInfo("CampTent.SpawnBlocked");
+                    CampingMod.PrintInfo("CampTent.SpawnBlocked");
                     return;
                 }
 
-                Camping.PrintInfo("CampTent.SpawnSet");
+                CampingMod.PrintInfo("CampTent.SpawnSet");
                 modPlayer.tentSpawn = new Point(spawnX, spawnY);
                 if (modPlayer.Player == Main.LocalPlayer)
                 {
@@ -63,11 +63,11 @@ namespace Camping.Tiles.Tents
             {
                 if (modPlayer.Player.SpawnX == -1 && modPlayer.Player.SpawnY == -1)
                 {
-                    Camping.PrintInfo("CampTent.SpawnRemove");
+                    CampingMod.PrintInfo("CampTent.SpawnRemove");
                 }
                 else
                 {
-                    Camping.PrintInfo("CampTent.SpawnRemoveBed");
+                    CampingMod.PrintInfo("CampTent.SpawnRemoveBed");
                 }
                 modPlayer.tentSpawn = default;
             }

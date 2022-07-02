@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Camping.Items.Tents
+namespace CampingMod.Items.Tents
 {
     [AutoloadEquip(EquipType.Back)]
     public class Outpost : ModItem
@@ -30,20 +30,18 @@ namespace Camping.Items.Tents
         }
         public override void AddRecipes()
         {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.Silk, 5); // 5/5 bed
-            recipe.AddIngredient(ItemID.Wood, 40); // 26 outpost + 10/10 workbench + 4/4 furnace
-            recipe.AddIngredient(ItemID.IronBar, 20); // 8/10 cooking pot + 4/5 anvil + 8/8 heavy workbench
-            recipe.AddIngredient(ItemID.Glass, 3); // 1+2/4 2 bottles
-            recipe.AddIngredient(ItemID.StoneBlock, 25); // 25/20 furnace
-            recipe.AddIngredient(ItemID.FallenStar, 1);
-            recipe.AddIngredient(ItemID.LifeCrystal, 1);
-            recipe.AddIngredient(ItemID.PiggyBank, 1);
-            recipe.AddIngredient(ItemID.Safe, 1);
-            recipe.anyWood = true;
-            recipe.anyIronBar = true;
-            recipe.AddTile(TileID.Sawmill);
-            recipe.Register();
+            CreateRecipe()
+                .AddIngredient(ItemID.Silk, 5) // 5/5 bed
+                .AddRecipeGroup(RecipeGroupID.Wood, 40) // 26 outpost + 10/10 workbench + 4/4 furnace
+                .AddRecipeGroup(RecipeGroupID.IronBar, 20) // 8/10 cooking pot + 4/5 anvil + 8/8 heavy workbench
+                .AddIngredient(ItemID.Glass, 3) // 1+2/4 2 bottles
+                .AddIngredient(ItemID.StoneBlock, 25) // 25/20 furnace
+                .AddIngredient(ItemID.FallenStar, 1)
+                .AddIngredient(ItemID.LifeCrystal, 1)
+                .AddIngredient(ItemID.PiggyBank, 1)
+                .AddIngredient(ItemID.Safe, 1)
+                .AddTile(TileID.Sawmill)
+                .Register();
         }
 
         public override void UpdateEquip(Player player)
