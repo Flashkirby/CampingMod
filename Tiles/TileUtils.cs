@@ -160,49 +160,17 @@ namespace CampingMod.Tiles.Tents
         private static void ToggleOpenSpecialChest(int tX, int tY, Player player, int specialChestType)
         {
             Main.stackSplit = 600;
-
-            // Clicked and current chest is already open
             if (specialChestType == player.chest)
             {
                 player.chest = -1;
                 SoundEngine.PlaySound(SoundID.MenuClose);
             }
-
-            // Clicked and another chest is open
-            else if (specialChestType != player.chest && player.chest == -1)
-            {
-                player.chest = specialChestType;
-                Main.playerInventory = true;
-                if (PlayerInput.GrappleAndInteractAreShared)
-                {
-                    PlayerInput.Triggers.JustPressed.Grapple = false;
-                }
-                Main.recBigList = false;
-                SoundEngine.PlaySound(SoundID.MenuOpen);
-                player.chestX = tX;
-                player.chestY = tY;
-                if (Main.tile[tX, tY].TileFrameX >= 36 && Main.tile[tX, tY].TileFrameX < 72)
-                {
-                    AchievementsHelper.HandleSpecialEvent(player, 16);
-                }
-            }
-
-            // Switching between chests
             else
             {
-                player.chest = specialChestType;
-                Main.playerInventory = true;
-                if (PlayerInput.GrappleAndInteractAreShared)
-                {
-                    PlayerInput.Triggers.JustPressed.Grapple = false;
-                }
-                Main.recBigList = false;
-                SoundEngine.PlaySound(SoundID.MenuTick);
-                player.chestX = tX;
-                player.chestY = tY;
+                SoundEngine.PlaySound(player.chest < 0 ? SoundID.MenuOpen : SoundID.MenuTick);
+                player.OpenChest(tX, tY, specialChestType);
             }
             Recipe.FindRecipes();
         }
-
     }
 }
