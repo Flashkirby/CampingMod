@@ -9,13 +9,13 @@ namespace Camping.Items.Tents
         public override void SetDefaults()
         {
             base.SetDefaults();
-            item.value = Item.sellPrice(0, 0, 2, 50);
-            item.createTile = ModContent.TileType<Tiles.Tents.LargeTent>();
+            Item.value = Item.sellPrice(0, 0, 2, 50);
+            Item.createTile = ModContent.TileType<Tiles.Tents.LargeTent>();
         }
         public override void AddRecipes()
         {
             // Raw craft option
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ItemID.Silk, 5);
             recipe.AddIngredient(ItemID.Wood, 25);
             recipe.AddIngredient(ItemID.IronBar, 8);
@@ -23,8 +23,7 @@ namespace Camping.Items.Tents
             recipe.anyWood = true;
             recipe.anyIronBar = true;
             recipe.AddTile(TileID.WorkBenches);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

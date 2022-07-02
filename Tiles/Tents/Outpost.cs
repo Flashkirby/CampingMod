@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -18,7 +19,7 @@ namespace Camping.Tiles.Tents
         protected const int _FRAMEHEIGHT = 5;
         int dropItem = 0;
 
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             AddMapEntry(new Color(116, 117, 186), CreateMapEntryName());
 
@@ -31,15 +32,15 @@ namespace Camping.Tiles.Tents
             Main.tileLighted[Type] = true;
             Main.tileFrameImportant[Type] = true;
             Main.tileLavaDeath[Type] = true;
-            dustType = -1;
-            disableSmartCursor = true;
-            adjTiles = new int[] {
+            DustType = -1;
+            disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+            AdjTiles = new int[] {
                     TileID.Beds, TileID.Chairs, TileID.Tables, TileID.Tables2,
                     TileID.WorkBenches, TileID.Bottles, TileID.CookingPots,
                     TileID.Anvils, TileID.Furnaces, TileID.HeavyWorkBench,
                     TileID.PiggyBank, TileID.Safes
                 };
-            bed = true;
+            bed/* tModPorter Note: Removed. Use TileID.Sets.CanBeSleptIn instead */ = true;
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 
             CampTent.SetTentBaseTileObjectData(_FRAMEWIDTH, _FRAMEHEIGHT);
@@ -61,10 +62,10 @@ namespace Camping.Tiles.Tents
         /// <summary>
         /// Allow smart select and drawing _Highlight.png
         /// </summary>
-        public override bool HasSmartInteract()
+        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
         { return true; }
 
-        public override bool NewRightClick(int tX, int tY)
+        public override bool RightClick(int tX, int tY)
         {
 
             Player player = Main.LocalPlayer;
@@ -136,8 +137,8 @@ namespace Camping.Tiles.Tents
 
             if (closer)
             {
-                Main.starInBottle = true;
-                Main.heartLantern = true;
+                Main.SceneMetrics.HasStarInBottle = true;
+                Main.SceneMetrics.HasHeartLantern = true;
             }
         }
 
@@ -148,7 +149,7 @@ namespace Camping.Tiles.Tents
 
             Tile tile = Main.tile[tX, tY];
             int logic = GetTileLogic(tX, tY);
-            float mirroredSign = (tile.frameX >= 18 * _FRAMEWIDTH) ? -1 : 1f;
+            float mirroredSign = (tile.TileFrameX >= 18 * _FRAMEWIDTH) ? -1 : 1f;
             switch (logic)
             {
                 case ItemID.StarinaBottle:
@@ -190,9 +191,9 @@ namespace Camping.Tiles.Tents
         private static int GetTileLogic(int tX, int tY)
         {
             Tile tile = Main.tile[tX, tY];
-            bool mirrored = (tile.frameX >= 18 * _FRAMEWIDTH);
-            int localTileX = tile.frameX % (18 * _FRAMEWIDTH) / 18;
-            int localTileY = tile.frameY % (18 * _FRAMEHEIGHT) / 18;
+            bool mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
+            int localTileX = tile.TileFrameX % (18 * _FRAMEWIDTH) / 18;
+            int localTileY = tile.TileFrameY % (18 * _FRAMEHEIGHT) / 18;
             if (localTileY == 2)
             {
                 if ((!mirrored && (localTileX == 1 || localTileX == 2))

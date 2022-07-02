@@ -13,17 +13,17 @@ namespace Camping.Tiles.Tents
     {
         int dropItem = 0;
 
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
-            base.SetDefaults();
+            base.SetStaticDefaults();
 
             AddMapEntry(new Color(90, 190, 20), CreateMapEntryName());
 
             Camping.Sets.TemporarySpawn.Add(Type);
             dropItem = ModContent.ItemType<Items.Tents.CraftTent>();
 
-            dustType = -1;
-            adjTiles = new int[] { TileID.Beds, TileID.WorkBenches };
+            DustType = -1;
+            AdjTiles = new int[] { TileID.Beds, TileID.WorkBenches };
         }
 
         public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)

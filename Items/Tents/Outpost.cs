@@ -10,27 +10,27 @@ namespace Camping.Items.Tents
     {
         public override void SetDefaults()
         {
-            item.width = 16;
-            item.height = 16;
-            item.maxStack = 99;
-            item.consumable = true;
-            item.value = Item.sellPrice(0, 2, 0, 0); 
-            item.rare = 1;
+            Item.width = 16;
+            Item.height = 16;
+            Item.maxStack = 99;
+            Item.consumable = true;
+            Item.value = Item.sellPrice(0, 2, 0, 0); 
+            Item.rare = 1;
 
-            item.useStyle = 1;
-            item.useAnimation = 15;
-            item.useTime = 10;
-            item.createTile = ModContent.TileType<Tiles.Tents.Outpost>();
-            item.placeStyle = 0;
+            Item.useStyle = 1;
+            Item.useAnimation = 15;
+            Item.useTime = 10;
+            Item.createTile = ModContent.TileType<Tiles.Tents.Outpost>();
+            Item.placeStyle = 0;
 
-            item.accessory = true;
+            Item.accessory = true;
 
-            item.useTurn = true;
-            item.autoReuse = true;
+            Item.useTurn = true;
+            Item.autoReuse = true;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ItemID.Silk, 5); // 5/5 bed
             recipe.AddIngredient(ItemID.Wood, 40); // 26 outpost + 10/10 workbench + 4/4 furnace
             recipe.AddIngredient(ItemID.IronBar, 20); // 8/10 cooking pot + 4/5 anvil + 8/8 heavy workbench
@@ -43,8 +43,7 @@ namespace Camping.Items.Tents
             recipe.anyWood = true;
             recipe.anyIronBar = true;
             recipe.AddTile(TileID.Sawmill);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
+            recipe.Register();
         }
 
         public override void UpdateEquip(Player player)

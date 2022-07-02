@@ -10,7 +10,7 @@ namespace Camping.Buffs.Outpost
     /// </summary>
     public class OutpostStage2 : ModBuff
     {
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.buffNoTimeDisplay[Type] = true;
             Main.buffNoSave[Type] = true;

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
@@ -73,7 +74,7 @@ namespace Camping
                     if (leftClicked)
                     {
                         CampingModPlayer.SpawnAtTent = false;
-                        Main.PlaySound(SoundID.MenuTick);
+                        SoundEngine.PlaySound(SoundID.MenuTick);
                     }
                 }
                 else if (hover == 2)
@@ -83,7 +84,7 @@ namespace Camping
                     if (leftClicked)
                     {
                         CampingModPlayer.SpawnAtTent = true;
-                        Main.PlaySound(SoundID.MenuTick);
+                        SoundEngine.PlaySound(SoundID.MenuTick);
                     }
                 }
             }

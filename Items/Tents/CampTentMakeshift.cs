@@ -1,4 +1,5 @@
-﻿using Terraria.ID;
+﻿using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Camping.Items.Tents
@@ -12,17 +13,16 @@ namespace Camping.Items.Tents
         public override void SetDefaults()
         {
             base.SetDefaults();
-            item.placeStyle = 1;
+            Item.placeStyle = 1;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ItemID.Cobweb, 30);
             recipe.AddIngredient(ItemID.Wood, 8);
             recipe.anyWood = true;
             recipe.AddTile(TileID.WorkBenches);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

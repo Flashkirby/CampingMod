@@ -30,7 +30,7 @@ namespace Camping
             ModCompatible.WeaponOutConvertor.Unload();
         }
 
-        public override void PostDrawInterface(SpriteBatch spriteBatch)
+        public override void PostDrawInterface(SpriteBatch spriteBatch)/* tModPorter Note: Removed. Use ModSystem.PostDrawInterface */
         {
             SpawnInterfaceHelper.DrawInterface(spriteBatch);
         }

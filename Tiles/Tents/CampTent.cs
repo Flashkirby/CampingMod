@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -14,7 +15,7 @@ namespace Camping.Tiles.Tents
         protected const int _FRAMEWIDTH = 5;
         protected const int _FRAMEHEIGHT = 3;
 
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             AddMapEntry(new Color(90, 190, 20), CreateMapEntryName());
 
@@ -24,10 +25,10 @@ namespace Camping.Tiles.Tents
             //extra info
             Main.tileFrameImportant[Type] = true;
             Main.tileLavaDeath[Type] = true;
-            dustType = -1;
-            disableSmartCursor = true;
-            adjTiles = new int[] { TileID.Beds };
-            bed = true;
+            DustType = -1;
+            disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+            AdjTiles = new int[] { TileID.Beds };
+            bed/* tModPorter Note: Removed. Use TileID.Sets.CanBeSleptIn instead */ = true;
 
             SetTentBaseTileObjectData(_FRAMEWIDTH, _FRAMEHEIGHT);
 
@@ -69,10 +70,10 @@ namespace Camping.Tiles.Tents
         /// <summary>
         /// Allow smart select and drawing _Highlight.png
         /// </summary>
-        public override bool HasSmartInteract()
+        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
         { return true; }
 
-        public override bool NewRightClick(int tX, int tY)
+        public override bool RightClick(int tX, int tY)
         {
             Player player = Main.LocalPlayer;
             CampingModPlayer modPlayer = player.GetModPlayer<CampingModPlayer>();
@@ -83,7 +84,7 @@ namespace Camping.Tiles.Tents
 
         public override void MouseOver(int tX, int tY)
         {
-            TileUtils.ShowItemIcon(tX, tY, GetItemTypeFromStyle(Main.tile[tX, tY].frameY));
+            TileUtils.ShowItemIcon(tX, tY, GetItemTypeFromStyle(Main.tile[tX, tY].TileFrameY));
         }
 
         /// <summary>

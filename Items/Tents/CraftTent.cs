@@ -9,28 +9,26 @@ namespace Camping.Items.Tents
         public override void SetDefaults()
         {
             base.SetDefaults();
-            item.value = Item.sellPrice(0, 0, 1, 0);
-            item.createTile = ModContent.TileType<Tiles.Tents.CraftTent>();
+            Item.value = Item.sellPrice(0, 0, 1, 0);
+            Item.createTile = ModContent.TileType<Tiles.Tents.CraftTent>();
         }
         public override void AddRecipes()
         {
             // Raw craft option
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ItemID.Silk, 2);
             recipe.AddIngredient(ItemID.Wood, 18);
             recipe.anyWood = true;
             recipe.AddTile(TileID.WorkBenches);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
+            recipe.Register();
 
             // Alternate upgrade option
-            recipe = new ModRecipe(mod);
+            recipe = CreateRecipe();
             recipe.AddIngredient(ModContent.ItemType<CampTent>());
             recipe.AddIngredient(ItemID.Wood, 10);
             recipe.anyWood = true;
             recipe.AddTile(TileID.WorkBenches);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

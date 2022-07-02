@@ -56,8 +56,8 @@ namespace Camping
         {
             if (localPermaSpawnCache != null)
             {
-                player.SpawnX = (int)((Vector2)localPermaSpawnCache).X;
-                player.SpawnY = (int)((Vector2)localPermaSpawnCache).Y;
+                Player.SpawnX = (int)((Vector2)localPermaSpawnCache).X;
+                Player.SpawnY = (int)((Vector2)localPermaSpawnCache).Y;
                 localPermaSpawnCache = null;
             }
         }
@@ -65,9 +65,9 @@ namespace Camping
         /// <summary> Store spawn in cache and override spawn to tent </summary>
         private void SetTemporaryRespawn()
         {
-            if (player.whoAmI == Main.myPlayer)
+            if (Player.whoAmI == Main.myPlayer)
             {
-                int tileType = (int)Main.tile[(int)tentSpawn.X, (int)tentSpawn.Y - 1].type;
+                int tileType = (int)Main.tile[(int)tentSpawn.X, (int)tentSpawn.Y - 1].TileType;
 
                 if (!Camping.Sets.TemporarySpawn.Contains(tileType))
                 {
@@ -82,9 +82,9 @@ namespace Camping
                     return;
                 }
 
-                localPermaSpawnCache = new Vector2(player.SpawnX, player.SpawnY);
-                player.SpawnX = tentSpawn.X;
-                player.SpawnY = tentSpawn.Y;
+                localPermaSpawnCache = new Vector2(Player.SpawnX, Player.SpawnY);
+                Player.SpawnX = tentSpawn.X;
+                Player.SpawnY = tentSpawn.Y;
             }
         }
 

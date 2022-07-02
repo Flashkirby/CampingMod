@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent.Achievements;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -15,8 +16,8 @@ namespace Camping.Tiles.Tents
         {
             Player player = Main.LocalPlayer;
             player.noThrow = 2;
-            player.showItemIcon = true;
-            player.showItemIcon2 = itemType;
+            player.cursorItemIconEnabled = true;
+            player.cursorItemIconID = itemType;
         }
 
         /// <summary>
@@ -33,11 +34,11 @@ namespace Camping.Tiles.Tents
         public static void GetTentSpawnPosition(int tX, int tY, out int spawnX, out int spawnY, int frameWidth, int frameHeight, int leftOffset, int mirroredOffset = 0)
         {
             Tile tile = Main.tile[tX, tY];
-            int localFrameX = tile.frameX % (18 * frameWidth);
-            int localFrameY = tile.frameY % (18 * frameHeight);
+            int localFrameX = tile.TileFrameX % (18 * frameWidth);
+            int localFrameY = tile.TileFrameY % (18 * frameHeight);
             spawnX = tX - localFrameX / 18 + leftOffset;
             spawnY = tY - localFrameY / 18 + frameHeight;
-            if (tile.frameX >= 18 * frameWidth) spawnX += mirroredOffset;  // Sprite is mirrored, add tile offset
+            if (tile.TileFrameX >= 18 * frameWidth) spawnX += mirroredOffset;  // Sprite is mirrored, add tile offset
         }
 
         public static void ToggleTemporarySpawnPoint(CampingModPlayer modPlayer, int spawnX, int spawnY)
@@ -53,14 +54,14 @@ namespace Camping.Tiles.Tents
 
                 Camping.PrintInfo("CampTent.SpawnSet");
                 modPlayer.tentSpawn = new Point(spawnX, spawnY);
-                if (modPlayer.player == Main.LocalPlayer)
+                if (modPlayer.Player == Main.LocalPlayer)
                 {
                     CampingModPlayer.SpawnAtTent = true;
                 }
             }
             else
             {
-                if (modPlayer.player.SpawnX == -1 && modPlayer.player.SpawnY == -1)
+                if (modPlayer.Player.SpawnX == -1 && modPlayer.Player.SpawnY == -1)
                 {
                     Camping.PrintInfo("CampTent.SpawnRemove");
                 }
@@ -87,7 +88,7 @@ namespace Camping.Tiles.Tents
                     try
                     {
                         Tile t = Main.tile[x, y];
-                        if (t.active() && Main.tileSolid[t.type])
+                        if (t.HasTile && Main.tileSolid[t.TileType])
                         {
                             return true;
                         }
@@ -164,7 +165,7 @@ namespace Camping.Tiles.Tents
             if (specialChestType == player.chest)
             {
                 player.chest = -1;
-                Main.PlaySound(SoundID.MenuClose);
+                SoundEngine.PlaySound(SoundID.MenuClose);
             }
 
             // Clicked and another chest is open
@@ -177,10 +178,10 @@ namespace Camping.Tiles.Tents
                     PlayerInput.Triggers.JustPressed.Grapple = false;
                 }
                 Main.recBigList = false;
-                Main.PlaySound(SoundID.MenuOpen);
+                SoundEngine.PlaySound(SoundID.MenuOpen);
                 player.chestX = tX;
                 player.chestY = tY;
-                if (Main.tile[tX, tY].frameX >= 36 && Main.tile[tX, tY].frameX < 72)
+                if (Main.tile[tX, tY].TileFrameX >= 36 && Main.tile[tX, tY].TileFrameX < 72)
                 {
                     AchievementsHelper.HandleSpecialEvent(player, 16);
                 }
@@ -196,7 +197,7 @@ namespace Camping.Tiles.Tents
                     PlayerInput.Triggers.JustPressed.Grapple = false;
                 }
                 Main.recBigList = false;
-                Main.PlaySound(SoundID.MenuTick);
+                SoundEngine.PlaySound(SoundID.MenuTick);
                 player.chestX = tX;
                 player.chestY = tY;
             }

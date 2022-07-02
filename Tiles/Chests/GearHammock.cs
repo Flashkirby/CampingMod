@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -18,7 +20,7 @@ namespace Camping.Tiles.Chests
         protected const int _FRAMEWIDTH = _TILEWIDTH * 18;
         protected const int _FRAMEHEIGHT = _TILEHEIGHT * 18;
 
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             AddMapEntry(new Color(135, 133, 80), CreateMapEntryName());
 
@@ -30,7 +32,7 @@ namespace Camping.Tiles.Chests
             // Shine like a chest
             Main.tileSpelunker[Type] = true;
             Main.tileContainer[Type] = true;
-            Main.tileValue[Type] = 50;
+            Main.tileOreFinderPriority[Type] = 50;
 
             //Main.tileShine2[Type] = true;
             //Main.tileShine[Type] = 1200;
@@ -41,7 +43,7 @@ namespace Camping.Tiles.Chests
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
             TileObjectData.newTile.Origin = new Point16(1, 1);
             TileObjectData.newTile.CoordinateHeights = new[] { 16, 18 }; // Height of each frame
-            TileObjectData.newTile.HookCheck = new PlacementHook(new Func<int, int, int, int, int, int>(Chest.FindEmptyChest), -1, 0, true);
+            TileObjectData.newTile.HookCheckIfCanPlace = new PlacementHook(new Func<int, int, int, int, int, int>(Chest.FindEmptyChest), -1, 0, true);
             TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(new Func<int, int, int, int, int, int>(Chest.AfterPlacement_Hook), -1, 0, false);
             TileObjectData.newTile.AnchorInvalidTiles = new[] { (int)TileID.MagicalIceBlock };
             TileObjectData.newTile.StyleHorizontal = true;
@@ -51,16 +53,16 @@ namespace Camping.Tiles.Chests
             TileObjectData.newTile.DrawYOffset = -4;
             TileObjectData.addTile(Type);
 
-            disableSmartCursor = true;
-            adjTiles = new int[] { TileID.Containers };
-            chest = Language.GetTextValue(Camping.LANG_KEY + "MapObject.GearHammock");
-            chestDrop = ItemType<Items.Chests.GearHammock>();
-            dustType = 26;
+            disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+            AdjTiles = new int[] { TileID.Containers };
+            chest/* tModPorter Note: Removed. Use ContainerName.SetDefault() and TileID.Sets.BasicChest instead */ = Language.GetTextValue(Camping.LANG_KEY + "MapObject.GearHammock");
+            ChestDrop = ItemType<Items.Chests.GearHammock>();
+            DustType = 26;
         }
 
-        public override bool HasSmartInteract() => true;
+        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings) => true;
 
-        public override ushort GetMapOption(int tX, int tY) => (ushort)(Main.tile[tX, tY].frameX / (_FRAMEWIDTH));
+        public override ushort GetMapOption(int tX, int tY) => (ushort)(Main.tile[tX, tY].TileFrameX / (_FRAMEWIDTH));
 
         /// <summary> Doesn't seem to actually do anything atm </summary>
         public string MapChestName(string name, int tX, int tY)
@@ -86,47 +88,47 @@ namespace Camping.Tiles.Chests
             Player player = Main.LocalPlayer;
             GetTileAndChestPosition(tX, tY, out Tile tile, out int left, out int top);
             int chest = Chest.FindChest(left, top);
-            player.showItemIcon2 = -1;
+            player.cursorItemIconID = -1;
             if (chest < 0)
             {
-                player.showItemIconText = Language.GetTextValue("LegacyChestType.0");
+                player.cursorItemIconText = Language.GetTextValue("LegacyChestType.0");
             }
             else
             {
-                player.showItemIconText = Main.chest[chest].name.Length > 0 ? Main.chest[chest].name : this.chest;
+                player.cursorItemIconText = Main.chest[chest].name.Length > 0 ? Main.chest[chest].name : this.chest/* tModPorter Note: Removed. Use ContainerName.SetDefault() and TileID.Sets.BasicChest instead */;
                 // Show text, or item icon if the text is the default name
-                if (player.showItemIconText == this.chest)
+                if (player.cursorItemIconText == this.chest/* tModPorter Note: Removed. Use ContainerName.SetDefault() and TileID.Sets.BasicChest instead */)
                 {
-                    player.showItemIcon2 = ItemType<Items.Chests.GearHammock>();
-                    player.showItemIconText = "";
+                    player.cursorItemIconID = ItemType<Items.Chests.GearHammock>();
+                    player.cursorItemIconText = "";
                 }
             }
             player.noThrow = 2;
-            player.showItemIcon = true;
+            player.cursorItemIconEnabled = true;
         }
 
         public override void MouseOverFar(int tX, int tY)
         {
             MouseOver(tX, tY);
             Player player = Main.LocalPlayer;
-            if (player.showItemIconText == "")
+            if (player.cursorItemIconText == "")
             {
-                player.showItemIcon = false;
-                player.showItemIcon2 = 0;
+                player.cursorItemIconEnabled = false;
+                player.cursorItemIconID = 0;
             }
         }
 
-        public override bool NewRightClick(int tX, int tY)
+        public override bool RightClick(int tX, int tY)
         {
             Player player = Main.LocalPlayer;
             GetTileAndChestPosition(tX, tY, out Tile tile, out int left, out int top);
             Main.mouseRightRelease = false;
-            Main.defaultChestName = chest;
+            Main.defaultChestName = chest/* tModPorter Note: Removed. Use ContainerName.SetDefault() and TileID.Sets.BasicChest instead */;
 
             // Close sign if open
             if (player.sign >= 0)
             {
-                Main.PlaySound(SoundID.MenuClose);
+                SoundEngine.PlaySound(SoundID.MenuClose);
                 player.sign = -1;
                 Main.editSign = false;
                 Main.npcChatText = "";
@@ -135,7 +137,7 @@ namespace Camping.Tiles.Chests
             // Swap Chests
             if (Main.editChest)
             {
-                Main.PlaySound(SoundID.MenuTick);
+                SoundEngine.PlaySound(SoundID.MenuTick);
                 Main.editChest = false;
                 Main.npcChatText = "";
             }
@@ -154,7 +156,7 @@ namespace Camping.Tiles.Chests
                     // If already open, close
                     player.chest = -1;
                     Recipe.FindRecipes();
-                    Main.PlaySound(SoundID.MenuClose);
+                    SoundEngine.PlaySound(SoundID.MenuClose);
                 }
                 else
                 {
@@ -174,7 +176,7 @@ namespace Camping.Tiles.Chests
                     if (chest == player.chest)
                     {
                         player.chest = -1;
-                        Main.PlaySound(SoundID.MenuClose);
+                        SoundEngine.PlaySound(SoundID.MenuClose);
                     }
                     // Otherwise, open sesame
                     else
@@ -184,7 +186,7 @@ namespace Camping.Tiles.Chests
                         Main.recBigList = false;
                         player.chestX = left;
                         player.chestY = top;
-                        Main.PlaySound(player.chest < 0 ? SoundID.MenuOpen : SoundID.MenuTick);
+                        SoundEngine.PlaySound(player.chest < 0 ? SoundID.MenuOpen : SoundID.MenuTick);
                     }
                     Recipe.FindRecipes();
                 }
@@ -203,8 +205,8 @@ namespace Camping.Tiles.Chests
             tile = Main.tile[tX, tY];
             left = tX;
             top = tY;
-            left -= tile.frameX / 18;
-            if (tile.frameY != 0)
+            left -= tile.TileFrameX / 18;
+            if (tile.TileFrameY != 0)
             { top--; }
         }
     }

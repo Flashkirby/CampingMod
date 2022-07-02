@@ -9,7 +9,7 @@ namespace Camping.ModCompatible
     {
         public static Mod weaponOut = null;
 
-        public override bool Autoload(ref string name)
+        public override bool IsLoadingEnabled(Mod mod)/* tModPorter Suggestion: If you return false for the purposes of manual loading, use the [Autoload(false)] attribute on your class instead */
         {
             weaponOut = ModLoader.GetMod("WeaponOut");
             return weaponOut != null;
@@ -28,7 +28,7 @@ namespace Camping.ModCompatible
 
         private void ConvertTent(Item item)
         {
-            if (item.type == weaponOut.ItemType("CampTent"))
+            if (item.type == weaponOut.Find<ModItem>("CampTent").Type)
             {
                 int stack = item.stack;
                 item.type = ItemType<Items.Tents.CampTent>();
@@ -36,7 +36,7 @@ namespace Camping.ModCompatible
                 item.stack = stack;
                 Camping.Print("WeaponOutConvertor.ConvertTent");
             }
-            else if (item.type == weaponOut.ItemType("CampTentMakeshift"))
+            else if (item.type == weaponOut.Find<ModItem>("CampTentMakeshift").Type)
             {
                 int stack = item.stack;
                 item.type = ItemType<Items.Tents.CampTentMakeshift>();

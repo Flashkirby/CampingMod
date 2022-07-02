@@ -24,10 +24,10 @@ namespace Camping.Tiles.Chests
             int hammock = TileType<GearHammock>();
             Tile tile = Main.tile[tX, tY];
             Tile below = Main.tile[tX, tY + 1];
-            if (tile.type != hammock && below.type == hammock)
+            if (tile.TileType != hammock && below.TileType == hammock)
             {
-                int left = tX - below.frameX / 18 % 3;
-                int top = tY + 1 + below.frameY / 18;
+                int left = tX - below.TileFrameX / 18 % 3;
+                int top = tY + 1 + below.TileFrameY / 18;
                 if (!Chest.CanDestroyChest(left, top))
                 {
                     blockDamaged = false;
