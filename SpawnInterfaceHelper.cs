@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
@@ -8,6 +7,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using ReLogic.Content;
+using CampingMod.Common.Players;
 
 namespace CampingMod
 {
@@ -21,7 +21,7 @@ namespace CampingMod
         {
             if (!Main.dedServ)
             {
-                spawnButtons = mod.Assets.Request<Texture2D>("UI/SpawnButtons", AssetRequestMode.ImmediateLoad).Value;
+                spawnButtons = ModContent.Request<Texture2D>("CampingMod/Assets/Textures/UI/SpawnButtons", AssetRequestMode.ImmediateLoad).Value;
             }
         }
 

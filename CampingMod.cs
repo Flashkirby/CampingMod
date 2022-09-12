@@ -1,9 +1,5 @@
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -28,7 +24,6 @@ namespace CampingMod
         {
             Sets.TemporarySpawn = null;
             SpawnInterfaceHelper.Unload();
-            ModCompatible.WeaponOutConvertor.Unload();
         }
 
         public static class Sets
