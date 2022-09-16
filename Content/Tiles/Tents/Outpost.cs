@@ -11,6 +11,7 @@ using Terraria.GameInput;
 using Terraria.GameContent.Achievements;
 using static Terraria.ModLoader.ModContent;
 using CampingMod.Common.Players;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace CampingMod.Content.Tiles.Tents
 {
@@ -25,7 +26,9 @@ namespace CampingMod.Content.Tiles.Tents
             AddMapEntry(new Color(116, 117, 186), CreateMapEntryName());
 
             // While this is a chest for the purpose of interaction (piggy bank, safe)...
-            TileID.Sets.BasicChest[Type] = true;
+            //TileID.Sets.BasicChest[Type] = true; 
+            // see "DrawEffects" and "SetDrawPositions"
+
             // It isn't a tile that actually stores items that need saving/loading
             Main.tileContainer[Type] = false;
 
@@ -253,6 +256,18 @@ namespace CampingMod.Content.Tiles.Tents
                 }
             }
             return -1;
+        }
+
+        public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData) {
+            // Set to true so that the player will recognise this furniture as a chest item
+            // this prevents the chest from being closed on the next frame
+            TileID.Sets.BasicChest[Type] = true; 
+        }
+        public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY) {
+            // After the checks, and just before drawing the tile data, disable this tile as being a chest
+            // This is because TileDrawing.CacheSpecialDraws attempts to modify tile frames that are in
+            // this set, which ends up drawing additional pink lines
+            TileID.Sets.BasicChest[Type] = false; 
         }
     }
 }
