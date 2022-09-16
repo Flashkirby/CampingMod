@@ -8,6 +8,7 @@ Mods: {
 			CraftTent: Craft Tent
 			LargeTent: Base Camp
 			TemporarySpawn: 担当暂时的出生点
+			TemporarySpawnPoint: 暂时的出生点
 			TentCrafting: Used for basic crafting
 			LargeTentCrafting: Used for basic crafting, cooking, and alchemy
 			OutpostCrafting: Used for advanced crafting, smelting, cooking, and alchemy
