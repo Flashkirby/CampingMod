@@ -162,6 +162,11 @@ namespace CampingMod.Content.Tiles.Tents
             ToggleOpenSpecialChest(tX, tY, player, -4);
         }
 
+        public static void ToggleVoidBag(int tX, int tY, Player player) 
+        {
+            ToggleOpenSpecialChest(tX, tY, player, -5);
+        }
+
         private static void ToggleOpenSpecialChest(int tX, int tY, Player player, int specialChestType)
         {
             Main.stackSplit = 600;

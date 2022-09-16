@@ -24,6 +24,11 @@ namespace CampingMod.Content.Tiles.Tents
         {
             AddMapEntry(new Color(116, 117, 186), CreateMapEntryName());
 
+            // While this is a chest for the purpose of interaction (piggy bank, safe)...
+            TileID.Sets.BasicChest[Type] = true;
+            // It isn't a tile that actually stores items that need saving/loading
+            Main.tileContainer[Type] = false;
+
             TileID.Sets.HasOutlines[Type] = true;
             TileID.Sets.CanBeSleptIn[Type] = true;
             TileID.Sets.DisableSmartCursor[Type] = true;
@@ -68,7 +73,6 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override bool RightClick(int tX, int tY)
         {
-
             Player player = Main.LocalPlayer;
             CampingModPlayer modPlayer = player.GetModPlayer<CampingModPlayer>();
 
@@ -76,7 +80,6 @@ namespace CampingMod.Content.Tiles.Tents
 
 
             // https://github.com/tModLoader/tModLoader/blob/master/ExampleMod/Tiles/ExampleChest.cs
-            // https://github.com/Flashkirby/CampingMod/pull/1#issuecomment-1175558003
             switch (logic)
             {
                 case ItemID.PiggyBank:
@@ -249,7 +252,7 @@ namespace CampingMod.Content.Tiles.Tents
                     return ItemID.Furnace;
                 }
             }
-            return 0;
+            return -1;
         }
     }
 }
