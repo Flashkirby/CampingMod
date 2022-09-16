@@ -8,6 +8,7 @@ using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.Localization;
 using CampingMod.Common.Players;
+using Terraria.GameContent;
 
 namespace CampingMod.Content.Tiles.Tents
 {
@@ -28,6 +29,9 @@ namespace CampingMod.Content.Tiles.Tents
             CampingMod.Sets.TemporarySpawn.Add(Type);
 
             dropItem = ModContent.ItemType<Items.Tents.LargeTent>();
+
+            TileID.Sets.CanBeSatOnForPlayers[Type] = true; // Facilitates calling ModifySittingTargetInfo for Players
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
 
             //extra info
             Main.tileFrameImportant[Type] = true;
@@ -62,16 +66,67 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override bool RightClick(int tX, int tY)
         {
+            Tile tile = Framing.GetTileSafely(tX, tY);
+            int frameX = (tile.TileFrameX / 18) % _FRAMEWIDTH;
+            int direction = (tile.TileFrameX >= 18 * _FRAMEWIDTH) ? -1 : 1;
+            int logic = GetTileLogic(tX, tY);
+
             Player player = Main.LocalPlayer;
-            CampingModPlayer modPlayer = player.GetModPlayer<CampingModPlayer>();
-            TileUtils.GetTentSpawnPosition(tX, tY, out int spawnX, out int spawnY, _FRAMEWIDTH, _FRAMEHEIGHT, 2, 1);
-            TileUtils.ToggleTemporarySpawnPoint(modPlayer, spawnX, spawnY);
+
+            if (logic == ItemID.WoodenChair) {
+
+                if (player.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) { // Avoid being able to trigger it from long range
+                    int offsetX = (frameX == 1 || frameX == 4) ? -direction : 0;
+                    player.GamepadEnableGrappleCooldown();
+                    player.sitting.SitDown(player, tX + offsetX, tY);
+                }
+            }
+            else {
+                CampingModPlayer modPlayer = player.GetModPlayer<CampingModPlayer>();
+                TileUtils.GetTentSpawnPosition(tX, tY, out int spawnX, out int spawnY, _FRAMEWIDTH, _FRAMEHEIGHT, 2, 1);
+                TileUtils.ToggleTemporarySpawnPoint(modPlayer, spawnX, spawnY);
+            }
+
             return true;
+        }
+
+        private static int GetTileLogic(int tX, int tY) {
+            Tile tile = Main.tile[tX, tY];
+            bool mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
+            int localTileX = tile.TileFrameX % (18 * _FRAMEWIDTH) / 18;
+            int localTileY = tile.TileFrameY % (18 * _FRAMEHEIGHT) / 18;
+            if (localTileY == 2) {
+                if ((!mirrored && (localTileX == 0 || localTileX == 1))
+                    ||
+                    (mirrored && (localTileX == 4 || localTileX == 5))) {
+                    return ItemID.WoodenChair; // A chair
+                }
+            }
+            return -1;
+        }
+
+
+        public override void ModifySittingTargetInfo(int i, int j, ref TileRestingInfo info) {
+            // It is very important to know that this is called on both players and NPCs, so do not use Main.LocalPlayer for example, use info.restingEntity
+            Tile tile = Framing.GetTileSafely(i, j);
+            bool mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
+
+            info.TargetDirection = mirrored ? 1 : -1;
+            info.VisualOffset = new Vector2(-8, 2);
+
+            info.AnchorTilePosition.X = i;
+            info.AnchorTilePosition.Y = j;
         }
 
         public override void MouseOver(int tX, int tY)
         {
-            TileUtils.ShowItemIcon(tX, tY, dropItem);
+            int logic = GetTileLogic(tX, tY);
+            if(logic == ItemID.WoodenChair) {
+                TileUtils.ShowItemIcon(tX, tY, ItemID.WoodenChair);
+            }
+            else {
+                TileUtils.ShowItemIcon(tX, tY, dropItem);
+            }
         }
     }
 }
