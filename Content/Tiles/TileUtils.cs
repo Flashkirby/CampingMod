@@ -40,6 +40,12 @@ namespace CampingMod.Content.Tiles.Tents
             if (tile.TileFrameX >= 18 * frameWidth) spawnX += mirroredOffset;  // Sprite is mirrored, add tile offset
         }
 
+        /// <summary>
+        /// Toggle the temporary spawn point of a modplayer and show message as appropriate.
+        /// </summary>
+        /// <param name="modPlayer"></param>
+        /// <param name="spawnX">spawnX position provided by GetTentSpawnPosition</param>
+        /// <param name="spawnY">spawnY position provided by GetTentSpawnPosition</param>
         public static void ToggleTemporarySpawnPoint(CampingModPlayer modPlayer, int spawnX, int spawnY)
         {
 
@@ -52,10 +58,10 @@ namespace CampingMod.Content.Tiles.Tents
                 }
 
                 CampingMod.PrintInfo("CampTent.SpawnSet");
-                modPlayer.tentSpawn = new Point(spawnX, spawnY);
+                modPlayer.SetTentSpawn(new Point(spawnX, spawnY));
                 if (modPlayer.Player == Main.LocalPlayer)
                 {
-                    CampingModPlayer.SpawnAtTent = true;
+                    CampingModPlayer.ChooseToSpawnAtTent = true;
                 }
             }
             else
@@ -68,7 +74,7 @@ namespace CampingMod.Content.Tiles.Tents
                 {
                     CampingMod.PrintInfo("CampTent.SpawnRemoveBed");
                 }
-                modPlayer.tentSpawn = default;
+                modPlayer.SetTentSpawn(null);
             }
         }
 
