@@ -16,9 +16,13 @@ namespace CampingMod.Content.Tiles.Chests
     /// This does the same but for the ceiling, since the gear hammock hangs from the ceiling.
     /// 
     /// ... and who wants to crash the game :^)
+    /// 1.4: Unfortunately currently isn't working properly, will be disabled until that can be fixed.
     /// </summary>
     public class GearHammockTileProtector : GlobalTile
     {
+        // This is buggy and unstable unfortunately, and too much of a hassle to make a hanging chest.
+        public override bool IsLoadingEnabled(Mod mod) => false;
+
         public override bool CanKillTile(int tX, int tY, int type, ref bool blockDamaged)
         {
             int hammock = TileType<GearHammock>();

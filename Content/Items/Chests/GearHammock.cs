@@ -6,6 +6,9 @@ namespace CampingMod.Content.Items.Chests
 {
     public class GearHammock : ModItem
     {
+        // This is buggy and unstable unfortunately, and too much of a hassle to make a hanging chest.
+        public override bool IsLoadingEnabled(Mod mod) => false;
+
         public override void SetDefaults()
         {
             Item.width = 26;

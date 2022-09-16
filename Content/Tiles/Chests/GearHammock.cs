@@ -20,6 +20,10 @@ namespace CampingMod.Content.Tiles.Chests
         protected const int _FRAMEWIDTH = _TILEWIDTH * 18;
         protected const int _FRAMEHEIGHT = _TILEHEIGHT * 18;
 
+        // This is buggy and unstable unfortunately, and too much of a hassle to make a hanging chest.
+        // Stack overflow exception on KillMultiTile
+        public override bool IsLoadingEnabled(Mod mod) => false;
+
         public override void SetStaticDefaults()
         {
             AddMapEntry(new Color(135, 133, 80), CreateMapEntryName());
@@ -174,7 +178,6 @@ namespace CampingMod.Content.Tiles.Chests
 
         public override void KillMultiTile(int tX, int tY, int frameX, int frameY)
         {
-            // TODO: check game crashing when destroyed via rocket
             Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _TILEWIDTH, 16 * _TILEHEIGHT, ItemType<Items.Chests.GearHammock>());
             Chest.DestroyChest(tX, tY);
         }
