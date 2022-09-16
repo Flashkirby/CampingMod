@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -44,11 +45,39 @@ namespace CampingMod.Content.Items.Tents
                 .Register();
         }
 
-        public override void UpdateEquip(Player player)
-        {
-            if (player != Main.LocalPlayer) return;
-            player.AddBuff(BuffID.HeartLamp, 2, false);
-            player.AddBuff(BuffID.StarInBottle, 2, false);
+        public override void UpdateEquip(Player player) {
+
+            // Star Lantern
+            Lighting.AddLight(player.Center + new Vector2(0, -player.height / 3) * player.Directions,
+                0.9f - Main.demonTorch * 0.2f,
+                0.9f - Main.demonTorch * 0.2f,
+                0.7f + Main.demonTorch * 0.2f
+                );
+
+            // Heart Lantern
+            Lighting.AddLight(player.Center + new Vector2(- player.width / 2, -player.height / 3) * player.Directions,
+                1f - Main.demonTorch * 0.1f,
+                0.3f - Main.demonTorch * 0.2f,
+                0.5f + Main.demonTorch * 0.2f
+                );
+
+            if (Main.rand.NextBool(20)) {
+                Vector2 starPosition = player.Center - new Vector2(10, player.height * 0.625f + 10);
+                Gore star = Gore.NewGoreDirect(Player.GetSource_None(), starPosition, player.velocity / 2, Main.rand.Next(16, 18));
+                star.scale *= 0.5f + (float)(Main.rand.NextDouble() * 0.25f);
+                star.velocity.Y = (star.velocity.Y + 2f) * 2;
+                star.velocity /= 2f;
+            }
+
+            // Buff all people around you
+            Rectangle buffArea = new Rectangle(Main.buffScanAreaWidth / -2, Main.buffScanAreaHeight / -2, Main.buffScanAreaWidth, Main.buffScanAreaHeight);
+            buffArea.Location += player.Center.ToPoint();
+            foreach (Player receiver in Main.player) {
+                if (buffArea.Contains(receiver.Center.ToPoint())) {
+                    receiver.AddBuff(BuffID.HeartLamp, 2, false);
+                    receiver.AddBuff(BuffID.StarInBottle, 2, false);
+                }
+            }
         }
     }
 }
