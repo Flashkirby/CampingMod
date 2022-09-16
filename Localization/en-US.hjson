@@ -53,7 +53,7 @@ Mods: {
 			CampTent: "{$Mods.CampingMod.Common.CampTent}"
 			SleepingBag: "{$Mods.CampingMod.Common.SleepingBag}"
 			CraftTent: "{$Mods.CampingMod.Common.CraftTent}"
-			LargeTent: "{$Mods.CampingMod.Common.SleepingBag}"
+			LargeTent: "{$Mods.CampingMod.Common.LargeTent}"
 			Outpost: "{$Mods.CampingMod.Common.Outpost}"
 		}
 
