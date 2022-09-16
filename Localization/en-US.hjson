@@ -1,5 +1,6 @@
 Mods: {
 	CampingMod: {
+		# Basically where possible, these common names are used to keep naming consistent across items, tile, and buffs
 		Common: {
 			GearHammock: Gear Hammock
 			CampTent: Camping Tent
