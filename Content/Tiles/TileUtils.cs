@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 
@@ -11,12 +12,15 @@ namespace CampingMod.Content.Tiles.Tents
 {
     internal static class TileUtils
     {
-        public static void ShowItemIcon(int tX, int tY, int itemType)
+        public static void ShowItemIcon(int tX, int tY, int itemType, string displayText=null)
         {
             Player player = Main.LocalPlayer;
             player.noThrow = 2;
             player.cursorItemIconEnabled = true;
             player.cursorItemIconID = itemType;
+            if(displayText != null) {
+                player.cursorItemIconText = displayText;
+            }
         }
 
         /// <summary>
@@ -145,6 +149,14 @@ namespace CampingMod.Content.Tiles.Tents
             }
             string message = Language.GetTextValue("Game.Time", currentHour + ":" + displayMinute + " " + period);
             Main.NewText(message, byte.MaxValue, 240, 20);
+        }
+
+        public static void SetPlayerSitInChair(Player player, int chairOriginX, int chairOriginY) {
+
+            if (player.IsWithinSnappngRangeToTile(chairOriginX, chairOriginY, PlayerSittingHelper.ChairSittingMaxDistance)) { 
+                player.GamepadEnableGrappleCooldown();
+                player.sitting.SitDown(player, chairOriginX, chairOriginY);
+            }
         }
 
         public static void TogglePiggyBank(int tX, int tY, Player player)

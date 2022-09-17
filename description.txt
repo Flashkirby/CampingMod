@@ -1,16 +1,28 @@
 ﻿[g:5] [c/FFFF00:Summary] [g:4] 
 Adds craftable tents that provide an additional spawn point to choose from upon death!
 
-[i/s1:184] Set up temporary spawn points by crafting tents
+[i/s1:184] Set up a temporary spawn point by crafting tents
 [i/s1:184] Choose to spawn between your tent or your bed
 [i/s1:184] Various tiers of tents with bonus utilities
-[i/s1:184] Gear hammocks, chests that hang on the ceiling
 
-Craft your first tent with [i/si:225]×2 and [i/si:9]×8 at a workbench, or a gear hammock with [i/si:150]×50.
+Craft your first tent with [i/si:225]×2 and [i/si:9]×8 at a workbench!
 
 As this was ported over from WeaponOut, any tents picked up or crafted from WeaponOut are converted to this mod's equivalent.
 
-[i/s1:58] [c/FFFF00:Credits] [i/s1:58]
+[g:5] [c/00FF88:Details] [g:4] 
+
+A temporary spawn point can be set alongside a normal spawn point, by interacting with a tent. Unlike beds, tents do not require valid housing to create a temporary spawn point, but these spawn points are not saved when exiting the world.
+
+[i/s1:36]  Caving Tent: Makeshift tent that uses cobweb instead of silk.
+[i/s1:36] Camping Tent: Standard tent created with silk and wood. 
+[i/s1:332] Sleeping Bag: Tent in bed form (smaller).
+[i/s1:36] Craft Tent: Upgrade for the camping tent that includes a workbench.
+[i/s1:36] Base Camp: Large (6x3) tent that includes a workbench, cooking pot, and placed bottle.
+[i/s1:363] Outpost: Huge (10x5) prefab that functions as a large variety of items (inc.[i/s1:36][i/s1:35][i/s1:398][i/s1:87][i/s1:346][i/s1:1859][i/s1:1431]), and boosts life regen while stood inside.
+
+
+
+[i/s1:58] [c/FF0000:Credits] [i/s1:58]
 Flashkirby99 - I am making this mod.
 kittenchilly - Ported to 1.4.
 Milliath - Переведено на русский.

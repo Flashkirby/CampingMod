@@ -12,6 +12,7 @@ using Terraria.GameContent.Achievements;
 using static Terraria.ModLoader.ModContent;
 using CampingMod.Common.Players;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent;
 
 namespace CampingMod.Content.Tiles.Tents
 {
@@ -50,6 +51,7 @@ namespace CampingMod.Content.Tiles.Tents
                     TileID.Anvils, TileID.Furnaces, TileID.HeavyWorkBench,
                     TileID.PiggyBank, TileID.Safes, TileID.TinkerersWorkbench
                 };
+            TileID.Sets.CanBeSatOnForPlayers[Type] = true; // Facilitates calling ModifySittingTargetInfo for Players
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
@@ -81,7 +83,7 @@ namespace CampingMod.Content.Tiles.Tents
             Player player = Main.LocalPlayer;
             CampingModPlayer modPlayer = player.GetModPlayer<CampingModPlayer>();
 
-            int logic = GetTileLogic(tX, tY);
+            int logic = GetTileLogic(tX, tY, out int lX, out int lY, out bool mirrored);
 
 
             // https://github.com/tModLoader/tModLoader/blob/master/ExampleMod/Tiles/ExampleChest.cs
@@ -96,6 +98,9 @@ namespace CampingMod.Content.Tiles.Tents
                 case ItemID.GPS:
                     TileUtils.DisplayTimeInChat();
                     break;
+                case ItemID.WoodenChair:
+                    TileUtils.SetPlayerSitInChair(player, tX, tY);
+                    break;
                 default:
                     TileUtils.GetTentSpawnPosition(tX, tY, out int spawnX, out int spawnY, _FRAMEWIDTH, _FRAMEHEIGHT, 6, -2);
                     TileUtils.ToggleTemporarySpawnPoint(modPlayer, spawnX, spawnY);
@@ -106,18 +111,25 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void MouseOver(int tX, int tY)
         {
-            int logic = GetTileLogic(tX, tY);
+            int logic = GetTileLogic(tX, tY, out _, out _, out _);
             int itemIcon = dropItem;
+            string itemName = "";
             switch (logic)
             {
                 case ItemID.PiggyBank:
-                    itemIcon = ItemID.PiggyBank; break;
+                    itemIcon = ItemID.PiggyBank;
+                    itemName = Language.GetTextValue("ItemName.PiggyBank");
+                    break;
                 case ItemID.Safe:
-                    itemIcon = ItemID.Safe; break;
+                    itemIcon = ItemID.Safe;
+                    itemName = Language.GetTextValue("ItemName.Safe");
+                    break;
                 case ItemID.GPS:
                     itemIcon = ItemID.DepthMeter; break;
+                case ItemID.WoodenChair:
+                    itemIcon = ItemID.WoodenChair;break;
             }
-            TileUtils.ShowItemIcon(tX, tY, itemIcon);
+            TileUtils.ShowItemIcon(tX, tY, itemIcon, itemName);
         }
 
         public override void NearbyEffects(int tX, int tY, bool closer)
@@ -157,7 +169,7 @@ namespace CampingMod.Content.Tiles.Tents
             //star in a bottle emits fallen stars gores
 
             Tile tile = Main.tile[tX, tY];
-            int logic = GetTileLogic(tX, tY);
+            int logic = GetTileLogic(tX, tY, out _, out _, out _);
             float mirroredSign = (tile.TileFrameX >= 18 * _FRAMEWIDTH) ? -1 : 1f;
             switch (logic)
             {
@@ -197,12 +209,12 @@ namespace CampingMod.Content.Tiles.Tents
 
         //
 
-        private static int GetTileLogic(int tX, int tY)
+        private static int GetTileLogic(int tX, int tY, out int localTileX, out int localTileY, out bool mirrored)
         {
             Tile tile = Main.tile[tX, tY];
-            bool mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
-            int localTileX = tile.TileFrameX % (18 * _FRAMEWIDTH) / 18;
-            int localTileY = tile.TileFrameY % (18 * _FRAMEHEIGHT) / 18;
+            mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
+            localTileX = tile.TileFrameX % (18 * _FRAMEWIDTH) / 18;
+            localTileY = tile.TileFrameY % (18 * _FRAMEHEIGHT) / 18;
             if (localTileY == 2)
             {
                 if ((!mirrored && (localTileX == 1 || localTileX == 2))
@@ -257,7 +269,27 @@ namespace CampingMod.Content.Tiles.Tents
                     return ItemID.Furnace;
                 }
             }
+            if (localTileY == 4) {
+                if ((!mirrored && localTileX == 5 || localTileX == 4)
+                    ||
+                    (mirrored && localTileX == 4 || localTileX == 5)) {
+                    return ItemID.WoodenChair;
+                }
+            }
             return -1;
+        }
+
+        public override void ModifySittingTargetInfo(int i, int j, ref TileRestingInfo info) {
+            // It is very important to know that this is called on both players and NPCs, so do not use Main.LocalPlayer for example, use info.restingEntity
+            Tile tile = Framing.GetTileSafely(i, j);
+            bool mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
+            bool furnaceSide = tile.TileFrameX % 36 == 0 ^ mirrored;
+
+            info.TargetDirection = mirrored == furnaceSide ? 1 : -1;
+            info.VisualOffset = new Vector2((furnaceSide ? - 8 : - 3), 1);
+
+            info.AnchorTilePosition.X = i;
+            info.AnchorTilePosition.Y = j;
         }
 
         public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData) {

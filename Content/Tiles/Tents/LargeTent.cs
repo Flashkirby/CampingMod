@@ -74,12 +74,8 @@ namespace CampingMod.Content.Tiles.Tents
             Player player = Main.LocalPlayer;
 
             if (logic == ItemID.WoodenChair) {
-
-                if (player.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) { // Avoid being able to trigger it from long range
-                    int offsetX = (frameX == 1 || frameX == 4) ? -direction : 0;
-                    player.GamepadEnableGrappleCooldown();
-                    player.sitting.SitDown(player, tX + offsetX, tY);
-                }
+                int offsetX = (frameX == 1 || frameX == 4) ? -direction : 0;
+                TileUtils.SetPlayerSitInChair(player, tX + offsetX, tY);
             }
             else {
                 CampingModPlayer modPlayer = player.GetModPlayer<CampingModPlayer>();
