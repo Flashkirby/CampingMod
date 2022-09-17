@@ -48,10 +48,12 @@ namespace CampingMod.Content.Tiles.Tents
                     TileID.Beds, TileID.Chairs, TileID.Tables, TileID.Tables2,
                     TileID.WorkBenches, TileID.Bottles, TileID.CookingPots,
                     TileID.Anvils, TileID.Furnaces, TileID.HeavyWorkBench,
-                    TileID.PiggyBank, TileID.Safes
+                    TileID.PiggyBank, TileID.Safes, TileID.TinkerersWorkbench
                 };
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-
+                
             CampTent.SetTentBaseTileObjectData(_FRAMEWIDTH, _FRAMEHEIGHT);
             //placement centre and offset on ground
             TileObjectData.newTile.Origin = new Point16(5, 4);

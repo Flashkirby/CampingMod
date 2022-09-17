@@ -41,6 +41,7 @@ namespace CampingMod.Content.Items.Tents
                 .AddIngredient(ItemID.LifeCrystal, 1)
                 .AddIngredient(ItemID.PiggyBank, 1)
                 .AddIngredient(ItemID.Safe, 1)
+                .AddIngredient(ItemID.TinkerersWorkshop, 1)
                 .AddTile(TileID.Sawmill)
                 .Register();
         }
