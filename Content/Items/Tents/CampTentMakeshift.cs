@@ -4,6 +4,9 @@ using Terraria.ModLoader;
 
 namespace CampingMod.Content.Items.Tents
 {
+    /// <summary>
+    /// Variant of the camping tent, can't be upgraded, but doesn't need a loom
+    /// </summary>
     public class CampTentMakeshift : CampTent
     {
         public override void SetStaticDefaults()
