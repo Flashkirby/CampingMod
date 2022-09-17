@@ -134,6 +134,8 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void NearbyEffects(int tX, int tY, bool closer)
         {
+            if (Main.LocalPlayer.DeadOrGhost) return;
+
             bool closest = (int)(Main.LocalPlayer.Center / 16).X == tX && (int)(Main.LocalPlayer.Center / 16).Y == tY;
             if (closest)
             {

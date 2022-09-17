@@ -74,7 +74,7 @@ namespace CampingMod.Content.Items.Tents
             Rectangle buffArea = new Rectangle(Main.buffScanAreaWidth / -2, Main.buffScanAreaHeight / -2, Main.buffScanAreaWidth, Main.buffScanAreaHeight);
             buffArea.Location += player.Center.ToPoint();
             foreach (Player receiver in Main.player) {
-                if (buffArea.Contains(receiver.Center.ToPoint())) {
+                if (player.active && !player.DeadOrGhost && buffArea.Contains(receiver.Center.ToPoint())) {
                     receiver.AddBuff(BuffID.HeartLamp, 2, false);
                     receiver.AddBuff(BuffID.StarInBottle, 2, false);
                 }
