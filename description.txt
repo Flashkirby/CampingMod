@@ -7,20 +7,30 @@ Adds craftable tents that provide an additional spawn point to choose from upon 
 
 Craft your first tent with [i/si:225]×2 and [i/si:9]×8 at a workbench!
 
-As this was ported over from WeaponOut, any tents picked up or crafted from WeaponOut are converted to this mod's equivalent.
-
 [g:5] [c/00FF88:Details] [g:4] 
 
-A temporary spawn point can be set alongside a normal spawn point, by interacting with a tent. Unlike beds, tents do not require valid housing to create a temporary spawn point, but these spawn points are not saved when exiting the world.
+A temporary spawn point can be set alongside a normal spawn point, by interacting with a tent. Unlike beds, tents do not require valid housing to create a temporary spawn point, but these spawn points are not saved when exiting the world. 
+When respawning, you can choose to spawn at either your original spawn point, or at the temporary spawn point.
 
-[i/s1:36]  Caving Tent: Makeshift tent that uses cobweb instead of silk.
-[i/s1:36] Camping Tent: Standard tent created with silk and wood. 
-[i/s1:332] Sleeping Bag: Tent in bed form (smaller).
-[i/s1:36] Craft Tent: Upgrade for the camping tent that includes a workbench.
-[i/s1:36] Base Camp: Large (6x3) tent that includes a workbench, cooking pot, and placed bottle.
-[i/s1:363] Outpost: Huge (10x5) prefab that functions as a large variety of items (inc.[i/s1:36][i/s1:35][i/s1:398][i/s1:87][i/s1:346][i/s1:1859][i/s1:1431]), and boosts life regen while stood inside.
+[i/s1:36] Caving Tent
+Makeshift tent that uses cobweb instead of silk. Can be worn as a backpack vanity accessory.
 
+[i/s1:36] Camping Tent
+Standard tent created with silk and wood. Can be worn as a backpack vanity accessory.
 
+[i/s1:332] Sleeping Bag
+Tent in a smaller bed form (4x2). Can be worn as a backpack vanity accessory.
+
+[i/s1:36] Craft Tent
+Upgrade for the camping tent that includes a workbench. Can be worn as a backpack vanity accessory.
+
+[i/s1:36] Base Camp
+Large (6x3) tent that includes a workbench, cooking pot, and placed bottle. Can be worn as a backpack vanity accessory.
+
+[i/s1:363] [c/9696ff:Outpost]
+Huge (10x5) prefab that functions as a large variety of items, and boosts life regen while stood inside.
+Includes: [i/s1:36] [i/s1:35] [i/s1:398] [i/s1:87] [i/s1:346] [i/s1:1859] [i/s1:1431]
+Can be worn as a accessory that provides the heart lantern and star in a bottle buff to nearby players.
 
 [i/s1:58] [c/FF0000:Credits] [i/s1:58]
 Flashkirby99 - I am making this mod.
