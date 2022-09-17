@@ -13,6 +13,7 @@ namespace CampingMod.Content.Items.Tents
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
+            Item.value = Item.sellPrice(0, 0, 0, 50);
         }
         public override void SetDefaults()
         {
