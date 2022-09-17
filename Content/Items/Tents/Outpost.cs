@@ -71,7 +71,8 @@ namespace CampingMod.Content.Items.Tents
             }
 
             // Buff all people around you
-            Rectangle buffArea = new Rectangle(Main.buffScanAreaWidth / -2, Main.buffScanAreaHeight / -2, Main.buffScanAreaWidth, Main.buffScanAreaHeight);
+            // buffScanArea is in tiles, so * 16 but also we need to halve it so * 8
+            Rectangle buffArea = new Rectangle(Main.buffScanAreaWidth * -8, Main.buffScanAreaHeight * -8, Main.buffScanAreaWidth * 16, Main.buffScanAreaHeight * 16);
             buffArea.Location += player.Center.ToPoint();
             foreach (Player receiver in Main.player) {
                 if (player.active && !player.DeadOrGhost && buffArea.Contains(receiver.Center.ToPoint())) {
