@@ -3,4 +3,4 @@ author = Flashkirby99, kittenchilly
 version = 2.0
 homepage=https://github.com/Flashkirby/CampingMod/blob/master/README.md
 
-buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, *.suo, *.sln, .git, .gitignore, *.env, *.md, .git\*, *.psd, *.fw.png *.TMP
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, *.suo, *.sln, .git, .gitignore, *.env, *.md, .git\*, *.psd, *.fw.png *.TMP, *.ase, *.aseprite
