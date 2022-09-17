@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CampingMod.Content.Tiles.Tents;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -8,6 +9,16 @@ namespace CampingMod.Common.Systems
 
     public class CampingSystem : ModSystem
     {
+        public int outpostTileID = 0;
+
+        public override void SetStaticDefaults() {
+            outpostTileID = ModContent.TileType<Outpost>();
+        }
+
+        public override void PostDrawTiles() {
+            Outpost.CalculateWindVisual();
+        }
+
         /// <summary>
         /// Display button interface for choosing tent spawn vs home spawn
         /// </summary>

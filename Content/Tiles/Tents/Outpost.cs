@@ -1,4 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
@@ -6,13 +10,10 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Terraria.DataStructures;
 using Terraria.Enums;
-using Terraria.Localization;
-using Terraria.GameInput;
-using Terraria.GameContent.Achievements;
 using static Terraria.ModLoader.ModContent;
+using ReLogic.Content;
+
 using CampingMod.Common.Players;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
 
 namespace CampingMod.Content.Tiles.Tents
 {
@@ -20,17 +21,33 @@ namespace CampingMod.Content.Tiles.Tents
     {
         protected const int _FRAMEWIDTH = 10;
         protected const int _FRAMEHEIGHT = 5;
-        int dropItem = 0;
+        protected const int _ANEMOMETER_FRAMES = 6;
+        protected const int _ANEMOMETER_COUNTER = 25;
+        static int dropItem = 0;
+        static int tileID = -1;
+
+        static Asset<Texture2D> AnemometerTexture;
+
+        static int AnemometerFrameCounter
+        {
+            get { return Main.tileFrameCounter[tileID]; }
+            set { Main.tileFrameCounter[tileID] = value; }
+        }
 
         public override void SetStaticDefaults()
         {
+            if (!Main.dedServ) {
+                AnemometerTexture = Request<Texture2D>("CampingMod/Content/Tiles/Tents/Outpost_Anemometer");
+                tileID = TileType<Outpost>();
+            }
+
             AddMapEntry(new Color(116, 117, 186), CreateMapEntryName());
 
             // While this is a chest for the purpose of interaction (piggy bank, safe)...
             //TileID.Sets.BasicChest[Type] = true; 
+            TileID.Sets.DoesntGetReplacedWithTileReplacement[Type] = true;
             // see "DrawEffects" and "SetDrawPositions"
-
-            // It isn't a tile that actually stores items that need saving/loading
+            // ...It isn't a tile that actually stores items that need saving/loading
             Main.tileContainer[Type] = false;
 
             TileID.Sets.HasOutlines[Type] = true;
@@ -117,13 +134,9 @@ namespace CampingMod.Content.Tiles.Tents
             switch (logic)
             {
                 case ItemID.PiggyBank:
-                    itemIcon = ItemID.PiggyBank;
-                    itemName = Language.GetTextValue("ItemName.PiggyBank");
-                    break;
+                    itemIcon = ItemID.PiggyBank; break;
                 case ItemID.Safe:
-                    itemIcon = ItemID.Safe;
-                    itemName = Language.GetTextValue("ItemName.Safe");
-                    break;
+                    itemIcon = ItemID.Safe; break;
                 case ItemID.GPS:
                     itemIcon = ItemID.DepthMeter; break;
                 case ItemID.WoodenChair:
@@ -297,13 +310,70 @@ namespace CampingMod.Content.Tiles.Tents
         public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData) {
             // Set to true so that the player will recognise this furniture as a chest item
             // this prevents the chest from being closed on the next frame
-            TileID.Sets.BasicChest[Type] = true; 
+            // unfortunately, this also allows blockswapping with chests via ValidTileForReplacement, which is why
+            // DoesntGetReplacedWithTileReplacement must also be set
+            TileID.Sets.BasicChest[Type] = true;
+
+            // Add hook on the top left corner tile for SpecialDraw
+            bool leftMostFrameTile = drawData.tileFrameX % (18 * _FRAMEWIDTH) == 0;
+            bool topMostFrameTile = drawData.tileFrameY % (18 * _FRAMEHEIGHT) == 0;
+            if (leftMostFrameTile && topMostFrameTile) {
+                Main.instance.TilesRenderer.AddSpecialLegacyPoint(i, j);
+            }
         }
+
         public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY) {
             // After the checks, and just before drawing the tile data, disable this tile as being a chest
             // This is because TileDrawing.CacheSpecialDraws attempts to modify tile frames that are in
             // this set, which ends up drawing additional pink lines
-            TileID.Sets.BasicChest[Type] = false; 
+            TileID.Sets.BasicChest[Type] = false;
+        }
+        public override void SpecialDraw(int i, int j, SpriteBatch spriteBatch) {
+
+            // Take the tile, check if it actually exists
+            Point p = new Point(i, j);
+            Tile tile = Framing.GetTileSafely(p);
+            if (tile == null || !tile.HasTile) { return; }
+            int direction = (tile.TileFrameX >= 18 * _FRAMEWIDTH) ? -1 : 1;
+
+            Texture2D texture = AnemometerTexture.Value;
+
+            Vector2 offScreen = new Vector2(Main.offScreenRange);
+            if (Main.drawToScreen) { offScreen = Vector2.Zero; }
+            Vector2 worldPos = p.ToWorldCoordinates(
+                16f * _FRAMEWIDTH / 2f + 66 * direction, 
+                10f);
+            Vector2 position = worldPos - Main.screenPosition + offScreen;
+
+            int localFrame = AnemometerFrameCounter / _ANEMOMETER_COUNTER;
+            localFrame = (localFrame + (int)(Math.Sin(i) * 3)) % _ANEMOMETER_FRAMES; // wrap to max frames, with sin offset
+            if (localFrame < 0) localFrame += _ANEMOMETER_FRAMES;
+
+            if (Framing.GetTileSafely(worldPos.ToTileCoordinates()).WallType > 0) { localFrame = 0; }
+
+            Rectangle frame = texture.Frame(1, _ANEMOMETER_FRAMES, 0, localFrame);
+
+            Color color = Lighting.GetColor(worldPos.ToTileCoordinates());
+
+            Vector2 origin = new Vector2(frame.Width / 2, frame.Height);
+
+            SpriteEffects effects = SpriteEffects.None;
+
+            spriteBatch.Draw(texture, position, frame, color, 0f, origin, 1f, effects, 0f);
+        }
+
+        public static void CalculateWindVisual() {
+            // 0.1f  = 5 mph, windy day starts at 0.4f
+            Main.windSpeedTarget = 0.4f;
+            float sensitivity = 20f; // detects changes of at least 2.5mph
+
+            AnemometerFrameCounter += Math.Clamp((int)(Main.WindForVisuals * sensitivity), -5, 5);
+            if (AnemometerFrameCounter >= _ANEMOMETER_FRAMES * _ANEMOMETER_COUNTER) {
+                AnemometerFrameCounter -= _ANEMOMETER_FRAMES * _ANEMOMETER_COUNTER;
+            }
+            else if (AnemometerFrameCounter < 0) {
+                AnemometerFrameCounter += _ANEMOMETER_FRAMES * _ANEMOMETER_COUNTER;
+            }
         }
     }
 }
