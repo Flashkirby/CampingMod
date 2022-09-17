@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using ReLogic.Content;
+using CampingMod.Common.Players;
 
-namespace Camping
+namespace CampingMod
 {
     internal static class SpawnInterfaceHelper
     {
@@ -15,11 +17,13 @@ namespace Camping
 
         public static Texture2D spawnButtons;
 
+        public static Texture2D spawnTent;
+
         public static void Load(Mod mod)
         {
-            if (!Main.dedServ)
-            {
-                spawnButtons = mod.GetTexture("UI/SpawnButtons");
+            if (!Main.dedServ) {
+                spawnButtons = ModContent.Request<Texture2D>("CampingMod/Assets/Textures/UI/SpawnButtons", AssetRequestMode.ImmediateLoad).Value;
+                spawnTent = ModContent.Request<Texture2D>("CampingMod/Assets/Textures/UI/SpawnTent", AssetRequestMode.ImmediateLoad).Value;
             }
         }
 
@@ -42,17 +46,17 @@ namespace Camping
                 spawnButtons,
                 spawnButtonSize,
                 0,
-                CampingModPlayer.SpawnAtTent ? 1 : 0,
+                CampingModPlayer.ChooseToSpawnAtTent ? 1 : 0,
                 -26,
-                84,
+                90,
                 deathAlpha.A);
             DrawData tentButton = GenerateUISpawnButton(
                 spawnButtons,
                 spawnButtonSize,
                 1,
-                CampingModPlayer.SpawnAtTent ? 0 : 1,
+                CampingModPlayer.ChooseToSpawnAtTent ? 0 : 1,
                 26,
-                84,
+                90,
                 deathAlpha.A);
 
             int hover = 0;
@@ -68,22 +72,22 @@ namespace Camping
 
                 if (hover == 1)
                 {
-                    Main.hoverItemName = Language.GetTextValue(Camping.LANG_KEY + "CampTent.SpawnAtHome");
+                    Main.hoverItemName = Language.GetTextValue(CampingMod.LANG_KEY + "CampTent.SpawnAtHome");
                     homeButton.color = Color.White;
                     if (leftClicked)
                     {
-                        CampingModPlayer.SpawnAtTent = false;
-                        Main.PlaySound(SoundID.MenuTick);
+                        CampingModPlayer.ChooseToSpawnAtTent = false;
+                        SoundEngine.PlaySound(SoundID.MenuTick);
                     }
                 }
                 else if (hover == 2)
                 {
-                    Main.hoverItemName = Language.GetTextValue(Camping.LANG_KEY + "CampTent.SpawnAtTent");
+                    Main.hoverItemName = Language.GetTextValue(CampingMod.LANG_KEY + "CampTent.SpawnAtTent");
                     tentButton.color = Color.White;
                     if (leftClicked)
                     {
-                        CampingModPlayer.SpawnAtTent = true;
-                        Main.PlaySound(SoundID.MenuTick);
+                        CampingModPlayer.ChooseToSpawnAtTent = true;
+                        SoundEngine.PlaySound(SoundID.MenuTick);
                     }
                 }
             }
@@ -101,6 +105,17 @@ namespace Camping
                 drawData.color);
         }
 
+        /// <summary>
+        /// Draw a transparent button in the centre of the screen.
+        /// </summary>
+        /// <param name="texture"></param>
+        /// <param name="buttonSize"></param>
+        /// <param name="frameX"></param>
+        /// <param name="frameY"></param>
+        /// <param name="drawOffsetX"></param>
+        /// <param name="drawOffsetY"></param>
+        /// <param name="alpha"></param>
+        /// <returns></returns>
         private static DrawData GenerateUISpawnButton(Texture2D texture, int buttonSize, int frameX, int frameY, int drawOffsetX, int drawOffsetY, byte alpha)
         {
             // Get the part of the spritesheet we want to draw
