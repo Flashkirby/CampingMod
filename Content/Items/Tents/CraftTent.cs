@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 
 namespace CampingMod.Content.Items.Tents
 {
+    [AutoloadEquip(EquipType.Back)]
     public class CraftTent : CampTent
     {
         public override void SetDefaults()
