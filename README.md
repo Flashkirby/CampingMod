@@ -17,7 +17,7 @@ Adds craftable tents that provide an additional spawn point to choose from upon 
 * Choose to spawn between your tent or your bed
 * Various tiers of tents with bonus utilities
 
-Craft your first tent with [i/si:225]×2 and [i/si:9]×8 at a workbench!
+Craft your first tent with Silk×2 and Wood×8 at a workbench!
 
 ## Details
 
