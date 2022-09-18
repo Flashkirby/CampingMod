@@ -48,8 +48,9 @@ namespace CampingMod.Common.Players
         /// <returns></returns>
         public override void OnRespawn(Player player) {
             if (player == Main.LocalPlayer && ChooseToSpawnAtTent) {
-                UseTentSpawnPoint();
-                OnRespawnDisplayMessage();
+                if (ValidateTentSpawnPoint()) {
+                    UseTentSpawnPoint();
+                }
             }
         }
 
@@ -93,22 +94,28 @@ namespace CampingMod.Common.Players
             }
         }
 
-        /// <summary> Enable spawning to tent, and display a message </summary>
-        private void OnRespawnDisplayMessage() {
-            if (Player.whoAmI == Main.myPlayer && tentSpawn != null) {
+        /// <summary>
+        /// Check if the tent spawn point is valid, and send a chat message if it is not.
+        /// </summary>
+        /// <returns>true if valid, false if not</returns>
+        private bool ValidateTentSpawnPoint() {
+            if (tentSpawn != null) {
                 int tileType = (int)Main.tile[(int)tentSpawn.Value.X, (int)tentSpawn.Value.Y - 1].TileType;
 
                 if (!CampingMod.Sets.TemporarySpawn.Contains(tileType)) {
                     CampingMod.PrintInfo("CampTent.SpawnMissing");
                     tentSpawn = default;
-                    return;
+                    return false;
                 }
 
                 if (TileUtils.IsTemporarySpawnObstructed(tentSpawn.Value.X, tentSpawn.Value.Y)) {
                     CampingMod.PrintInfo("CampTent.SpawnBlocked");
-                    return;
+                    return false;
                 }
+
+                return true;
             }
+            return false;
         }
 
     }
