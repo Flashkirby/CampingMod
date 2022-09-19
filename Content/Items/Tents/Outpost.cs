@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -9,6 +9,9 @@ namespace CampingMod.Content.Items.Tents
     [AutoloadEquip(EquipType.Back)]
     public class Outpost : ModItem
     {
+        public override void SetStaticDefaults() {
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+        }
         public override void SetDefaults()
         {
             Item.width = 16;
@@ -31,14 +34,31 @@ namespace CampingMod.Content.Items.Tents
         }
         public override void AddRecipes()
         {
+            // raw recipe
             CreateRecipe()
                 .AddIngredient(ItemID.Silk, 5) // 5/5 bed
                 .AddRecipeGroup(RecipeGroupID.Wood, 40) // 26 outpost + 10/10 workbench + 4/4 furnace
                 .AddRecipeGroup(RecipeGroupID.IronBar, 20) // 8/10 cooking pot + 4/5 anvil + 8/8 heavy workbench
-                .AddIngredient(ItemID.Glass, 3) // 1+2/4 2 bottles
+                .AddIngredient(ItemID.Glass, 3) // 1+2/4 2 bottles + 1 mug + fallen star
                 .AddIngredient(ItemID.StoneBlock, 25) // 25/20 furnace
                 .AddIngredient(ItemID.FallenStar, 1)
                 .AddIngredient(ItemID.LifeCrystal, 1)
+                .AddIngredient(ItemID.PiggyBank, 1)
+                .AddIngredient(ItemID.Safe, 1)
+                .AddIngredient(ItemID.TinkerersWorkshop, 1)
+                .AddTile(TileID.Sawmill)
+                .Register();
+
+            // completed items recipe
+            CreateRecipe()
+                .AddIngredient(ItemID.Silk, 5) // 5/5 bed
+                .AddRecipeGroup(RecipeGroupID.Wood, 40) // 26 outpost + 10/10 workbench + 4/4 furnace
+                .AddRecipeGroup(RecipeGroupID.IronBar, 20) // 8/10 cooking pot + 4/5 anvil + 8/8 heavy workbench
+                .AddIngredient(ItemID.StoneBlock, 25) // 25/20 furnace
+                .AddIngredient(ItemID.Bottle, 2)
+                .AddIngredient(ItemID.Mug, 1)
+                .AddIngredient(ItemID.StarinaBottle, 1)
+                .AddIngredient(ItemID.HeartLantern, 1)
                 .AddIngredient(ItemID.PiggyBank, 1)
                 .AddIngredient(ItemID.Safe, 1)
                 .AddIngredient(ItemID.TinkerersWorkshop, 1)

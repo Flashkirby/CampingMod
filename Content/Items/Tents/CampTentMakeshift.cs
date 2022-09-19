@@ -22,6 +22,7 @@ namespace CampingMod.Content.Items.Tents
         }
         public override void AddRecipes()
         {
+            // 1 silk = 7 cobweb, so this is costs 16 more web, at the bonus of not needing a loom
             CreateRecipe()
                 .AddIngredient(ItemID.Cobweb, 30)
                 .AddRecipeGroup(RecipeGroupID.Wood, 8)
