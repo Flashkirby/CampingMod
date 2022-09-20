@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace CampingMod
 {
-    public class CampingMod : Mod {
+    partial class CampingMod : Mod {
         public const string LANG_KEY = "Mods.CampingMod.";
 
         public CampingMod() {
@@ -20,6 +20,12 @@ namespace CampingMod
             Sets.TemporarySpawn = null;
             SpawnInterfaceHelper.Unload();
         }
+
+        public override void PostSetupContent() {
+            SetupModIntegration();
+        }
+
+
 
         public static class Sets {
             /// <summary> Tiles which are identified as temporary spawn points. </summary>
