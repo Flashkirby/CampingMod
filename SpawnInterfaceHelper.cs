@@ -30,6 +30,7 @@ namespace CampingMod
         public static void Unload()
         {
             spawnButtons = default;
+            spawnTent = default;
         }
 
         public static void DrawInterface(SpriteBatch spriteBatch)
