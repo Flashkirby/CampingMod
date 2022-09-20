@@ -73,7 +73,7 @@ namespace CampingMod
 
                 if (hover == 1)
                 {
-                    Main.hoverItemName = Language.GetTextValue(CampingMod.LANG_KEY + "CampTent.SpawnAtHome");
+                    Main.instance.MouseText(Language.GetTextValue(CampingMod.LANG_KEY + "CampTent.SpawnAtHome"), 0, 0);
                     homeButton.color = Color.White;
                     if (leftClicked)
                     {
@@ -81,9 +81,9 @@ namespace CampingMod
                         SoundEngine.PlaySound(SoundID.MenuTick);
                     }
                 }
-                else if (hover == 2)
+                else if (hover == 2) 
                 {
-                    Main.hoverItemName = Language.GetTextValue(CampingMod.LANG_KEY + "CampTent.SpawnAtTent");
+                    Main.instance.MouseText(Language.GetTextValue(CampingMod.LANG_KEY + "CampTent.SpawnAtTent"), 0, 0);
                     tentButton.color = Color.White;
                     if (leftClicked)
                     {
