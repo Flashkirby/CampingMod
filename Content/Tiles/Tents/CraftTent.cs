@@ -33,7 +33,7 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void MouseOver(int tX, int tY)
         {
-            TileUtils.ShowItemIcon(tX, tY, dropItem);
+            TileUtils.ShowItemIcon(dropItem);
         }
     }
 }

@@ -85,7 +85,7 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void MouseOver(int tX, int tY)
         {
-            TileUtils.ShowItemIcon(tX, tY, GetItemTypeFromStyle(Main.tile[tX, tY].TileFrameY));
+            TileUtils.ShowItemIcon(GetItemTypeFromStyle(Main.tile[tX, tY].TileFrameY));
         }
 
         /// <summary>

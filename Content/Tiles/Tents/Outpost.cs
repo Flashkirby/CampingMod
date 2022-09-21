@@ -142,7 +142,11 @@ namespace CampingMod.Content.Tiles.Tents
                 case ItemID.WoodenChair:
                     itemIcon = ItemID.WoodenChair;break;
             }
-            TileUtils.ShowItemIcon(tX, tY, itemIcon, itemName);
+            TileUtils.ShowItemIcon(itemIcon, itemName);
+        }
+
+        public override void MouseOverFar(int i, int j) {
+            TileUtils.ShowItemIcon(0, "");
         }
 
         public override void NearbyEffects(int tX, int tY, bool closer)

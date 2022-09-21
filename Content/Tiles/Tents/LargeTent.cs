@@ -118,10 +118,10 @@ namespace CampingMod.Content.Tiles.Tents
         {
             int logic = GetTileLogic(tX, tY);
             if(logic == ItemID.WoodenChair) {
-                TileUtils.ShowItemIcon(tX, tY, ItemID.WoodenChair);
+                TileUtils.ShowItemIcon(ItemID.WoodenChair);
             }
             else {
-                TileUtils.ShowItemIcon(tX, tY, dropItem);
+                TileUtils.ShowItemIcon(dropItem);
             }
         }
     }

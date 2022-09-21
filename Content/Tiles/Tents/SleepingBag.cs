@@ -99,7 +99,7 @@ namespace CampingMod.Content.Tiles.Tents
                 }
             }
             else {
-                TileUtils.ShowItemIcon(tX, tY, dropItem);
+                TileUtils.ShowItemIcon(dropItem);
             }
 
         }

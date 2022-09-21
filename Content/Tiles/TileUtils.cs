@@ -12,12 +12,14 @@ namespace CampingMod.Content.Tiles.Tents
 {
     internal static class TileUtils
     {
-        public static void ShowItemIcon(int tX, int tY, int itemType, string displayText=null)
+        public static void ShowItemIcon(int itemType = -1, string displayText = null)
         {
             Player player = Main.LocalPlayer;
             player.noThrow = 2;
-            player.cursorItemIconEnabled = true;
-            player.cursorItemIconID = itemType;
+            if (itemType >= 0) {
+                player.cursorItemIconEnabled = true;
+                player.cursorItemIconID = itemType;
+            }
             if(displayText != null) {
                 player.cursorItemIconText = displayText;
             }
