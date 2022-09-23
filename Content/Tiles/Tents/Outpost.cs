@@ -100,7 +100,7 @@ namespace CampingMod.Content.Tiles.Tents
             Player player = Main.LocalPlayer;
             CampingModPlayer modPlayer = player.GetModPlayer<CampingModPlayer>();
 
-            int logic = GetTileLogic(tX, tY, out int lX, out int lY, out bool mirrored);
+            int logic = GetTileLogic(tX, tY, out int lX, out int lY, out bool mirrored, out _);
 
 
             // https://github.com/tModLoader/tModLoader/blob/master/ExampleMod/Tiles/ExampleChest.cs
@@ -128,7 +128,7 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void MouseOver(int tX, int tY)
         {
-            int logic = GetTileLogic(tX, tY, out _, out _, out _);
+            int logic = GetTileLogic(tX, tY, out _, out _, out _, out _);
             int itemIcon = dropItem;
             string itemName = "";
             switch (logic)
@@ -146,7 +146,7 @@ namespace CampingMod.Content.Tiles.Tents
         }
 
         public override void MouseOverFar(int i, int j) {
-            TileUtils.ShowItemIcon(0, "");
+            TileUtils.ShowItemIcon(-1, "");
         }
 
         public override void NearbyEffects(int tX, int tY, bool closer)
@@ -188,11 +188,12 @@ namespace CampingMod.Content.Tiles.Tents
             //star in a bottle emits fallen stars gores
 
             Tile tile = Main.tile[tX, tY];
-            int logic = GetTileLogic(tX, tY, out _, out _, out _);
+            int logic = GetTileLogic(tX, tY, out _, out _, out _, out bool lightOff);
             float mirroredSign = (tile.TileFrameX >= 18 * _FRAMEWIDTH) ? -1 : 1f;
             switch (logic)
             {
                 case ItemID.StarinaBottle:
+                    if (lightOff) { break; }
                     float torchPulse = Main.demonTorch * 0.2f;
                     r = 0.9f - torchPulse;
                     g = 0.9f - torchPulse;
@@ -206,6 +207,7 @@ namespace CampingMod.Content.Tiles.Tents
                     }
                     break;
                 case ItemID.HeartLantern:
+                    if (lightOff) { break; }
                     r = 1f - Main.demonTorch * 0.1f;
                     g = 0.3f - Main.demonTorch * 0.2f;
                     b = 0.5f + Main.demonTorch * 0.2f;
@@ -225,13 +227,33 @@ namespace CampingMod.Content.Tiles.Tents
                     break;
             }
         }
+        
+        public override void HitWire(int tX, int tY) {
+            GetTileLogic(tX, tY, out int localTileX, out int localTileY, out _, out bool lightOff);
 
-        //
+            Point topLeft = new Point(tX - localTileX, tY - localTileY);
+            short frameAdj = (short)(18 * (lightOff ? -_FRAMEHEIGHT : _FRAMEHEIGHT)); // light on, make off (move to 2nd row), viceversa
 
-        private static int GetTileLogic(int tX, int tY, out int localTileX, out int localTileY, out bool mirrored)
+            Main.NewText($"{lightOff}");
+
+            for (int i = 0; i < _FRAMEWIDTH; i++) {
+                for (int j = 0; j < _FRAMEHEIGHT; j++) {
+                    Main.tile[topLeft.X + i, topLeft.Y + j].TileFrameY += frameAdj;
+                    Wiring.SkipWire(topLeft.X + i, topLeft.Y + j);
+                }
+            }
+
+            // Avoid trying to send packets in singleplayer.
+            if (Main.netMode != NetmodeID.SinglePlayer) {
+                NetMessage.SendTileSquare(-1, topLeft.X, topLeft.Y, _FRAMEWIDTH, _FRAMEHEIGHT, TileChangeType.None);
+            }
+        }
+
+        private static int GetTileLogic(int tX, int tY, out int localTileX, out int localTileY, out bool mirrored, out bool wireToggled)
         {
-            Tile tile = Main.tile[tX, tY];
+            Tile tile = Framing.GetTileSafely(tX, tY);
             mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
+            wireToggled = (tile.TileFrameY >= 18 * _FRAMEHEIGHT);
             localTileX = tile.TileFrameX % (18 * _FRAMEWIDTH) / 18;
             localTileY = tile.TileFrameY % (18 * _FRAMEHEIGHT) / 18;
             if (localTileY == 2)
