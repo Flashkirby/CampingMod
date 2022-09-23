@@ -234,8 +234,6 @@ namespace CampingMod.Content.Tiles.Tents
             Point topLeft = new Point(tX - localTileX, tY - localTileY);
             short frameAdj = (short)(18 * (lightOff ? -_FRAMEHEIGHT : _FRAMEHEIGHT)); // light on, make off (move to 2nd row), viceversa
 
-            Main.NewText($"{lightOff}");
-
             for (int i = 0; i < _FRAMEWIDTH; i++) {
                 for (int j = 0; j < _FRAMEHEIGHT; j++) {
                     Main.tile[topLeft.X + i, topLeft.Y + j].TileFrameY += frameAdj;
