@@ -1,36 +1,36 @@
 Mods: {
 	CampingMod: {
 		Common: {
-			GearHammock: Gear Hammock
+			GearHammock: 齿轮吊床
 			CampTent: 野营帐篷
 			CampTentMakeshift: 洞穴帐篷
-			SleepingBag: Sleeping Bag
-			CraftTent: Craft Tent
-			LargeTent: Base Camp
+			SleepingBag: 睡袋
+			CraftTent: 工艺帐篷
+			LargeTent: 大本营
 			TemporarySpawn: 担当暂时的出生点
 			TemporarySpawnPoint: 暂时的出生点
-			TentCrafting: Used for basic crafting
-			LargeTentCrafting: Used for basic crafting, cooking, and alchemy
-			OutpostCrafting: Used for advanced crafting, smelting, cooking, and alchemy
-			Outpost: Outpost
-			OutpostBank: Provides access to a Piggy Bank and Safe
-			OutpostEffect: Increases recovery when standing inside
+			TentCrafting: 用于基础制作
+			LargeTentCrafting: 用于基本的制作、烹饪和炼金术
+			OutpostCrafting: 用于高级制作、冶炼、烹饪和炼金术
+			Outpost: 前哨站
+			OutpostBank: 包含存钱罐和保险箱的功能
+			OutpostEffect: 站在里面时增加恢复
 		}
 
 		CampTent: {
-			SpawnSet: Temporary spawn point set!
-			SpawnRemove: Temporary spawn point removed!
-			SpawnBlocked: The area is obstructed.
-			SpawnRemoveBed: Spawn point reset to bed!
-			SpawnMissing: Temporary spawn point missing, returned to original spawn point.
-			SpawnAtTent: Spawn at temporary spawn point
-			SpawnAtHome: Spawn at original spawn point
+			SpawnSet: 已设置临时重生点!
+			SpawnRemove: 移除临时重生点!
+			SpawnBlocked: 该区域被遮挡.
+			SpawnRemoveBed: 重生点设置为床!
+			SpawnMissing: 临时重生点丢失，返回原始重生点.
+			SpawnAtTent: 重生在临时重生点
+			SpawnAtHome: 重生在初始重生点
 		}
 
 		BuffDescription: {
-			OutpostStage1: Life regen is increased when standing in the outpost
-			OutpostStage2: Life regen is increased, reduces some debuff durations when unharmed for %TIME seconds
-			OutpostStage3: Life regen is increased, drastically reduces duration to some debuffs
+			OutpostStage1: 站在前哨站时增加生命回复
+			OutpostStage2: 生命恢复增加，在 %TIME 秒内未受伤时减少一些减益持续时间
+			OutpostStage3: 生命回复增加，大幅减少一些减益的持续时间
 		}
 
 		WeaponOutConvertor: {
