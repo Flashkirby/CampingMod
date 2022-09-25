@@ -388,7 +388,6 @@ namespace CampingMod.Content.Tiles.Tents
 
         public static void CalculateWindVisual() {
             // 0.1f  = 5 mph, windy day starts at 0.4f
-            Main.windSpeedTarget = 0.4f;
             float sensitivity = 20f; // detects changes of at least 2.5mph
 
             AnemometerFrameCounter += Math.Clamp((int)(Main.WindForVisuals * sensitivity), -5, 5);
