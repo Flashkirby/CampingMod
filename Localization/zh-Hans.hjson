@@ -21,10 +21,10 @@ Mods: {
 			SpawnSet: 临时出生点已设置!
 			SpawnRemove: 临时出生点已移除!
 			SpawnBlocked: 无法在此处建造。
-			SpawnRemoveBed: Spawn point reset to bed!
-			SpawnMissing: 临时出生点已丢失,即将返回初始出生点。
+			SpawnRemoveBed: 出生点已重设为床!
+			SpawnMissing: 临时出生点已丢失,即将回到上一个生成位置。
 			SpawnAtTent: 回到临时出生点
-			SpawnAtHome: 回到初始出生点
+			SpawnAtHome: 回到上一个出生点
 		}
 
 		BuffDescription: {
