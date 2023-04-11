@@ -1,7 +1,9 @@
 ﻿# Camping Mod
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/Flashkirby/CampingMod/master/icon.png"/>
+  <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2864849706">
+    <img src="https://raw.githubusercontent.com/Flashkirby/CampingMod/master/icon.png"/>
+  </a>
 </p>
 <p align="center">
 <img src="http://i.imgur.com/kdcROYP.png"/>
@@ -57,4 +59,4 @@ kittenchilly - Ported to 1.4.
 
 Milliath - Переведено на русский.
 
-Gouvod - 汉语翻译
+Gouvod, Zomty, Safijiiva, Ticok, huige3 - 汉语翻译
