@@ -1,38 +1,38 @@
 ﻿
 # Chests
 
-Common.GearHammock=Gear Hammock
+Common.GearHammock=齿轮吊床
 
 # Spawn Tent texts
 
 Common.CampTent=野营帐篷
 Common.CampTentMakeshift=洞穴帐篷
-Common.SleepingBag=Sleeping Bag
-Common.CraftTent=Craft Tent
-Common.LargeTent=Base Camp
+Common.SleepingBag=睡袋
+Common.CraftTent=工艺帐篷
+Common.LargeTent=大本营
 
 Common.TemporarySpawn=担当暂时的出生点
-Common.TentCrafting=Used for basic crafting
-Common.LargeTentCrafting=Used for basic crafting, cooking, and alchemy
-Common.OutpostCrafting=Used for advanced crafting, smelting, cooking, and alchemy
+Common.TentCrafting=用于基础制作
+Common.LargeTentCrafting=用于基本的制作、烹饪和炼金术
+Common.OutpostCrafting=用于高级制作、冶炼、烹饪和炼金术
 
-CampTent.SpawnSet=Temporary spawn point set!
-CampTent.SpawnRemove=Temporary spawn point removed!
-CampTent.SpawnBlocked=The area is obstructed.
-CampTent.SpawnRemoveBed=Spawn point reset to bed!
-CampTent.SpawnMissing=Temporary spawn point missing, returned to original spawn point.
+CampTent.SpawnSet=已设置临时重生点!
+CampTent.SpawnRemove=移除临时重生点!
+CampTent.SpawnBlocked=该区域被遮挡.
+CampTent.SpawnRemoveBed=重生点设置为床!
+CampTent.SpawnMissing=临时重生点丢失，返回原始重生点.
 
 # Outpost
 
-Common.Outpost=Outpost
-Common.OutpostBank=Provides access to a Piggy Bank and Safe
-Common.OutpostEffect=Increases recovery when standing inside
-BuffDescription.OutpostStage1=Life regen is increased when standing in the outpost
-BuffDescription.OutpostStage2=Life regen is increased, reduces some debuff durations when unharmed for %TIME seconds
-BuffDescription.OutpostStage3=Life regen is increased, drastically reduces duration to some debuffs
+Common.Outpost=前哨站
+Common.OutpostBank=包含存钱罐和保险箱的功能
+Common.OutpostEffect=站在里面时增加恢复
+BuffDescription.OutpostStage1=前哨站增益：站在前哨站时增加生命回复
+BuffDescription.OutpostStage2=前哨站增益：生命恢复增加，在 %TIME 秒内未受伤时减少一些减益持续时间
+BuffDescription.OutpostStage3=前哨站增益：生命回复增加，大幅减少一些减益的持续时间
 
 # Information
 
-CampTent.SpawnAtTent=Spawn at temporary spawn point
-CampTent.SpawnAtHome=Spawn at original spawn point
+CampTent.SpawnAtTent=在临时重生点重生
+CampTent.SpawnAtHome=在初始重生点重生
 WeaponOutConvertor.ConvertTent=Camping Mod: Converted WeaponOut tent to Camping tent.

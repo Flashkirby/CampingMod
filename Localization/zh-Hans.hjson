@@ -1,36 +1,36 @@
 Mods: {
 	CampingMod: {
 		Common: {
-			GearHammock: Gear Hammock
+			GearHammock: 齿轮吊床
 			CampTent: 野营帐篷
-			CampTentMakeshift: 洞穴探险帐篷
+			CampTentMakeshift: 洞穴帐篷
 			SleepingBag: 睡袋
 			CraftTent: 工艺帐篷
-			LargeTent: 基地帐篷
-			TemporarySpawn: 可以作为临时的出生点
-			TemporarySpawnPoint: 临时出生点
-			TentCrafting: 可以进行基础的制作
-			LargeTentCrafting: 可以进行基础的制作,附带烹饪和炼金功能
-			OutpostCrafting: 可以进行进阶的制作,附带熔炼、烹饪和炼金功能
-			Outpost: 小型哨站
-			OutpostBank: 内置猪猪存钱罐及保险箱
-			OutpostEffect: 为使用者提供恢复性增益
+			LargeTent: 大本营
+			TemporarySpawn: 担当暂时的出生点
+			TemporarySpawnPoint: 暂时的出生点
+			TentCrafting: 用于基础制作
+			LargeTentCrafting: 用于基本的制作、烹饪和炼金术
+			OutpostCrafting: 用于高级制作、冶炼、烹饪和炼金术
+			Outpost: 前哨站
+			OutpostBank: 包含存钱罐和保险箱的功能
+			OutpostEffect: 站在里面时增加恢复
 		}
 
 		CampTent: {
-			SpawnSet: 临时出生点已设置!
-			SpawnRemove: 临时出生点已移除!
-			SpawnBlocked: 无法在此处建造。
-			SpawnRemoveBed: 出生点已重设为床!
-			SpawnMissing: 临时出生点已丢失,即将回到上一个生成位置。
-			SpawnAtTent: 回到临时出生点
-			SpawnAtHome: 回到上一个出生点
+			SpawnSet: 已设置临时重生点!
+			SpawnRemove: 移除临时重生点!
+			SpawnBlocked: 该区域被遮挡.
+			SpawnRemoveBed: 重生点设置为床!
+			SpawnMissing: 临时重生点丢失，返回原始重生点.
+			SpawnAtTent: 重生在临时重生点
+			SpawnAtHome: 重生在初始重生点
 		}
 
 		BuffDescription: {
-			OutpostStage1: 检测到附近有哨站
-			OutpostStage2: 哨站的恢复性增益将在你未受到伤害的 %TIME 秒后提供
-			OutpostStage3: 提高生命再生速度，大幅缩短一些减益的持续时间
+			OutpostStage1: 站在前哨站时增加生命回复
+			OutpostStage2: 生命恢复增加，在 %TIME 秒内未受伤时减少一些减益持续时间
+			OutpostStage3: 生命回复增加，大幅减少一些减益的持续时间
 		}
 
 		WeaponOutConvertor: {
