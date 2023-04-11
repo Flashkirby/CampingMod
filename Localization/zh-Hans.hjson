@@ -34,7 +34,7 @@ Mods: {
 		}
 
 		WeaponOutConvertor: {
-			ConvertTent: Camping Mod: 转换为野营帐篷!
+			ConvertTent: Camping Mod: 把WeaponOut出的帐篷改成露营帐篷
 		}
 	}
 }
