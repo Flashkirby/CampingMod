@@ -3,10 +3,10 @@ Mods: {
 		Common: {
 			GearHammock: 齿轮吊床
 			CampTent: 野营帐篷
-			CampTentMakeshift: 洞穴帐篷
+			CampTentMakeshift: 洞穴探险帐篷
 			SleepingBag: 睡袋
 			CraftTent: 工艺帐篷
-			LargeTent: 大本营
+			LargeTent: 基地帐篷
 			TemporarySpawn: 担当暂时的出生点
 			TemporarySpawnPoint: 暂时的出生点
 			TentCrafting: 用于基础制作
@@ -34,7 +34,7 @@ Mods: {
 		}
 
 		WeaponOutConvertor: {
-			ConvertTent: Camping Mod: Converted WeaponOut tent to Camping tent.
+			ConvertTent: Camping Mod: 转换为野营帐篷!
 		}
 	}
 }
