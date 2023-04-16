@@ -15,6 +15,7 @@ Mods: {
 			Outpost: 前哨站
 			OutpostBank: 包含存钱罐和保险箱的功能
 			OutpostEffect: 站在里面时增加恢复
+			SittingLog: 原木长凳
 		}
 
 		CampTent: {

@@ -15,6 +15,7 @@ Mods: {
 			Outpost: Лагерь
 			OutpostBank: Доступ к Свинье-копилке и Сейфу
 			OutpostEffect: Увеличивает восстановление, если стоять внутри
+			SittingLog: Бревенчатая Скамейка
 		}
 
 		CampTent: {
