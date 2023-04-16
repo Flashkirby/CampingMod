@@ -47,5 +47,13 @@ namespace CampingMod
         public static void PrintInfo(string text) {
             Main.NewText(Language.GetTextValue(LANG_KEY + text), 255, 240, 20);
         }
+
+        /// <summary>
+        /// Prints a value from the mod's language file in Yellow, with args used in String.Format (using {0}, {1} etc.)
+        /// </summary>
+        /// <param name="text"></param>
+        public static void PrintInfo(string text, params string[] args) {
+            Main.NewText(Language.GetTextValue(LANG_KEY + text, args), 255, 240, 20);
+        }
     }
 }

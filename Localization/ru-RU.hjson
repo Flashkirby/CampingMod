@@ -25,6 +25,7 @@ Mods: {
 			SpawnMissing: Временный спавн не найден, возвращение на первый спавн.
 			SpawnAtTent: Спавн на временной точке
 			SpawnAtHome: Спавн на первоначальной точке
+			CannotTeleportToTentBecauseNotMeetingItemRequirements: Не могу телепортироваться без {0}
 		}
 
 		BuffDescription: {

@@ -25,6 +25,7 @@ Mods: {
 			SpawnMissing: 临时重生点丢失，返回原始重生点.
 			SpawnAtTent: 重生在临时重生点
 			SpawnAtHome: 重生在初始重生点
+			CannotTeleportToTentBecauseNotMeetingItemRequirements: 没有{0}无法传送
 		}
 
 		BuffDescription: {

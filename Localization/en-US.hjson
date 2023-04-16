@@ -26,6 +26,7 @@ Mods: {
 			SpawnMissing: Temporary spawn point missing, returned to original spawn point.
 			SpawnAtTent: Spawn at temporary spawn point
 			SpawnAtHome: Spawn at original spawn point
+			CannotTeleportToTentBecauseNotMeetingItemRequirements: Cannot teleport without a {0}
 		}
 
 		BuffDescription: {
