@@ -65,7 +65,7 @@ namespace CampingMod.Content.Tiles.Tents
         {
             int type = GetItemTypeFromStyle(pixelY);
             if (type > 0)
-            { Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEWIDTH, type); }
+            { Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, type); }
         }
 
         /// <summary>

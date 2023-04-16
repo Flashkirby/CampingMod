@@ -55,7 +55,7 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
         {
-            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEWIDTH, dropItem);
+            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, dropItem);
         }
 
         /// <summary>
@@ -116,9 +116,10 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void MouseOver(int tX, int tY)
         {
+			Player player = Main.LocalPlayer;
             int logic = GetTileLogic(tX, tY);
-            if(logic == ItemID.WoodenChair) {
-                TileUtils.ShowItemIcon(ItemID.WoodenChair);
+            if(logic == ItemID.WoodenChair && player.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) {
+                TileUtils.ShowItemIcon(ItemID.BarStool);
             }
             else {
                 TileUtils.ShowItemIcon(dropItem);

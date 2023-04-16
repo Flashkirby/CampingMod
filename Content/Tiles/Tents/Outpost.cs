@@ -14,6 +14,8 @@ using static Terraria.ModLoader.ModContent;
 using ReLogic.Content;
 
 using CampingMod.Common.Players;
+using Terraria.GameContent;
+using System.Collections;
 
 namespace CampingMod.Content.Tiles.Tents
 {
@@ -86,7 +88,7 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
         {
-            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEWIDTH, dropItem);
+            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, dropItem);
         }
 
         /// <summary>
@@ -126,13 +128,12 @@ namespace CampingMod.Content.Tiles.Tents
             return true;
         }
 
-        public override void MouseOver(int tX, int tY)
+        public override void MouseOver(int tX, int tY) 
         {
             int logic = GetTileLogic(tX, tY, out _, out _, out _, out _);
             int itemIcon = dropItem;
             string itemName = "";
-            switch (logic)
-            {
+            switch (logic) {
                 case ItemID.PiggyBank:
                     itemIcon = ItemID.PiggyBank; break;
                 case ItemID.Safe:
@@ -140,7 +141,11 @@ namespace CampingMod.Content.Tiles.Tents
                 case ItemID.GPS:
                     itemIcon = ItemID.DepthMeter; break;
                 case ItemID.WoodenChair:
-                    itemIcon = ItemID.WoodenChair;break;
+                    Player player = Main.LocalPlayer;
+                    if (player.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) {
+                        itemIcon = ItemID.WoodenChair;
+                    }
+                    break;
             }
             TileUtils.ShowItemIcon(itemIcon, itemName);
         }
@@ -151,28 +156,27 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void NearbyEffects(int tX, int tY, bool closer)
         {
-            if (Main.LocalPlayer.DeadOrGhost) return;
+            Player player = Main.LocalPlayer;
+            if (player.DeadOrGhost) return;
 
-            bool closest = (int)(Main.LocalPlayer.Center / 16).X == tX && (int)(Main.LocalPlayer.Center / 16).Y == tY;
+            int stage1 = BuffType<Buffs.Outpost.OutpostStage1>();
+            int stage2 = BuffType<Buffs.Outpost.OutpostStage2>();
+            int stage3 = BuffType<Buffs.Outpost.OutpostStage3>();
+
+            bool closest = (int)(player.Center / 16).X == tX && (int)(player.Center / 16).Y == tY;
             if (closest)
             {
-                if (Main.LocalPlayer.lifeRegenTime >= 30 * 60)
+                if (player.lifeRegenTime >= 30 * 60)
                 {
-                    Main.LocalPlayer.ClearBuff(BuffType<Buffs.Outpost.OutpostStage1>());
-                    Main.LocalPlayer.ClearBuff(BuffType<Buffs.Outpost.OutpostStage2>());
-                    Main.LocalPlayer.AddBuff(BuffType<Buffs.Outpost.OutpostStage3>(), 30, quiet: false);
+                    ApplyBuffSet(player, new int[] { stage1, stage2, stage3 }, stage3, false);
                 }
-                else
-                {
-                    Main.LocalPlayer.ClearBuff(BuffType<Buffs.Outpost.OutpostStage1>());
-                    Main.LocalPlayer.AddBuff(BuffType<Buffs.Outpost.OutpostStage2>(), 30, quiet: false);
-                    Main.LocalPlayer.ClearBuff(BuffType<Buffs.Outpost.OutpostStage3>());
+                else {
+                    ApplyBuffSet(player, new int[] { stage1, stage2, stage3 }, stage2, false);
                 }
             }
-            else if (!Main.LocalPlayer.HasBuff(BuffType<Buffs.Outpost.OutpostStage2>())
-                && !Main.LocalPlayer.HasBuff(BuffType<Buffs.Outpost.OutpostStage3>()))
+            else if (!player.HasBuff(stage2) && !player.HasBuff(stage3))
             {
-                Main.LocalPlayer.AddBuff(BuffType<Buffs.Outpost.OutpostStage1>(), 30, quiet: false);
+                ApplyBuffSet(player, new int[] { stage1, stage2, stage3 }, stage1, true);
             }
 
             if (closer)
@@ -180,6 +184,16 @@ namespace CampingMod.Content.Tiles.Tents
                 Main.SceneMetrics.HasStarInBottle = true;
                 Main.SceneMetrics.HasHeartLantern = true;
             }
+        }
+
+        private void ApplyBuffSet(Player player, int[] buffTypesToReplace, int newBuffType, bool quiet = true) {
+            // convert to nicer to use List
+            ArrayList replaceList = new ArrayList(buffTypesToReplace);
+            replaceList.Remove(newBuffType);
+            foreach (int clearBuff in replaceList) {
+                player.ClearBuff(clearBuff);
+            }
+            player.AddBuff(newBuffType, 4, quiet);
         }
 
         public override void ModifyLight(int tX, int tY, ref float r, ref float g, ref float b)
