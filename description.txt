@@ -40,9 +40,10 @@ Can be worn as a accessory that provides the heart lantern and star in a bottle 
 Wikithis - Wiki support
 
 [i/s1:58] [c/FF0000:Credits] [i/s1:58]
-Flashkirby - I am making this mod.
-kittenchilly - Ported to 1.4.
-Language localization:
+Developer: Flashkirby
+Art: Flashkirby, RunicPixels
+1.4 Porting: kittenchilly, Flashkirby
+Localization:
     Русский: Milliath
     汉语: Gouvod (outdated)
 
