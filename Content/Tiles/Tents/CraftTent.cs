@@ -20,6 +20,10 @@ namespace CampingMod.Content.Tiles.Tents
             AddMapEntry(new Color(90, 190, 20), CreateMapEntryName());
 
             CampingMod.Sets.TemporarySpawn.Add(Type);
+
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair); // Beds count as chairs for the purpose of suitable room creation
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable); // Workbenches count as tables for room creation
+
             dropItem = ModContent.ItemType<Items.Tents.CraftTent>();
 
             DustType = -1;

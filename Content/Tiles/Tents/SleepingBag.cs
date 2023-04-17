@@ -28,6 +28,8 @@ namespace CampingMod.Content.Tiles.Tents
             TileID.Sets.DisableSmartCursor[Type] = true;
             CampingMod.Sets.TemporarySpawn.Add(Type);
 
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair); // Beds count as chairs for the purpose of suitable room creation
+
             dropItem = ModContent.ItemType<Items.Tents.SleepingBag>();
 
             //extra info

@@ -71,10 +71,11 @@ namespace CampingMod.Content.Tiles.Tents
                     TileID.PiggyBank, TileID.Safes, TileID.TinkerersWorkbench
                 };
             TileID.Sets.CanBeSatOnForPlayers[Type] = true; // Facilitates calling ModifySittingTargetInfo for Players
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair); // Beds count as chairs for the purpose of suitable room creation
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-                
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor); // All in one housing item!
+
             CampTent.SetTentBaseTileObjectData(_FRAMEWIDTH, _FRAMEHEIGHT);
             //placement centre and offset on ground
             TileObjectData.newTile.Origin = new Point16(5, 4);

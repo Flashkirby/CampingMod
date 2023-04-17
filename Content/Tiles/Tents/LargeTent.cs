@@ -31,7 +31,8 @@ namespace CampingMod.Content.Tiles.Tents
             dropItem = ModContent.ItemType<Items.Tents.LargeTent>();
 
             TileID.Sets.CanBeSatOnForPlayers[Type] = true; // Facilitates calling ModifySittingTargetInfo for Players
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair); // Beds count as chairs for the purpose of suitable room creation
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable); // Workbenches count as tables for room creation
 
             //extra info
             Main.tileFrameImportant[Type] = true;
@@ -113,12 +114,11 @@ namespace CampingMod.Content.Tiles.Tents
             info.AnchorTilePosition.X = i;
             info.AnchorTilePosition.Y = j;
         }
-
         public override void MouseOver(int tX, int tY)
         {
 			Player player = Main.LocalPlayer;
             int logic = GetTileLogic(tX, tY);
-            if(logic == ItemID.WoodenChair && player.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) {
+            if (logic == ItemID.WoodenChair && player.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) {
                 TileUtils.ShowItemIcon(ItemID.BarStool);
             }
             else {
