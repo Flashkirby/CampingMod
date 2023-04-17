@@ -40,6 +40,8 @@ namespace CampingMod.Common
 			string mapIconName = Language.GetTextValue($"{CampingMod.LANG_KEY}Common.TemporarySpawnPoint");
 			text = Language.GetTextValue("Game.TeleportTo", mapIconName);
 
+			// Prevents wormholing when something else has taken priority, such as teleporting to pylons
+			// Note: teleporting to players takes priority over teleporting to tents
 			if (Main.cancelWormHole) return;
 
 			// Click on the map icon
@@ -47,10 +49,6 @@ namespace CampingMod.Common
 
 				if (!modPlayer.Player.HasUnityPotion()) {
 					// Can't use this feature without wormhole potions
-					string errorText = "lmao"; //Language.GetTextValue("Game.TeleportTo", player[num34].name);
-
-					SystemLoader.PostDrawFullscreenMap(ref errorText);
-
 					CampingMod.PrintInfo("CampTent.CannotTeleportToTentBecauseNotMeetingItemRequirements", Language.GetTextValue("ItemName.WormholePotion"));
 				}
 				else {
@@ -60,6 +58,8 @@ namespace CampingMod.Common
 					// Consume wormhole potions
 					if (modPlayer.TeleportToTent(PlayerSpawnContext.RecallFromItem)) {
 						modPlayer.Player.TakeUnityPotion();
+						// Prevent any other wormhole teleports
+						Main.cancelWormHole = true;
 					}
                 }
 
