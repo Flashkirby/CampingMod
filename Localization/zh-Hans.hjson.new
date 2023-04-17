@@ -1,0 +1,50 @@
+
+Mods: {
+	CampingMod: {
+		# Basically where possible, these common names are used to keep naming consistent across items, tile, and buffs
+		Common: {
+			GearHammock: 齿轮吊床
+			CampTent: 野营帐篷
+			CampTentMakeshift: 洞穴探险帐篷
+			SleepingBag: 睡袋
+			CraftTent: 工艺帐篷
+			LargeTent: 基地帐篷
+			TemporarySpawn: 担当暂时的出生点
+			TemporarySpawnPoint: 暂时的出生点
+			TentCrafting: 用于基础制作
+			LargeTentCrafting: 用于基本的制作、烹饪和炼金术
+			OutpostCrafting: 用于高级制作、冶炼、烹饪和炼金术
+			Outpost: 前哨站
+			OutpostBank: 包含存钱罐和保险箱的功能
+			OutpostEffect: 站在里面时增加恢复
+			SittingLog: 原木长凳
+		}
+
+		CampTent: {
+			SpawnSet: 已设置临时重生点!
+			SpawnRemove: 移除临时重生点!
+			SpawnBlocked: 该区域被遮挡.
+			SpawnRemoveBed: 重生点设置为床!
+			SpawnMissing: 临时重生点丢失，返回原始重生点.
+			SpawnAtTent: 重生在临时重生点
+			SpawnAtHome: 重生在初始重生点
+			CannotTeleportToTentBecauseNotMeetingItemRequirements: 没有{0}无法传送
+		}
+
+		Buffs: {
+			OutpostStage1: {
+				Description: 站在前哨站时增加生命回复
+			}
+
+			OutpostStage2: {
+				Description: 生命恢复增加，在 %TIME 秒内未受伤时减少一些减益持续时间
+			}
+
+			OutpostStage3: {
+				Description: 生命回复增加，大幅减少一些减益的持续时间
+			}
+		}
+
+		WeaponOutConvertor.ConvertTent: Camping Mod: 把WeaponOut出的帐篷改成露营帐篷
+	}
+}

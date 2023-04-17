@@ -1,0 +1,112 @@
+
+Mods: {
+	CampingMod: {
+		# Basically where possible, these common names are used to keep naming consistent across items, tile, and buffs
+		Common: {
+			GearHammock: Gear Hammock
+			CampTent: Camping Tent
+			CampTentMakeshift: Caving Tent
+			SleepingBag: Sleeping Bag
+			CraftTent: Craft Tent
+			LargeTent: Base Camp
+			TemporarySpawn: Acts as a temporary spawn point
+			TemporarySpawnPoint: Temporary Spawn
+			TentCrafting: Used for basic crafting
+			LargeTentCrafting: Used for basic crafting, cooking, and alchemy
+			OutpostCrafting: Used for advanced crafting, smelting, cooking, and alchemy
+			Outpost: Outpost
+			OutpostBank: Provides access to a Piggy Bank and Safe
+			OutpostEffect: Increases recovery when standing inside
+			SittingLog: Log Bench
+		}
+
+		CampTent: {
+			SpawnSet: Temporary spawn point set!
+			SpawnRemove: Temporary spawn point removed!
+			SpawnBlocked: The area is obstructed.
+			SpawnRemoveBed: Spawn point reset to bed!
+			SpawnMissing: Temporary spawn point missing, returned to original spawn point.
+			SpawnAtTent: Spawn at temporary spawn point
+			SpawnAtHome: Spawn at original spawn point
+			CannotTeleportToTentBecauseNotMeetingItemRequirements: Cannot teleport without a {0}
+		}
+
+		Buffs: {
+			OutpostStage1: {
+				Description: Life regen is increased when standing in the outpost
+				DisplayName: "{$Mods.CampingMod.Common.Outpost}"
+			}
+
+			OutpostStage2: {
+				Description: Life regen is increased, reduces some debuff durations when unharmed for %TIME seconds
+				DisplayName: "{$Mods.CampingMod.Common.Outpost}"
+			}
+
+			OutpostStage3: {
+				Description: Life regen is increased, drastically reduces duration to some debuffs
+				DisplayName: "{$Mods.CampingMod.Common.Outpost}"
+			}
+		}
+
+		WeaponOutConvertor.ConvertTent: Camping Mod: Converted WeaponOut tent to Camping tent.
+
+		Items: {
+			GearHammock.DisplayName: "{$Mods.CampingMod.Common.GearHammock}"
+
+			CampTent: {
+				DisplayName: "{$Mods.CampingMod.Common.CampTent}"
+				Tooltip: "{$Mods.CampingMod.Common.TemporarySpawn}"
+			}
+
+			CampTentMakeshift: {
+				DisplayName: "{$Mods.CampingMod.Common.CampTentMakeshift}"
+				Tooltip: "{$Mods.CampingMod.Common.TemporarySpawn}"
+			}
+
+			SleepingBag: {
+				DisplayName: "{$Mods.CampingMod.Common.SleepingBag}"
+				Tooltip: "{$Mods.CampingMod.Common.TemporarySpawn}"
+			}
+
+			CraftTent: {
+				DisplayName: "{$Mods.CampingMod.Common.CraftTent}"
+				Tooltip:
+					'''
+					{$Mods.CampingMod.Common.TemporarySpawn}
+					{$Mods.CampingMod.Common.TentCrafting}
+					'''
+			}
+
+			LargeTent: {
+				DisplayName: "{$Mods.CampingMod.Common.LargeTent}"
+				Tooltip:
+					'''
+					{$Mods.CampingMod.Common.TemporarySpawn}
+					{$Mods.CampingMod.Common.LargeTentCrafting}
+					'''
+			}
+
+			Outpost: {
+				DisplayName: "{$Mods.CampingMod.Common.Outpost}"
+				Tooltip:
+					'''
+					{$Mods.CampingMod.Common.TemporarySpawn}
+					{$Mods.CampingMod.Common.OutpostCrafting}
+					{$Mods.CampingMod.Common.OutpostBank}
+					{$Mods.CampingMod.Common.OutpostEffect}
+					'''
+			}
+
+			SittingLog.DisplayName: "{$Mods.CampingMod.Common.SittingLog}"
+		}
+
+		Tiles: {
+			GearHammock.MapEntry: "{$Mods.CampingMod.Common.GearHammock}"
+			CampTent.MapEntry: "{$Mods.CampingMod.Common.CampTent}"
+			SleepingBag.MapEntry: "{$Mods.CampingMod.Common.SleepingBag}"
+			CraftTent.MapEntry: "{$Mods.CampingMod.Common.CraftTent}"
+			LargeTent.MapEntry: "{$Mods.CampingMod.Common.LargeTent}"
+			Outpost.MapEntry: "{$Mods.CampingMod.Common.Outpost}"
+		}
+	}
+}
