@@ -2,7 +2,7 @@
 Adds craftable tents that provide an additional spawn point to choose from upon death!
 
 [i/s1:184] Set up a temporary spawn point by crafting tents
-[i/s1:184] Choose to spawn between your tent or your bed
+[i/s1:184] Choose to respawn between your tent or your bed
 [i/s1:184] Various tiers of tents with bonus utilities
 
 Craft your first tent with [i/s30:150] and [i/s8:9] at a workbench!
@@ -11,11 +11,11 @@ Check out the wiki https://terrariamods.wiki.gg/wiki/Camping
 
 [g:5] [c/00FF88:Details] [g:4] 
 
-Your Temporary Spawn Point is first activated when pressing the Interact button on a tent after entering a world or multiplayer server, and is de-activated upon leaving the world or disconnecting from the server. Unlike a normal spawn point, a temporary spawn point cannot be teleported to with standard recall items such as Magic Mirror.
+You can set a Temporary Spawn Point by pressing the Interact button on a tent. Upon dying, the player will have a choice of respawning at their original spawn point, or at their temporary spawn point.
 
-Upon dying, the player will have a choice of respawning at their original spawn point, or at the temporary spawn point.
+When re-entering a world, you will still start at spawn, or your bed. While you cannot return to a temporary spawn point with items such as Magic Mirror, you can teleport to it using a Wormhole Potion by clicking on it in the fullscreen map. 
 
-An active temporary spawn point is marked on the minimap by a tent icon. 
+Your active temporary spawn point is marked on the minimap by a tent icon. 
 
 [i/s1:36] Caving Tent
 Makeshift tent that uses cobweb instead of silk. Can be worn as a backpack vanity accessory.
