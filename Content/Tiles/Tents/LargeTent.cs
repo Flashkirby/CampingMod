@@ -78,6 +78,10 @@ namespace CampingMod.Content.Tiles.Tents
                 int offsetX = (frameX == 1 || frameX == 4) ? -direction : 0;
                 TileUtils.SetPlayerSitInChair(player, tX + offsetX, tY);
             }
+            else if(logic == ItemID.SleepingIcon) {
+                player.GamepadEnableGrappleCooldown();
+                player.sleeping.StartSleeping(player, tX, tY);
+            }
             else {
                 CampingModPlayer modPlayer = player.GetModPlayer<CampingModPlayer>();
                 TileUtils.GetTentSpawnPosition(tX, tY, out int spawnX, out int spawnY, _FRAMEWIDTH, _FRAMEHEIGHT, 2, 1);
@@ -96,30 +100,52 @@ namespace CampingMod.Content.Tiles.Tents
                 if ((!mirrored && (localTileX == 0 || localTileX == 1))
                     ||
                     (mirrored && (localTileX == 4 || localTileX == 5))) {
-                    return ItemID.WoodenChair; // A chair
+                    if(Main.LocalPlayer.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) {
+                        return ItemID.WoodenChair; // A chair
+                    }
+                }
+            }
+            if (localTileY == 1 || localTileY == 2) {
+                if (localTileX == (mirrored ? 3 : 2)) {
+                    if(Main.LocalPlayer.IsWithinSnappngRangeToTile(tX, tY, PlayerSleepingHelper.BedSleepingMaxDistance)) {
+                        return ItemID.SleepingIcon; // Sleeping
+                    }
                 }
             }
             return -1;
         }
 
 
-        public override void ModifySittingTargetInfo(int i, int j, ref TileRestingInfo info) {
-            // It is very important to know that this is called on both players and NPCs, so do not use Main.LocalPlayer for example, use info.restingEntity
-            Tile tile = Framing.GetTileSafely(i, j);
+        public override void ModifySittingTargetInfo(int tX, int tY, ref TileRestingInfo info) {
+            // It is very important to know that this is called on both players and NPCs, so do not use Main.LocalPlayer for example, use info.restingEntity) {
+            Tile tile = Main.tile[tX, tY];
             bool mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
 
             info.TargetDirection = mirrored ? 1 : -1;
             info.VisualOffset = new Vector2(-8, 2);
 
-            info.AnchorTilePosition.X = i;
-            info.AnchorTilePosition.Y = j;
+            info.AnchorTilePosition.X = tX;
+            info.AnchorTilePosition.Y = tY;
         }
+
+        public override void ModifySleepingTargetInfo(int tX, int tY, ref TileRestingInfo info) {
+            Tile tile = Main.tile[tX, tY];
+            int localTileY = tile.TileFrameY % (18 * _FRAMEHEIGHT) / 18;
+            info.AnchorTilePosition.Y = tY + 1 - localTileY;
+            info.DirectionOffset = 4 + 16 * info.TargetDirection;
+
+            // Basically, hide the player when sleeping
+            info.VisualOffset.Y -= Main.screenPosition.Y - Player.defaultHeight;
+        }
+
         public override void MouseOver(int tX, int tY)
         {
-			Player player = Main.LocalPlayer;
             int logic = GetTileLogic(tX, tY);
-            if (logic == ItemID.WoodenChair && player.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) {
+            if (logic == ItemID.WoodenChair) {
                 TileUtils.ShowItemIcon(ItemID.BarStool);
+            }
+            else if (logic == ItemID.SleepingIcon) {
+                TileUtils.ShowItemIcon(ItemID.SleepingIcon);
             }
             else {
                 TileUtils.ShowItemIcon(dropItem);

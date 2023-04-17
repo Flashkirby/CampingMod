@@ -121,6 +121,10 @@ namespace CampingMod.Content.Tiles.Tents
                 case ItemID.WoodenChair:
                     TileUtils.SetPlayerSitInChair(player, tX, tY);
                     break;
+                case ItemID.SleepingIcon:
+                    player.GamepadEnableGrappleCooldown();
+                    player.sleeping.StartSleeping(player, tX, tY);
+                    break;
                 default:
                     TileUtils.GetTentSpawnPosition(tX, tY, out int spawnX, out int spawnY, _FRAMEWIDTH, _FRAMEHEIGHT, 6, -2);
                     TileUtils.ToggleTemporarySpawnPoint(modPlayer, spawnX, spawnY);
@@ -140,13 +144,11 @@ namespace CampingMod.Content.Tiles.Tents
                 case ItemID.Safe:
                     itemIcon = ItemID.Safe; break;
                 case ItemID.GPS:
-                    itemIcon = ItemID.DepthMeter; break;
+                    itemIcon = ItemID.PlatinumWatch; break;
                 case ItemID.WoodenChair:
-                    Player player = Main.LocalPlayer;
-                    if (player.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) {
-                        itemIcon = ItemID.WoodenChair;
-                    }
-                    break;
+                    itemIcon = ItemID.WoodenChair; break;
+                case ItemID.SleepingIcon:
+                    itemIcon = ItemID.SleepingIcon; break;
             }
             TileUtils.ShowItemIcon(itemIcon, itemName);
         }
@@ -327,23 +329,46 @@ namespace CampingMod.Content.Tiles.Tents
                 if ((!mirrored && localTileX == 5 || localTileX == 4)
                     ||
                     (mirrored && localTileX == 4 || localTileX == 5)) {
-                    return ItemID.WoodenChair;
+                    if (Main.LocalPlayer.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) {
+                        return ItemID.WoodenChair;
+                    }
+                }
+            }
+            if (localTileY == 3) {
+                if ((!mirrored && localTileX == 5 || localTileX == 6)
+                    ||
+                    (mirrored && localTileX == 3 || localTileX == 4)) {
+                    if (Main.LocalPlayer.IsWithinSnappngRangeToTile(tX, tY, PlayerSleepingHelper.BedSleepingMaxDistance)) {
+                        return ItemID.SleepingIcon;
+                    }
                 }
             }
             return -1;
         }
 
-        public override void ModifySittingTargetInfo(int i, int j, ref TileRestingInfo info) {
+        public override void ModifySittingTargetInfo(int tX, int tY, ref TileRestingInfo info) {
             // It is very important to know that this is called on both players and NPCs, so do not use Main.LocalPlayer for example, use info.restingEntity
-            Tile tile = Framing.GetTileSafely(i, j);
+            Tile tile = Framing.GetTileSafely(tX, tY);
             bool mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
             bool furnaceSide = tile.TileFrameX % 36 == 0 ^ mirrored;
 
             info.TargetDirection = mirrored == furnaceSide ? 1 : -1;
             info.VisualOffset = new Vector2((furnaceSide ? - 8 : - 3), 1);
 
-            info.AnchorTilePosition.X = i;
-            info.AnchorTilePosition.Y = j;
+            info.AnchorTilePosition.X = tX;
+            info.AnchorTilePosition.Y = tY;
+        }
+
+        public override void ModifySleepingTargetInfo(int tX, int tY, ref TileRestingInfo info) {
+            Tile tile = Main.tile[tX, tY];
+            int localTileY = tile.TileFrameY % (18 * _FRAMEHEIGHT) / 18;
+            bool mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
+            info.TargetDirection = mirrored ? 1 : -1;
+            info.AnchorTilePosition.Y = tY + 3 - localTileY;
+
+            // fit in that bunk section
+            info.DirectionOffset = 20 + 8 * info.TargetDirection;
+            info.VisualOffset.Y -= 10f;
         }
 
         public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData) {
