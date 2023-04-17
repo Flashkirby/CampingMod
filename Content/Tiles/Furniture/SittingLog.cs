@@ -68,7 +68,6 @@ namespace CampingMod.Content.Tiles.Furniture
 			if (closer && Main.SceneMetrics.HasCampfire && player.sitting.isSitting) {
 				player.AddBuff(BuffID.Calm, Math.Min(player.lifeRegenTime / 120, 30) * 60 + 30);
 			}
-			Main.NewText(player.lifeRegenTime);
 		}
 
         public override void NumDust(int tX, int tY, bool fail, ref int num) {
