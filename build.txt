@@ -1,6 +1,8 @@
 displayName = Camping
-author = Flashkirby99, kittenchilly
-version = 2.0.5
+author = Flashkirby, kittenchilly
+version = 2.1.0
+
 homepage=https://terrariamods.wiki.gg/wiki/Camping
 
+includeSource=true
 buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, *.suo, *.sln, .git, .gitignore, *.env, *.md, .git\*, *.psd, *.fw.png *.TMP, *.ase, *.aseprite
