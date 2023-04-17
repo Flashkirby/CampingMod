@@ -4,11 +4,14 @@ using Terraria;
 using Terraria.ModLoader;
 using CampingMod.Content.Tiles.Tents;
 using Terraria.ID;
+using Terraria.ModLoader.IO;
 
 namespace CampingMod.Common.Players
 {
-    class CampingModPlayer : ModPlayer
+    partial class CampingModPlayer : ModPlayer
     {
+        private int[] sI = new int[200], sX = new int[200], sY = new int[200];
+
         /// <summary>
         /// By default, the player will prefer spawning at a tent (if set) over a bed.
         /// </summary>
@@ -26,15 +29,6 @@ namespace CampingMod.Common.Players
         /// Null while the player's original spawn point is active
         /// </summary>
         private Vector2? localPermaSpawnCache;
-
-        /// <summary>
-        /// Reset all values on entering the world
-        /// </summary>
-        public override void OnEnterWorld(Player player) {
-            tentSpawn = null;
-            localPermaSpawnCache = null;
-            ChooseToSpawnAtTent = true;
-        }
 
         /// <summary>
         /// Restore spawn point if it's still cached
@@ -142,6 +136,5 @@ namespace CampingMod.Common.Players
             }
             return false;
         }
-
     }
 }
