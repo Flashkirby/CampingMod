@@ -16,6 +16,7 @@ Mods: {
 			Outpost: Outpost
 			OutpostBank: Provides access to a Piggy Bank and Safe
 			OutpostEffect: Increases recovery when standing inside
+			SittingLog: Log Bench
 		}
 
 		CampTent: {
@@ -26,6 +27,7 @@ Mods: {
 			SpawnMissing: Temporary spawn point missing, returned to original spawn point.
 			SpawnAtTent: Spawn at temporary spawn point
 			SpawnAtHome: Spawn at original spawn point
+			CannotTeleportToTentBecauseNotMeetingItemRequirements: Cannot teleport without a {0}
 		}
 
 		BuffDescription: {
@@ -38,6 +40,7 @@ Mods: {
 			ConvertTent: Camping Mod: Converted WeaponOut tent to Camping tent.
 		}
 
+		# Hopefully you won't need to touch these as all the mod translations are kept above this point
 		ItemName: {
 			GearHammock: "{$Mods.CampingMod.Common.GearHammock}"
 			CampTent: "{$Mods.CampingMod.Common.CampTent}"
@@ -46,6 +49,7 @@ Mods: {
 			CraftTent: "{$Mods.CampingMod.Common.CraftTent}"
 			LargeTent: "{$Mods.CampingMod.Common.LargeTent}"
 			Outpost: "{$Mods.CampingMod.Common.Outpost}"
+			SittingLog: "{$Mods.CampingMod.Common.SittingLog}"
 		}
 
 		MapObject: {

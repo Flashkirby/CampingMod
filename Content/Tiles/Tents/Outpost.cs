@@ -14,6 +14,8 @@ using static Terraria.ModLoader.ModContent;
 using ReLogic.Content;
 
 using CampingMod.Common.Players;
+using Terraria.GameContent;
+using System.Collections;
 
 namespace CampingMod.Content.Tiles.Tents
 {
@@ -69,10 +71,11 @@ namespace CampingMod.Content.Tiles.Tents
                     TileID.PiggyBank, TileID.Safes, TileID.TinkerersWorkbench
                 };
             TileID.Sets.CanBeSatOnForPlayers[Type] = true; // Facilitates calling ModifySittingTargetInfo for Players
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair); // Beds count as chairs for the purpose of suitable room creation
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-                
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor); // All in one housing item!
+
             CampTent.SetTentBaseTileObjectData(_FRAMEWIDTH, _FRAMEHEIGHT);
             //placement centre and offset on ground
             TileObjectData.newTile.Origin = new Point16(5, 4);
@@ -86,7 +89,7 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
         {
-            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEWIDTH, dropItem);
+            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, dropItem);
         }
 
         /// <summary>
@@ -118,6 +121,10 @@ namespace CampingMod.Content.Tiles.Tents
                 case ItemID.WoodenChair:
                     TileUtils.SetPlayerSitInChair(player, tX, tY);
                     break;
+                case ItemID.SleepingIcon:
+                    player.GamepadEnableGrappleCooldown();
+                    player.sleeping.StartSleeping(player, tX, tY);
+                    break;
                 default:
                     TileUtils.GetTentSpawnPosition(tX, tY, out int spawnX, out int spawnY, _FRAMEWIDTH, _FRAMEHEIGHT, 6, -2);
                     TileUtils.ToggleTemporarySpawnPoint(modPlayer, spawnX, spawnY);
@@ -126,21 +133,22 @@ namespace CampingMod.Content.Tiles.Tents
             return true;
         }
 
-        public override void MouseOver(int tX, int tY)
+        public override void MouseOver(int tX, int tY) 
         {
             int logic = GetTileLogic(tX, tY, out _, out _, out _, out _);
             int itemIcon = dropItem;
             string itemName = "";
-            switch (logic)
-            {
+            switch (logic) {
                 case ItemID.PiggyBank:
                     itemIcon = ItemID.PiggyBank; break;
                 case ItemID.Safe:
                     itemIcon = ItemID.Safe; break;
                 case ItemID.GPS:
-                    itemIcon = ItemID.DepthMeter; break;
+                    itemIcon = ItemID.PlatinumWatch; break;
                 case ItemID.WoodenChair:
-                    itemIcon = ItemID.WoodenChair;break;
+                    itemIcon = ItemID.WoodenChair; break;
+                case ItemID.SleepingIcon:
+                    itemIcon = ItemID.SleepingIcon; break;
             }
             TileUtils.ShowItemIcon(itemIcon, itemName);
         }
@@ -151,28 +159,27 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void NearbyEffects(int tX, int tY, bool closer)
         {
-            if (Main.LocalPlayer.DeadOrGhost) return;
+            Player player = Main.LocalPlayer;
+            if (player.DeadOrGhost) return;
 
-            bool closest = (int)(Main.LocalPlayer.Center / 16).X == tX && (int)(Main.LocalPlayer.Center / 16).Y == tY;
+            int stage1 = BuffType<Buffs.Outpost.OutpostStage1>();
+            int stage2 = BuffType<Buffs.Outpost.OutpostStage2>();
+            int stage3 = BuffType<Buffs.Outpost.OutpostStage3>();
+
+            bool closest = (int)(player.Center / 16).X == tX && (int)(player.Center / 16).Y == tY;
             if (closest)
             {
-                if (Main.LocalPlayer.lifeRegenTime >= 30 * 60)
+                if (player.lifeRegenTime >= 30 * 60)
                 {
-                    Main.LocalPlayer.ClearBuff(BuffType<Buffs.Outpost.OutpostStage1>());
-                    Main.LocalPlayer.ClearBuff(BuffType<Buffs.Outpost.OutpostStage2>());
-                    Main.LocalPlayer.AddBuff(BuffType<Buffs.Outpost.OutpostStage3>(), 30, quiet: false);
+                    ApplyBuffSet(player, new int[] { stage1, stage2, stage3 }, stage3, false);
                 }
-                else
-                {
-                    Main.LocalPlayer.ClearBuff(BuffType<Buffs.Outpost.OutpostStage1>());
-                    Main.LocalPlayer.AddBuff(BuffType<Buffs.Outpost.OutpostStage2>(), 30, quiet: false);
-                    Main.LocalPlayer.ClearBuff(BuffType<Buffs.Outpost.OutpostStage3>());
+                else {
+                    ApplyBuffSet(player, new int[] { stage1, stage2, stage3 }, stage2, false);
                 }
             }
-            else if (!Main.LocalPlayer.HasBuff(BuffType<Buffs.Outpost.OutpostStage2>())
-                && !Main.LocalPlayer.HasBuff(BuffType<Buffs.Outpost.OutpostStage3>()))
+            else if (!player.HasBuff(stage2) && !player.HasBuff(stage3))
             {
-                Main.LocalPlayer.AddBuff(BuffType<Buffs.Outpost.OutpostStage1>(), 30, quiet: false);
+                ApplyBuffSet(player, new int[] { stage1, stage2, stage3 }, stage1, true);
             }
 
             if (closer)
@@ -180,6 +187,16 @@ namespace CampingMod.Content.Tiles.Tents
                 Main.SceneMetrics.HasStarInBottle = true;
                 Main.SceneMetrics.HasHeartLantern = true;
             }
+        }
+
+        private void ApplyBuffSet(Player player, int[] buffTypesToReplace, int newBuffType, bool quiet = true) {
+            // convert to nicer to use List
+            ArrayList replaceList = new ArrayList(buffTypesToReplace);
+            replaceList.Remove(newBuffType);
+            foreach (int clearBuff in replaceList) {
+                player.ClearBuff(clearBuff);
+            }
+            player.AddBuff(newBuffType, 4, quiet);
         }
 
         public override void ModifyLight(int tX, int tY, ref float r, ref float g, ref float b)
@@ -312,23 +329,46 @@ namespace CampingMod.Content.Tiles.Tents
                 if ((!mirrored && localTileX == 5 || localTileX == 4)
                     ||
                     (mirrored && localTileX == 4 || localTileX == 5)) {
-                    return ItemID.WoodenChair;
+                    if (Main.LocalPlayer.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) {
+                        return ItemID.WoodenChair;
+                    }
+                }
+            }
+            if (localTileY == 3) {
+                if ((!mirrored && localTileX == 5 || localTileX == 6)
+                    ||
+                    (mirrored && localTileX == 3 || localTileX == 4)) {
+                    if (Main.LocalPlayer.IsWithinSnappngRangeToTile(tX, tY, PlayerSleepingHelper.BedSleepingMaxDistance)) {
+                        return ItemID.SleepingIcon;
+                    }
                 }
             }
             return -1;
         }
 
-        public override void ModifySittingTargetInfo(int i, int j, ref TileRestingInfo info) {
+        public override void ModifySittingTargetInfo(int tX, int tY, ref TileRestingInfo info) {
             // It is very important to know that this is called on both players and NPCs, so do not use Main.LocalPlayer for example, use info.restingEntity
-            Tile tile = Framing.GetTileSafely(i, j);
+            Tile tile = Framing.GetTileSafely(tX, tY);
             bool mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
             bool furnaceSide = tile.TileFrameX % 36 == 0 ^ mirrored;
 
             info.TargetDirection = mirrored == furnaceSide ? 1 : -1;
             info.VisualOffset = new Vector2((furnaceSide ? - 8 : - 3), 1);
 
-            info.AnchorTilePosition.X = i;
-            info.AnchorTilePosition.Y = j;
+            info.AnchorTilePosition.X = tX;
+            info.AnchorTilePosition.Y = tY;
+        }
+
+        public override void ModifySleepingTargetInfo(int tX, int tY, ref TileRestingInfo info) {
+            Tile tile = Main.tile[tX, tY];
+            int localTileY = tile.TileFrameY % (18 * _FRAMEHEIGHT) / 18;
+            bool mirrored = (tile.TileFrameX >= 18 * _FRAMEWIDTH);
+            info.TargetDirection = mirrored ? 1 : -1;
+            info.AnchorTilePosition.Y = tY + 3 - localTileY;
+
+            // fit in that bunk section
+            info.DirectionOffset = 20 + 8 * info.TargetDirection;
+            info.VisualOffset.Y -= 10f;
         }
 
         public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData) {

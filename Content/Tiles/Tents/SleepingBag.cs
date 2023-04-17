@@ -24,9 +24,11 @@ namespace CampingMod.Content.Tiles.Tents
 
             TileID.Sets.HasOutlines[Type] = true;
             TileID.Sets.CanBeSleptIn[Type] = true;
-            TileID.Sets.InteractibleByNPCs[Type] = true; // Town NPCs will palm their hand at this tile
+            TileID.Sets.InteractibleByNPCs[Type] = true;
             TileID.Sets.DisableSmartCursor[Type] = true;
             CampingMod.Sets.TemporarySpawn.Add(Type);
+
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair); // Beds count as chairs for the purpose of suitable room creation
 
             dropItem = ModContent.ItemType<Items.Tents.SleepingBag>();
 
@@ -49,7 +51,7 @@ namespace CampingMod.Content.Tiles.Tents
 
         public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
         {
-            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEWIDTH, dropItem);
+            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, dropItem);
         }
 
         /// <summary>

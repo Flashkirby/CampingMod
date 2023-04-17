@@ -3,11 +3,15 @@
 using Terraria;
 using Terraria.ModLoader;
 using CampingMod.Content.Tiles.Tents;
+using Terraria.ID;
+using Terraria.ModLoader.IO;
 
 namespace CampingMod.Common.Players
 {
-    class CampingModPlayer : ModPlayer
+    partial class CampingModPlayer : ModPlayer
     {
+        private int[] sI = new int[200], sX = new int[200], sY = new int[200];
+
         /// <summary>
         /// By default, the player will prefer spawning at a tent (if set) over a bed.
         /// </summary>
@@ -25,15 +29,6 @@ namespace CampingMod.Common.Players
         /// Null while the player's original spawn point is active
         /// </summary>
         private Vector2? localPermaSpawnCache;
-
-        /// <summary>
-        /// Reset all values on entering the world
-        /// </summary>
-        public override void OnEnterWorld(Player player) {
-            tentSpawn = null;
-            localPermaSpawnCache = null;
-            ChooseToSpawnAtTent = true;
-        }
 
         /// <summary>
         /// Restore spawn point if it's still cached
@@ -118,5 +113,28 @@ namespace CampingMod.Common.Players
             return false;
         }
 
+        /// <summary>
+        /// Implementation of private method Player.Spawn_SetPosition to fetch spawn tent position as world coords
+        /// </summary>
+        public Vector2? GetTentSpawnPosition() {
+            if (!tentSpawn.HasValue) return null;
+            return new Vector2(tentSpawn.Value.X * 16 + 8 - Player.width / 2f, tentSpawn.Value.Y * 16 - Player.height);
+        }
+
+        public bool TeleportToTent(PlayerSpawnContext context) {
+            if (ValidateTentSpawnPoint()) {
+                // Using DoPotionOfReturnTeleportationAndSetTheComebackPoint as a reference
+                Player.RemoveAllGrapplingHooks();
+
+                //See also Player.UnityTeleport, and Player.DoPotionOfReturnReturnToOriginalUsePosition
+                Vector2 teleportPosition = (Vector2)GetTentSpawnPosition();
+                int teleportStyle = TeleportationStyleID.RecallPotion; 
+                Player.Teleport(teleportPosition, teleportStyle);
+                NetMessage.SendData(MessageID.Teleport, -1, -1, null, 0, Player.whoAmI, Player.position.X, Player.position.Y, teleportStyle);
+                NetMessage.SendData(MessageID.PlayerControls, -1, Player.whoAmI, null, Player.whoAmI);
+                return true;
+            }
+            return false;
+        }
     }
 }

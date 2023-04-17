@@ -1,5 +1,7 @@
+
 Mods: {
 	CampingMod: {
+		# Basically where possible, these common names are used to keep naming consistent across items, tile, and buffs
 		Common: {
 			GearHammock: Гамак
 			CampTent: Палатка
@@ -29,14 +31,20 @@ Mods: {
 			CannotTeleportToTentBecauseNotMeetingItemRequirements: Не могу телепортироваться без {0}
 		}
 
-		BuffDescription: {
-			OutpostStage1: Жизнь восстанавливается быстрее
-			OutpostStage2: Жизнь восстанавливается быстрее, снижает время плохих эффектов, если не получать урона %TIME секунд
-			OutpostStage3: Жизнь восстанавливается быстрее, сильно снижает время плохих эффектов
+		Buffs: {
+			OutpostStage1: {
+				Description: Жизнь восстанавливается быстрее
+			}
+
+			OutpostStage2: {
+				Description: Жизнь восстанавливается быстрее, снижает время плохих эффектов, если не получать урона %TIME секунд
+			}
+
+			OutpostStage3: {
+				Description: Жизнь восстанавливается быстрее, сильно снижает время плохих эффектов
+			}
 		}
 
-		WeaponOutConvertor: {
-			ConvertTent: Camping: Палатка из WeaponOut перемещена в Camping.
-		}
+		WeaponOutConvertor.ConvertTent: Camping: Палатка из WeaponOut перемещена в Camping.
 	}
 }
