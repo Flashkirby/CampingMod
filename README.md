@@ -16,15 +16,18 @@ This mod is set up for localisation, so we are accepting translations!
 Adds craftable tents that provide an additional spawn point to choose from upon death!
 
 * Set up a temporary spawn point by crafting tents
-* Choose to spawn between your tent or your bed
+* Choose to respawn between your tent or your bed
 * Various tiers of tents with bonus utilities
 
 Craft your first tent with Silk×2 and Wood×8 at a workbench!
 
 ## Details
 
-A temporary spawn point can be set alongside a normal spawn point, by interacting with a tent. Unlike beds, tents do not require valid housing to create a temporary spawn point, but these spawn points are not saved when exiting the world. 
-When respawning, you can choose to spawn at either your original spawn point, or at the temporary spawn point.
+You can set a Temporary Spawn Point by pressing the Interact button on a tent. Upon dying, the player will have a choice of respawning at their original spawn point, or at their temporary spawn point.
+
+When re-entering a world, you will still start at spawn, or your bed. While you cannot return to a temporary spawn point with items such as Magic Mirror, you can teleport to it using a Wormhole Potion by clicking on it in the fullscreen map. 
+
+Your active temporary spawn point is marked on the minimap by a tent icon. 
 
 - Caving Tent
 
@@ -53,10 +56,12 @@ Can be worn as a accessory that provides the heart lantern and star in a bottle 
 
 ## Credits
 
-Flashkirby99 - I am making this mod.
+Developer: Flashkirby
 
-kittenchilly - Ported to 1.4.
+Art: Flashkirby, RunicPixels
 
-Milliath - Переведено на русский.
+1.4 Porting: kittenchilly, Flashkirby
 
-Gouvod, Zomty, Safijiiva, Ticok, huige3 - 汉语翻译
+Localization:
+    Русский перевод: Milliath
+    汉语: Gouvod, Zomty, Safijiiva, Ticok, huige3
