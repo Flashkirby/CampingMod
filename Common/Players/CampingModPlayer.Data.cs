@@ -28,9 +28,11 @@ namespace CampingMod.Common.Players
         /// Also attempt to load a saved spawn point, see Player.FindSpawn
         /// </summary>
         public override void OnEnterWorld(Player player) {
+
             localPermaSpawnCache = null;
             ChooseToSpawnAtTent = true;
 
+            tentSpawn = null;
             int worldIndex = new ArrayList(sI).IndexOf(Main.worldID);
             if (worldIndex >= 0) {
                 tentSpawn = new Point(sX[worldIndex], sY[worldIndex]);
@@ -61,8 +63,6 @@ namespace CampingMod.Common.Players
             tag.Set(TAG_SPAWN_X, saveX.ToArray(), true);
             tag.Set(TAG_SPAWN_Y, saveY.ToArray(), true);
             Console.WriteLine($"CampingMod: Saving data for CampingModPlayer:{Player.name}");
-
-            tentSpawn = null;
         }
 
         private void InsertTruncate(ref List<int> list, int value, int capacity) {
