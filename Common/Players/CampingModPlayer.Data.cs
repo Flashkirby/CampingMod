@@ -27,7 +27,7 @@ namespace CampingMod.Common.Players
         /// Reset all values on entering the world.
         /// Also attempt to load a saved spawn point, see Player.FindSpawn
         /// </summary>
-        public override void OnEnterWorld(Player player) {
+        public override void OnEnterWorld() {
 
             localPermaSpawnCache = null;
             ChooseToSpawnAtTent = true;

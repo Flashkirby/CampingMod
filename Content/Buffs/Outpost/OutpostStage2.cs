@@ -35,7 +35,7 @@ namespace CampingMod.Content.Buffs.Outpost
             }
         }
 
-        public override void ModifyBuffTip(ref string tip, ref int rare)
+        public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
             int remaining = Math.Max(0, 30 - (int)(Main.LocalPlayer.lifeRegenTime / 60));
             tip = tip.Replace("%TIME", "" + remaining); // See BuffDescription.OutpostStage2

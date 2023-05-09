@@ -60,14 +60,14 @@ namespace CampingMod.Content.Tiles.Chests
             TileObjectData.addTile(Type);
 
             // Names
-            ContainerName.SetDefault(Language.GetTextValue(CampingMod.LANG_KEY + "MapObject.GearHammock"));
+            ContainerName/* tModPorter Note: Removed. Override DefaultContainerName instead */.SetDefault(Language.GetTextValue(CampingMod.LANG_KEY + "MapObject.GearHammock"));
 
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault(Language.GetTextValue(CampingMod.LANG_KEY + "MapObject.GearHammock"));
+            LocalizedText name = CreateMapEntryName();
+            // name.SetDefault(Language.GetTextValue(CampingMod.LANG_KEY + "MapObject.GearHammock"));
             AddMapEntry(new Color(200, 200, 200), name, MapChestName);
 
             AdjTiles = new int[] { TileID.Containers };
-            ChestDrop = ItemType<Items.Chests.GearHammock>();
+            ItemDrop = ItemType<Items.Chests.GearHammock>();
             DustType = DustID.Bone;
         }
 
@@ -206,7 +206,7 @@ namespace CampingMod.Content.Tiles.Chests
             }
             else
             {
-                string defaultName = TileLoader.ContainerName(tile.TileType); // This gets the ContainerName text for the currently selected language
+                string defaultName = TileLoader.DefaultContainerName(tile.TileType)/* tModPorter Note: new method takes in FrameX and FrameY */; // This gets the ContainerName text for the currently selected language
                 player.cursorItemIconText = Main.chest[chest].name.Length > 0 ? Main.chest[chest].name : defaultName;
                 if (player.cursorItemIconText == defaultName)
                 {

@@ -41,8 +41,8 @@ namespace CampingMod.Common.Players
         /// Swap out the spawn positions just before respawning
         /// </summary>
         /// <returns></returns>
-        public override void OnRespawn(Player player) {
-            if (player == Main.LocalPlayer && ChooseToSpawnAtTent) {
+        public override void OnRespawn() {
+            if (Player == Main.LocalPlayer && ChooseToSpawnAtTent) {
                 if (ValidateTentSpawnPoint()) {
                     UseTentSpawnPoint();
                 }
@@ -130,7 +130,7 @@ namespace CampingMod.Common.Players
                 Vector2 teleportPosition = (Vector2)GetTentSpawnPosition();
                 int teleportStyle = TeleportationStyleID.RecallPotion; 
                 Player.Teleport(teleportPosition, teleportStyle);
-                NetMessage.SendData(MessageID.Teleport, -1, -1, null, 0, Player.whoAmI, Player.position.X, Player.position.Y, teleportStyle);
+                NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, Player.whoAmI, Player.position.X, Player.position.Y, teleportStyle);
                 NetMessage.SendData(MessageID.PlayerControls, -1, Player.whoAmI, null, Player.whoAmI);
                 return true;
             }
