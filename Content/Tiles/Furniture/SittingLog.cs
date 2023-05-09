@@ -66,7 +66,7 @@ namespace CampingMod.Content.Tiles.Furniture
 			Player player = Main.LocalPlayer;
 			bool closest = (int)(player.Bottom.X / 16) == tX && (int)((player.Bottom.Y - 1) / 16) == tY;
 			if (closer && Main.SceneMetrics.HasCampfire && player.sitting.isSitting) {
-				player.AddBuff(BuffID.Calm, Math.Min(player.lifeRegenTime / 610, 5) * 60 + 30);
+				player.AddBuff(BuffID.Calm, (int)Math.Min(player.lifeRegenTime / 610, 5) * 60 + 30);
 			}
 		}
 
