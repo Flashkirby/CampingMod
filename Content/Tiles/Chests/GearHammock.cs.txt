@@ -65,7 +65,7 @@ namespace CampingMod.Content.Tiles.Chests
             AddMapEntry(new Color(200, 200, 200), name, MapChestName);
 
             AdjTiles = new int[] { TileID.Containers };
-            ItemDrop = ItemType<Items.Chests.GearHammock>();
+            //ItemDrop = ItemType<Items.Chests.GearHammock>();
             DustType = DustID.Bone;
         }
 
