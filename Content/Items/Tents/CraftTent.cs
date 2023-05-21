@@ -15,11 +15,12 @@ namespace CampingMod.Content.Items.Tents
         }
         public override void AddRecipes()
         {
-            // Raw craft option
+            // Raw craft option - but force the decraft option to be the 2nd one 
             CreateRecipe()
                 .AddIngredient(ItemID.Silk, 2)
                 .AddRecipeGroup(RecipeGroupID.Wood, 18)
                 .AddTile(TileID.WorkBenches)
+                .DisableDecraft()
                 .Register();
 
             // Alternate upgrade option

@@ -11,8 +11,6 @@ namespace CampingMod.Content.Tiles.Tents
 {
     public class CraftTent : CampTent
     {
-        int dropItem = 0;
-
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -24,20 +22,13 @@ namespace CampingMod.Content.Tiles.Tents
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair); // Beds count as chairs for the purpose of suitable room creation
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable); // Workbenches count as tables for room creation
 
-            dropItem = ModContent.ItemType<Items.Tents.CraftTent>();
-
             DustType = -1;
             AdjTiles = new int[] { TileID.Beds, TileID.WorkBenches };
         }
 
-        public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
-        {
-            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, dropItem);
-        }
-
         public override void MouseOver(int tX, int tY)
         {
-            TileUtils.ShowItemIcon(dropItem);
+            TileUtils.ShowItemIcon(ModContent.ItemType<Items.Tents.CraftTent>());
         }
     }
 }

@@ -16,7 +16,7 @@ namespace CampingMod.Content.Tiles.Tents
     {
         protected const int _FRAMEWIDTH = 6;
         protected const int _FRAMEHEIGHT = 3;
-        int dropItem = 0;
+        int itemIcon = 0;
 
         public override void SetStaticDefaults()
         {
@@ -28,7 +28,7 @@ namespace CampingMod.Content.Tiles.Tents
 
             CampingMod.Sets.TemporarySpawn.Add(Type);
 
-            dropItem = ModContent.ItemType<Items.Tents.LargeTent>();
+            itemIcon = ModContent.ItemType<Items.Tents.LargeTent>();
 
             TileID.Sets.CanBeSatOnForPlayers[Type] = true; // Facilitates calling ModifySittingTargetInfo for Players
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair); // Beds count as chairs for the purpose of suitable room creation
@@ -52,11 +52,6 @@ namespace CampingMod.Content.Tiles.Tents
             TileObjectData.newAlternate.Direction = TileObjectDirection.PlaceRight;
             TileObjectData.addAlternate(1);
             TileObjectData.addTile(Type);
-        }
-
-        public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
-        {
-            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, dropItem);
         }
 
         /// <summary>
@@ -148,7 +143,7 @@ namespace CampingMod.Content.Tiles.Tents
                 TileUtils.ShowItemIcon(ItemID.SleepingIcon);
             }
             else {
-                TileUtils.ShowItemIcon(dropItem);
+                TileUtils.ShowItemIcon(itemIcon);
             }
         }
     }

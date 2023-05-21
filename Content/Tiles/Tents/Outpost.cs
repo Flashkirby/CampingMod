@@ -25,7 +25,7 @@ namespace CampingMod.Content.Tiles.Tents
         protected const int _FRAMEHEIGHT = 5;
         protected const int _ANEMOMETER_FRAMES = 6;
         protected const int _ANEMOMETER_COUNTER = 25;
-        static int dropItem = 0;
+        static int itemIcon = 0;
         static int tileID = -1;
 
         static Asset<Texture2D> AnemometerTexture;
@@ -57,7 +57,7 @@ namespace CampingMod.Content.Tiles.Tents
             TileID.Sets.DisableSmartCursor[Type] = true;
             CampingMod.Sets.TemporarySpawn.Add(Type);
 
-            dropItem = ItemType<Items.Tents.Outpost>();
+            itemIcon = ItemType<Items.Tents.Outpost>();
 
             //extra info
             Main.tileLighted[Type] = true;
@@ -85,11 +85,6 @@ namespace CampingMod.Content.Tiles.Tents
             TileObjectData.newAlternate.Direction = TileObjectDirection.PlaceRight;
             TileObjectData.addAlternate(1);
             TileObjectData.addTile(Type);
-        }
-
-        public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
-        {
-            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, dropItem);
         }
 
         /// <summary>
@@ -136,7 +131,7 @@ namespace CampingMod.Content.Tiles.Tents
         public override void MouseOver(int tX, int tY) 
         {
             int logic = GetTileLogic(tX, tY, out _, out _, out _, out _);
-            int itemIcon = dropItem;
+            int itemIcon = Outpost.itemIcon;
             string itemName = "";
             switch (logic) {
                 case ItemID.PiggyBank:

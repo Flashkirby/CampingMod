@@ -14,23 +14,14 @@ namespace CampingMod.Content.Items.Tents
 
         public override void SetDefaults()
         {
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Tents.CampTent>(), 0);
+
             Item.width = 16;
             Item.height = 16;
-            Item.maxStack = 99;
-            Item.consumable = true;
             Item.value = Item.sellPrice(0, 0, 1, 0);
             Item.rare = ItemRarityID.White;
 
-            Item.useStyle = ItemUseStyleID.Swing;
-            Item.useAnimation = 15;
-            Item.useTime = 10;
-            Item.createTile = ModContent.TileType<Tiles.Tents.CampTent>();
-            Item.placeStyle = 0;
-
             Item.accessory = true;
-
-            Item.useTurn = true;
-            Item.autoReuse = true;
         }
         public override void AddRecipes()
         {

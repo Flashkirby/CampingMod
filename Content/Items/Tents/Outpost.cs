@@ -14,27 +14,18 @@ namespace CampingMod.Content.Items.Tents
         }
         public override void SetDefaults()
         {
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Tents.Outpost>(), 0);
+
             Item.width = 16;
             Item.height = 16;
-            Item.maxStack = 99;
-            Item.consumable = true;
             Item.value = Item.sellPrice(0, 2, 0, 0); 
-            Item.rare = 1;
-
-            Item.useStyle = 1;
-            Item.useAnimation = 15;
-            Item.useTime = 10;
-            Item.createTile = ModContent.TileType<Tiles.Tents.Outpost>();
-            Item.placeStyle = 0;
+            Item.rare = ItemRarityID.Blue;
 
             Item.accessory = true;
-
-            Item.useTurn = true;
-            Item.autoReuse = true;
         }
         public override void AddRecipes()
         {
-            // raw recipe
+            // raw recipe, but use the 2nd recipe as decrafter
             CreateRecipe()
                 .AddIngredient(ItemID.Silk, 5) // 5/5 bed
                 .AddRecipeGroup(RecipeGroupID.Wood, 40) // 26 outpost + 10/10 workbench + 4/4 furnace
@@ -47,6 +38,7 @@ namespace CampingMod.Content.Items.Tents
                 .AddIngredient(ItemID.Safe, 1)
                 .AddIngredient(ItemID.TinkerersWorkshop, 1)
                 .AddTile(TileID.Sawmill)
+                .DisableDecraft()
                 .Register();
 
             // completed items recipe

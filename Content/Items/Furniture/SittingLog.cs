@@ -28,9 +28,10 @@ namespace CampingMod.Content.Items.Furniture
                 .AddTile(TileID.Sawmill)
                 .Register();
 
-            // Craft back into normal wood at a slight loss (it is a cut log after all)
+            // Craft back into normal wood at a slight loss (it is a cut log after all), shimmer will do this better
             Recipe.Create(ItemID.Wood, 2)
                 .AddIngredient(this,1)
+                .DisableDecraft()
                 .Register();
         }
     }

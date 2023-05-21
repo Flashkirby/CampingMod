@@ -8,6 +8,7 @@ using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.Localization;
 using CampingMod.Common.Players;
+using System.Collections.Generic;
 
 namespace CampingMod.Content.Tiles.Tents
 {
@@ -63,12 +64,14 @@ namespace CampingMod.Content.Tiles.Tents
             TileObjectData.newTile.DrawYOffset = 2;
         }
 
-        public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
-        {
-            int type = GetItemTypeFromStyle(pixelY);
-            if (type > 0)
-            { Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, type); }
-        }
+        //public override IEnumerable<Item> GetItemDrops(int i, int j)
+        //public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
+        //{
+        //    int type = GetItemTypeFromStyle(pixelY);
+        //    if (type > 0) {
+        //        //Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, type);
+        //    }
+        //}
 
         /// <summary>
         /// Allow smart select and drawing _Highlight.png

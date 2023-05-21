@@ -16,7 +16,7 @@ namespace CampingMod.Content.Tiles.Tents
     {
         protected const int _FRAMEWIDTH = 4;
         protected const int _FRAMEHEIGHT = 2;
-        int dropItem = 0;
+        int itemIcon = 0;
 
         public override void SetStaticDefaults()
         {
@@ -30,7 +30,7 @@ namespace CampingMod.Content.Tiles.Tents
 
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair); // Beds count as chairs for the purpose of suitable room creation
 
-            dropItem = ModContent.ItemType<Items.Tents.SleepingBag>();
+            itemIcon = ModContent.ItemType<Items.Tents.SleepingBag>();
 
             //extra info
             Main.tileFrameImportant[Type] = true;
@@ -47,11 +47,6 @@ namespace CampingMod.Content.Tiles.Tents
             TileObjectData.newAlternate.Direction = TileObjectDirection.PlaceRight;
             TileObjectData.addAlternate(1);
             TileObjectData.addTile(Type);
-        }
-
-        public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY)
-        {
-            Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, dropItem);
         }
 
         /// <summary>
@@ -101,7 +96,7 @@ namespace CampingMod.Content.Tiles.Tents
                 }
             }
             else {
-                TileUtils.ShowItemIcon(dropItem);
+                TileUtils.ShowItemIcon(itemIcon);
             }
 
         }
