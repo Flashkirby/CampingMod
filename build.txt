@@ -1,4 +1,4 @@
-displayName = Camping
+displayName = Camping [1.4.4-preview]
 author = Flashkirby, kittenchilly
 version = 3.0.0
 
