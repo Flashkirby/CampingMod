@@ -24,6 +24,14 @@ namespace CampingMod.Common.Players
         private static readonly string TAG_SPAWN_Y = "SpawnWorldY"; // an int 200 array
 
         /// <summary>
+        /// Spawn Index - this is the data for the save file. It consists of
+        /// [][0] TAG_SPAWN_ID current worldID
+        /// [][1] TAG_SPAWN_X spawn tile X
+        /// [][2] TAG_SPAWN_Y spawn tile Y
+        /// </summary>
+        private int[] sI = new int[200], sX = new int[200], sY = new int[200];
+
+        /// <summary>
         /// Reset all values on entering the world.
         /// Also attempt to load a saved spawn point, see Player.FindSpawn
         /// </summary>
@@ -41,30 +49,45 @@ namespace CampingMod.Common.Players
         }
 
         public override void SaveData(TagCompound tag) {
+            string consoleMessage;
             var saveID = new List<int>(sI);
             var saveX = new List<int>(sX);
             var saveY = new List<int>(sY);
 
             // If already in, find and and remove it
             int index = saveID.IndexOf(Main.worldID);
-            if (index > 0) {
+            if (index >= 0) {
                 saveID.RemoveAt(index);
                 saveX.RemoveAt(index);
                 saveY.RemoveAt(index);
+                consoleMessage = $"Removed World ID {Main.worldID}";
             }
-            // Then add to the top if its not already there
-            if (index != 0 && tentSpawn != null) {
+            else {
+                consoleMessage = $"No existing world ID {Main.worldID}";
+            }
+            // Then add to the front if its not already there
+            if (index >= 0 && tentSpawn != null) {
                 InsertTruncate(ref saveID, Main.worldID, 200);
                 InsertTruncate(ref saveX, tentSpawn.Value.X, 200);
                 InsertTruncate(ref saveY, tentSpawn.Value.Y, 200);
+                consoleMessage += ", saved tent spawn location";
+            }
+            else {
+                consoleMessage += ", no tent spawn to save";
             }
 
             tag.Set(TAG_SPAWN_ID, saveID.ToArray(), true);
             tag.Set(TAG_SPAWN_X, saveX.ToArray(), true);
             tag.Set(TAG_SPAWN_Y, saveY.ToArray(), true);
-            Console.WriteLine($"CampingMod: Saving data for CampingModPlayer:{Player.name}");
+            Console.WriteLine($"CampingMod: Saving data for CampingModPlayer:{Player.name}: {consoleMessage}");
         }
 
+        /// <summary>
+        /// Add a new value to the start of a list, truncating any data past the capacity.
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="value"></param>
+        /// <param name="capacity"></param>
         private void InsertTruncate(ref List<int> list, int value, int capacity) {
             list.Insert(0, value);
             try {

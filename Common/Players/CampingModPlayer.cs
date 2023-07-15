@@ -10,7 +10,6 @@ namespace CampingMod.Common.Players
 {
     partial class CampingModPlayer : ModPlayer
     {
-        private int[] sI = new int[200], sX = new int[200], sY = new int[200];
 
         /// <summary>
         /// By default, the player will prefer spawning at a tent (if set) over a bed.
