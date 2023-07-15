@@ -1,6 +1,6 @@
 displayName = Camping
 author = Flashkirby, kittenchilly
-version = 2.1.1
+version = 2.1.2
 
 homepage=https://terrariamods.wiki.gg/wiki/Camping
 
