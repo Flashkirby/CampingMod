@@ -66,7 +66,7 @@ namespace CampingMod.Common.Players
                 consoleMessage = $"No existing world ID {Main.worldID}";
             }
             // Then add to the front if its not already there
-            if (index >= 0 && tentSpawn != null) {
+            if (tentSpawn != null) {
                 InsertTruncate(ref saveID, Main.worldID, 200);
                 InsertTruncate(ref saveX, tentSpawn.Value.X, 200);
                 InsertTruncate(ref saveY, tentSpawn.Value.Y, 200);
