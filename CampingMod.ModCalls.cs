@@ -14,7 +14,7 @@ namespace CampingMod
             // https://steamcommunity.com/sharedfiles/filedetails/?id=2832487441
             ModLoader.TryGetMod("Wikithis", out Mod wikithis);
             if (wikithis != null && !Main.dedServ) {
-                wikithis.Call(0, this, "terrariamods.wiki.gg$Camping");
+                wikithis.Call("AddModURL", this, "https://terrariamods.wiki.gg/wiki/Camping/{}");
             }
         }
     }
