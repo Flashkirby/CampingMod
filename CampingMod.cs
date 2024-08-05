@@ -5,7 +5,10 @@ using Terraria.ModLoader;
 
 namespace CampingMod
 {
-    partial class CampingMod : Mod {
+    partial class CampingMod : Mod
+    {
+        public static bool ThoriumModLoaded { get { return ModLoader.HasMod("ThoriumMod"); } }
+
         public const string LANG_KEY = "Mods.CampingMod.";
 
         public CampingMod() {
