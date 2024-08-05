@@ -22,7 +22,7 @@ namespace CampingMod.Content.Tiles.Furniture
 	{
 		protected const int _FRAMEWIDTH = 3;
 		protected const int _FRAMEHEIGHT = 1;
-		int dropItem = 0;
+		int itemDrop = 0;
 
 		public override void SetStaticDefaults() {
 
@@ -34,7 +34,7 @@ namespace CampingMod.Content.Tiles.Furniture
 			TileID.Sets.DisableSmartCursor[Type] = true;
 			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
 
-			dropItem = ModContent.ItemType<Items.Furniture.SittingLog>();
+            itemDrop = ModContent.ItemType<Items.Furniture.SittingLog>();
 
 			Main.tileFrameImportant[Type] = true;
 			Main.tileNoAttach[Type] = true;
@@ -43,21 +43,24 @@ namespace CampingMod.Content.Tiles.Furniture
 			AdjTiles = new int[] { TileID.Benches };
 
 
-
 			// Placement
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
 			TileObjectData.newTile.Height = 1;
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.CoordinateHeights = new[] { 18 }; // normally 18 would be 16 + 2 padding, but since we need to include the bottom its 20
-			TileObjectData.newTile.Origin = new Point16(1, 0);
+			TileObjectData.newTile.Origin = new Point16(1, 0); // middle tile is tile placement origin
 			TileObjectData.newTile.Direction = TileObjectDirection.PlaceLeft;
 
 			// And mirrored
 			TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
 			TileObjectData.newAlternate.Direction = TileObjectDirection.PlaceRight;
-			TileObjectData.addAlternate(1); // Facing right will use the second texture style
+            TileObjectData.addAlternate(1); // Facing right will use the second texture style
 			TileObjectData.addTile(Type);
-		}
+
+			// Need to register the alternate style as a new item drop, because it's not picked up for some reason. Maybe this tile is not configured correctly?
+			RegisterItemDrop(itemDrop, new int[] { 1 });
+
+        }
 
 		/// <summary>
 		/// Calming effect when sat by a campfire
@@ -72,10 +75,6 @@ namespace CampingMod.Content.Tiles.Furniture
 
         public override void NumDust(int tX, int tY, bool fail, ref int num) {
 			num = fail ? 1 : 3;
-		}
-
-		public override void KillMultiTile(int tX, int tY, int pixelX, int pixelY) {
-			Item.NewItem(new EntitySource_TileBreak(tX, tY), tX * 16, tY * 16, 16 * _FRAMEWIDTH, 16 * _FRAMEHEIGHT, dropItem);
 		}
 
 		/// <summary>
@@ -116,7 +115,7 @@ namespace CampingMod.Content.Tiles.Furniture
 			if (!player.IsWithinSnappngRangeToTile(tX, tY, PlayerSittingHelper.ChairSittingMaxDistance)) { // Match condition in RightClick. Interaction should only show if clicking it does something
 				return;
 			}
-			TileUtils.ShowItemIcon(dropItem);
+			TileUtils.ShowItemIcon(itemDrop);
 			if (Main.tile[tX, tY].TileFrameX / 18 < _FRAMEWIDTH) {
 				player.cursorItemIconReversed = true;
 			}

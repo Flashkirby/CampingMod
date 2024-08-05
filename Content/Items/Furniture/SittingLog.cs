@@ -12,7 +12,7 @@ namespace CampingMod.Content.Items.Furniture
         }
 
         public override void SetDefaults() {
-            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.SittingLog>());
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.SittingLog>(), 0);
             Item.maxStack = 99;
             Item.width = 16;
             Item.height = 16;
