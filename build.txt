@@ -1,6 +1,6 @@
-displayName = Camping [1.4.4-preview]
+displayName = Camping [1.4.4-preview-3-0-1]
 author = Flashkirby, kittenchilly
-version = 3.0.0
+version = 3.0.1
 
 homepage=https://terrariamods.wiki.gg/wiki/Camping
 
