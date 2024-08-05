@@ -47,24 +47,66 @@ namespace CampingMod.Common
 			// Click on the map icon
 			if (Main.mouseLeft && Main.mouseLeftRelease) {
 
-				if (!modPlayer.Player.HasUnityPotion()) {
+				bool teleport = false;
+                Main.mouseLeftRelease = false;
+                Main.mapFullscreen = false;
+
+                if (!teleport && CampingMod.ThoriumModLoaded) { teleport = TeleportWithModdedItem(modPlayer, "ThoriumMod", "WormHoleMirror"); }
+
+				if (!teleport) { teleport = TeleportWithWormholdPotion(modPlayer); }
+
+                if (!teleport) {
 					// Can't use this feature without wormhole potions
 					CampingMod.PrintInfo("CampTent.CannotTeleportToTentBecauseNotMeetingItemRequirements", Language.GetTextValue("ItemName.WormholePotion"));
 				}
-				else {
-					Main.mouseLeftRelease = false;
-                    Main.mapFullscreen = false;
-
-					// Consume wormhole potions
-					if (modPlayer.TeleportToTent(PlayerSpawnContext.RecallFromItem)) {
-						modPlayer.Player.TakeUnityPotion();
-						// Prevent any other wormhole teleports
-						Main.cancelWormHole = true;
-					}
-                }
-
 			}
 
 		}
+
+		private bool TeleportWithWormholdPotion(CampingModPlayer modPlayer)
+		{
+			if (modPlayer.Player.HasUnityPotion()) {
+
+                // Consume wormhole potions
+                if (modPlayer.TeleportToTent(PlayerSpawnContext.RecallFromItem)) {
+                    modPlayer.Player.TakeUnityPotion();
+                    // Prevent any other wormhole teleports
+                    Main.cancelWormHole = true;
+                    return true;
+                }
+            }
+			return false;
+		}
+
+		private bool TeleportWithModdedItem(CampingModPlayer modPlayer, string modName, string itemName)
+		{
+            if (ModLoader.TryGetMod(modName, out Mod mod) && mod.TryFind(itemName, out ModItem modItem)) {
+				// equivalent to wormhole potion check, but for this specific item
+				bool found = false;
+
+                foreach( Item i in modPlayer.Player.inventory) {
+					if (i.type == modItem.Type && i.stack > 0) {
+						found = true;
+						break;
+                    }
+				}
+
+				if(!found && modPlayer.Player.useVoidBag()) {
+                    foreach (Item i in modPlayer.Player.bank4.item) {
+                        if (i.type == modItem.Type && i.stack > 0) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+
+				if (found) {
+					modPlayer.TeleportToTent(PlayerSpawnContext.RecallFromItem);
+					Main.cancelWormHole = true;
+					return true;
+				}
+			}
+			return false;
+        }
     }
 }

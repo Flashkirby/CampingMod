@@ -1,13 +1,8 @@
 ﻿# Camping Mod
-
 <p align="center">
-  <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2864849706">
-    <img src="https://raw.githubusercontent.com/Flashkirby/CampingMod/master/icon.png"/>
-  </a>
+<img src="https://raw.githubusercontent.com/Flashkirby/CampingMod/master/icon.png"/>
 </p>
-<p align="center">
-<img src="http://i.imgur.com/kdcROYP.png"/>
-</p>
+<p align="center"><img src="http://i.imgur.com/kdcROYP.png"/></p>
 
 This mod is set up for localisation, so we are accepting translations!
 
@@ -53,6 +48,11 @@ Large (6x3) tent that includes a workbench, cooking pot, and placed bottle. Can 
 
 Huge (10x5) prefab that functions as a large variety of items, and boosts life regen while stood inside.
 Can be worn as a accessory that provides the heart lantern and star in a bottle buff to nearby players.
+
+## Compatibility List
+- Portable Wormhole, fully compatible
+- Cellphone is Wormhole, fully compatible
+- Thorium Mod: Wormhole Mirror, integration available
 
 ## Credits
 

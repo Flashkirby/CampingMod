@@ -60,26 +60,26 @@ namespace CampingMod.Common.Players
                 saveID.RemoveAt(index);
                 saveX.RemoveAt(index);
                 saveY.RemoveAt(index);
-                consoleMessage = $"Removed World ID {Main.worldID}";
+                consoleMessage = $"u{Main.worldID}@{index}";
             }
             else {
-                consoleMessage = $"No existing world ID {Main.worldID}";
+                consoleMessage = $"c{Main.worldID}";
             }
             // Then add to the front if its not already there
             if (tentSpawn != null) {
                 InsertTruncate(ref saveID, Main.worldID, 200);
                 InsertTruncate(ref saveX, tentSpawn.Value.X, 200);
                 InsertTruncate(ref saveY, tentSpawn.Value.Y, 200);
-                consoleMessage += ", saved tent spawn location";
+                consoleMessage += $"/x{tentSpawn.Value.X}y{tentSpawn.Value.Y}";
             }
             else {
-                consoleMessage += ", no tent spawn to save";
+                consoleMessage += "/d";
             }
 
             tag.Set(TAG_SPAWN_ID, saveID.ToArray(), true);
             tag.Set(TAG_SPAWN_X, saveX.ToArray(), true);
             tag.Set(TAG_SPAWN_Y, saveY.ToArray(), true);
-            Console.WriteLine($"CampingMod: Saving data for CampingModPlayer:{Player.name}: {consoleMessage}");
+            Console.WriteLine($"INFO CampingMod: Saving data CampingModPlayer/{Player.name}/{consoleMessage}");
         }
 
         /// <summary>
