@@ -49,11 +49,10 @@ Large (6x3) tent that includes a workbench, cooking pot, and placed bottle. Can 
 Huge (10x5) prefab that functions as a large variety of items, and boosts life regen while stood inside.
 Can be worn as a accessory that provides the heart lantern and star in a bottle buff to nearby players.
 
-## Mod Compatibility
-- [Thorium Mod](https://steamcommunity.com/sharedfiles/filedetails/?id=2909886416): Wormhole Mirror support
-- [Wikithis](https://steamcommunity.com/sharedfiles/filedetails/?id=2832487441): Wiki support
-- [Portable Wormhole](https://steamcommunity.com/sharedfiles/filedetails/?id=2845703054): fully compatible
-- [Cellphone is Wormhole](https://steamcommunity.com/sharedfiles/filedetails/?id=2674701188): fully compatible
+## Compatibility List
+- Portable Wormhole, fully compatible
+- Cellphone is Wormhole, fully compatible
+- Thorium Mod: Wormhole Mirror, integration available
 
 ## Credits
 
