@@ -44,7 +44,7 @@ Developer: Flashkirby
 Art: Flashkirby, RunicPixels
 1.4 Porting: kittenchilly, Flashkirby
 Localization:
-    Русский перевод: Milliath
+    Русский перевод: Milliath, xenofite, Alino4kaHvoshch
     汉语: Gouvod, Zomty, Safijiiva, Ticok, huige3
 
 Tell me more? https://terrariamods.wiki.gg/wiki/Camping
