@@ -35,16 +35,20 @@ namespace CampingMod.Common.Players
         /// Reset all values on entering the world.
         /// Also attempt to load a saved spawn point, see Player.FindSpawn
         /// </summary>
-        public override void OnEnterWorld() {
-
+        public override void OnEnterWorld()
+        {
             localPermaSpawnCache = null;
             ChooseToSpawnAtTent = true;
 
             tentSpawn = null;
             int worldIndex = new ArrayList(sI).IndexOf(Main.worldID);
-            if (worldIndex >= 0) {
+            if (worldIndex >= 0)
+            {
                 tentSpawn = new Point(sX[worldIndex], sY[worldIndex]);
-                Console.WriteLine($"CampingMod: Loaded data for CampingModPlayer:{Player.name}:{Main.worldID} @ {worldIndex}/{sI.Length} ({tentSpawn.Value.X}x{tentSpawn.Value.Y})");
+                if (CampingMod.DEBUG_SAVE)
+                {
+                    Console.WriteLine($"CampingMod: Loaded data for CampingModPlayer:{Player.name}:{Main.worldID} @ {worldIndex}/{sI.Length} ({tentSpawn.Value.X}x{tentSpawn.Value.Y})");
+                }
             }
         }
 
@@ -79,7 +83,10 @@ namespace CampingMod.Common.Players
             tag.Set(TAG_SPAWN_ID, saveID.ToArray(), true);
             tag.Set(TAG_SPAWN_X, saveX.ToArray(), true);
             tag.Set(TAG_SPAWN_Y, saveY.ToArray(), true);
-            Console.WriteLine($"INFO CampingMod: Saving data CampingModPlayer/{Player.name}/{consoleMessage}");
+            if (CampingMod.DEBUG_SAVE)
+            {
+                Console.WriteLine($"CampingMod: Saving data CampingModPlayer/{Player.name}/{consoleMessage}");
+            }
         }
 
         /// <summary>
@@ -101,7 +108,11 @@ namespace CampingMod.Common.Players
                 sI = tag.GetIntArray(TAG_SPAWN_ID);
                 sX = tag.GetIntArray(TAG_SPAWN_X);
                 sY = tag.GetIntArray(TAG_SPAWN_Y);
-                Console.WriteLine($"CampingMod: Tags loaded for CampingModPlayer:{Player.name}");
+
+                if (CampingMod.DEBUG_SAVE)
+                {
+                    Console.WriteLine($"CampingMod: Tags loaded for CampingModPlayer:{Player.name}");
+                }
             }
             else {
             }
