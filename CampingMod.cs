@@ -7,6 +7,8 @@ namespace CampingMod
 {
     partial class CampingMod : Mod
     {
+        internal const bool DEBUG_SAVE = false;
+
         public static bool ThoriumModLoaded { get { return ModLoader.HasMod("ThoriumMod"); } }
 
         public const string LANG_KEY = "Mods.CampingMod.";

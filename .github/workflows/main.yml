@@ -1,0 +1,19 @@
+name: Push on Release jobs
+
+on:
+  push:
+    branches: [ release ]
+
+jobs:
+  automaticpublish:
+    name: Automatic Mod Browser Publish Integration
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+       
+      # Mod Browser integration
+      - uses: JavidPack/tModLoaderPublishIntegration@v0.11.8.8
+        with:
+          STEAMID64: ${{secrets.STEAMID64}}
+          MODBROWSERPASSPHRASE: ${{secrets.MODBROWSERPASSPHRASE}}
+          MODNAME: CampingMod
